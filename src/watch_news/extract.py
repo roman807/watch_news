@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import trafilatura
 
-MAX_CHARS = 6000
+MAX_CHARS = 3000 #6000
 
 
 def get_full_text(url: str) -> str | None:

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from anthropic import Anthropic
 
-MODEL = "claude-opus-5"
+MODEL = "claude-haiku-4-5"  #"claude-opus-5"
 MAX_SUMMARY_TOKENS = 200
 
 PROMPT_TEMPLATE = """You are writing a single entry in a daily watch-news digest.
