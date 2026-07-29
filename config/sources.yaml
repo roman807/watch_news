@@ -41,7 +41,7 @@
   feed_url: https://watchesbysjx.com/feed
   max_initial: 10
 
-- name: Wrist Enthusiast
-  homepage: https://www.wristenthusiast.com/
-  feed_url: https://www.wristenthusiast.com/latest?format=rss
+- name: aBlogtoWatch
+  homepage: https://www.ablogtowatch.com/
+  feed_url: https://www.ablogtowatch.com/feed
   max_initial: 10

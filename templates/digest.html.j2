@@ -23,6 +23,7 @@
     }
   }
   * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
   body {
     margin: 0;
     padding: 2.5rem 1.25rem;
@@ -31,22 +32,47 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     line-height: 1.5;
   }
-  .wrap { max-width: 720px; margin: 0 auto; }
+  .container { max-width: 960px; margin: 0 auto; }
   header { margin-bottom: 2rem; }
   h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
   .meta { color: var(--muted); font-size: 0.9rem; }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    .layout { flex-direction: column; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.4rem 1rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a { border-left: none; padding: 0.15rem 0; }
+  }
   h2.section {
     font-size: 1.2rem;
     margin: 2.5rem 0 1rem;
     padding-bottom: 0.4rem;
     border-bottom: 2px solid var(--accent);
-  }
-  h3.source {
-    font-size: 1.05rem;
-    margin: 2rem 0 0.75rem;
-    color: var(--accent);
-    border-bottom: 1px solid var(--border);
-    padding-bottom: 0.4rem;
+    scroll-margin-top: 1rem;
   }
   ul.summary-bullets {
     background: var(--card);
@@ -61,18 +87,6 @@
   .bullet-links a { color: var(--accent); text-decoration: none; }
   .bullet-links a:hover { text-decoration: underline; }
   .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
-  article.item {
-    background: var(--card);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 1rem 1.1rem;
-    margin-bottom: 0.75rem;
-  }
-  article.item h3 { margin: 0 0 0.35rem; font-size: 1rem; }
-  article.item h3 a { color: var(--text); text-decoration: none; }
-  article.item h3 a:hover { text-decoration: underline; }
-  article.item p { margin: 0; color: var(--muted); font-size: 0.92rem; }
-  .published { display: block; margin-top: 0.4rem; font-size: 0.78rem; color: var(--muted); }
   .empty { color: var(--muted); font-style: italic; }
   .group {
     background: var(--card);
@@ -94,17 +108,26 @@
 </style>
 </head>
 <body>
-<div class="wrap">
+<div class="container">
   <header>
     <h1>Watch News Digest</h1>
-    <div class="meta">{{ date_str }} · {{ total }} new article{{ "s" if total != 1 else "" }}</div>
+    <div class="meta">{{ date_str }} {{ time_str }} · {{ total }} new article{{ "s" if total != 1 else "" }}</div>
   </header>
 
   {% if not grouped %}
     <p class="empty">No new articles since the last run.</p>
   {% else %}
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#microbrands">Microbrands</a>
+      <a href="#mainstream-brands">Mainstream Brands</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#business-news">Business News</a>
+    </nav>
+    <div class="wrap">
 
-  <h2 class="section">Summary</h2>
+  <h2 class="section" id="summary">Summary</h2>
   {% if analysis.summary_bullets %}
     <ul class="summary-bullets">
       {% for bullet in analysis.summary_bullets %}
@@ -120,7 +143,7 @@
     <p class="empty">No summary available.</p>
   {% endif %}
 
-  <h2 class="section">Microbrands</h2>
+  <h2 class="section" id="microbrands">Microbrands</h2>
   {% if analysis.microbrands %}
     {% for group in analysis.microbrands %}
       <div class="group">
@@ -135,7 +158,7 @@
     <p class="empty">No microbrand articles today.</p>
   {% endif %}
 
-  <h2 class="section">Brands Discussed</h2>
+  <h2 class="section" id="mainstream-brands">Mainstream Brands</h2>
   {% if analysis.brands_discussed %}
     {% for group in analysis.brands_discussed %}
       <div class="group">
@@ -147,10 +170,10 @@
       </div>
     {% endfor %}
   {% else %}
-    <p class="empty">No brands identified today.</p>
+    <p class="empty">No mainstream brands identified today.</p>
   {% endif %}
 
-  <h2 class="section">New Releases</h2>
+  <h2 class="section" id="new-releases">New Releases</h2>
   {% if analysis.new_releases %}
     {% for group in analysis.new_releases %}
       {% set specs = group.specs %}
@@ -175,18 +198,23 @@
     <p class="empty">No new releases identified today.</p>
   {% endif %}
 
-  <h2 class="section">All Articles</h2>
-  {% for source, items in grouped.items() %}
-    <h3 class="source">{{ source }}</h3>
-    {% for item in items %}
-      <article class="item">
-        <h3><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a></h3>
-        <p>{{ item.summary }}</p>
-        {% if item.published %}<span class="published">{{ item.published }}</span>{% endif %}
-      </article>
+  <h2 class="section" id="business-news">Business News</h2>
+  {% if analysis.business_news %}
+    {% for item in analysis.business_news %}
+      <div class="group">
+        <div class="heading">{{ item.topic }}{% if item.sources %} <span class="sources">({{ item.sources|join(", ") }})</span>{% endif %}</div>
+        <p class="note">{{ item.summary }}</p>
+        <div class="links">
+          {% for url in item.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+        </div>
+      </div>
     {% endfor %}
-  {% endfor %}
+  {% else %}
+    <p class="empty">No business news today.</p>
+  {% endif %}
 
+    </div>
+  </div>
   {% endif %}
 </div>
 </body>

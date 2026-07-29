@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import date
+from datetime import date, datetime
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -17,7 +17,8 @@ class DigestItem:
 
 
 def render_digest(grouped: dict[str, list[DigestItem]], analysis, today: date | None = None) -> "tuple[str, str]":
-    today = today or date.today()
+    now = datetime.now()
+    today = today or now.date()
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=True)
     template = env.get_template("digest.html.j2")
 
@@ -26,6 +27,7 @@ def render_digest(grouped: dict[str, list[DigestItem]], analysis, today: date | 
     title_by_url = {item.url: item.title for items in non_empty.values() for item in items}
     html = template.render(
         date_str=today.isoformat(),
+        time_str=now.strftime("%H:%M"),
         grouped=non_empty,
         total=total,
         analysis=analysis,

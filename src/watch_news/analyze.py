@@ -36,7 +36,16 @@ _BRAND_DISCUSSED_ITEM_SCHEMA = {
             "items": {"type": "string"},
             "description": "Distinct model names discussed for this brand today; empty array if only brand-level news.",
         },
-        "urls": {"type": "array", "items": {"type": "string"}},
+        "urls": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": (
+                "Only urls of articles that are dedicated to this brand, or that give it a "
+                "substantial standalone section (e.g. its own entry in a multi-brand roundup). "
+                "Do not include an article just because the brand is namedropped or compared "
+                "in passing."
+            ),
+        },
     },
     "required": ["brand", "models", "urls"],
     "additionalProperties": False,
@@ -87,6 +96,27 @@ _NEW_RELEASE_ITEM_SCHEMA = {
         "specs": _RELEASE_SPECS_SCHEMA,
     },
     "required": ["brand", "model", "urls", "specs"],
+    "additionalProperties": False,
+}
+
+_BUSINESS_NEWS_ITEM_SCHEMA = {
+    "type": "object",
+    "properties": {
+        "topic": {
+            "type": "string",
+            "description": "A short label for this business-news item, e.g. 'LVMH H1 2026 results' or 'Windup Chicago attendance record'.",
+        },
+        "summary": {
+            "type": "string",
+            "description": "One quick sentence summarizing the news.",
+        },
+        "urls": {
+            "type": "array",
+            "items": {"type": "string"},
+            "description": "Urls covering this story; merge multiple outlets covering the same story into one entry.",
+        },
+    },
+    "required": ["topic", "summary", "urls"],
     "additionalProperties": False,
 }
 
@@ -142,18 +172,39 @@ TOOL_SCHEMA = {
                 ),
                 "items": _NEW_RELEASE_ITEM_SCHEMA,
             },
+            "business_news": {
+                "type": "array",
+                "description": (
+                    "Articles about the watch business/industry rather than a specific watch — "
+                    "e.g. brand or group financial results, executive moves, acquisitions, "
+                    "retail or export data, trade-show attendance figures, industry trends. One "
+                    "entry per distinct story; merge multiple outlets covering the same story "
+                    "into a single entry with all their urls. Empty array if there's no business "
+                    "news today."
+                ),
+                "items": _BUSINESS_NEWS_ITEM_SCHEMA,
+            },
             "brands_discussed": {
                 "type": "array",
                 "description": (
-                    "Every distinct brand discussed today — one entry per brand, not per model — "
-                    "with the model(s) discussed and all article urls. This is typically the "
-                    "longest list of the four — generate it last so the shorter, higher-value "
-                    "sections above are never cut short."
+                    "Mainstream/established brands that get substantive coverage today — one "
+                    "entry per brand, not per model — with the model(s) discussed and the "
+                    "article urls that back it. Do NOT include a brand here if it's a microbrand "
+                    "already captured in the microbrands list above — this list is for "
+                    "mainstream brands only, and each brand should appear in exactly one of the "
+                    "two lists. Inclusion bar: only include a brand if at least one article is "
+                    "dedicated to it, or gives it a whole standalone section within an article "
+                    "covering multiple brands/models (e.g. one write-up in a roundup, one item in "
+                    "a 'top 5 watches' list). Do NOT include a brand solely because it's "
+                    "namedropped, mentioned in a one-line comparison, or referenced in passing "
+                    "inside an article that isn't substantially about it. When in doubt, leave it "
+                    "out. This is typically the longest list of the four — generate it last so "
+                    "the shorter, higher-value sections above are never cut short."
                 ),
                 "items": _BRAND_DISCUSSED_ITEM_SCHEMA,
             },
         },
-        "required": ["summary_bullets", "microbrands", "new_releases", "brands_discussed"],
+        "required": ["summary_bullets", "microbrands", "new_releases", "business_news", "brands_discussed"],
         "additionalProperties": False,
     },
     "strict": True,
@@ -211,16 +262,27 @@ class SummaryBullet:
 
 
 @dataclass(frozen=True)
+class BusinessNewsItem:
+    topic: str
+    summary: str
+    urls: list = field(default_factory=list)
+    sources: list = field(default_factory=list)
+
+
+@dataclass(frozen=True)
 class DigestAnalysis:
     summary_bullets: list
     microbrands: list
     brands_discussed: list
     new_releases: list
+    business_news: list
 
 
 def empty_analysis(note: str = "") -> DigestAnalysis:
     bullets = [SummaryBullet(text=note, urls=[])] if note else []
-    return DigestAnalysis(summary_bullets=bullets, microbrands=[], brands_discussed=[], new_releases=[])
+    return DigestAnalysis(
+        summary_bullets=bullets, microbrands=[], brands_discussed=[], new_releases=[], business_news=[]
+    )
 
 
 def _process_summary_bullets(raw_bullets: list, valid_urls: set) -> list:
@@ -355,6 +417,31 @@ def _merge_new_releases(raw_groups: list, valid_urls: set, url_to_source: dict) 
     return sorted(result, key=lambda r: (r.brand.casefold(), r.model.casefold()))
 
 
+def _merge_business_news(raw_items: list, valid_urls: set, url_to_source: dict) -> list:
+    merged: dict = {}
+    order: list = []
+    for entry in raw_items:
+        topic = (entry.get("topic") or "").strip()
+        summary = (entry.get("summary") or "").strip()
+        urls = [u for u in entry.get("urls", []) if u in valid_urls]
+        if not topic or not urls:
+            continue
+        key = topic.casefold()
+        if key in merged:
+            e_topic, e_summary, e_urls = merged[key]
+            merged[key] = (e_topic, e_summary or summary, list(dict.fromkeys(e_urls + urls)))
+        else:
+            merged[key] = (topic, summary, urls)
+            order.append(key)
+
+    result = []
+    for key in order:
+        topic, summary, urls = merged[key]
+        sources = sorted({url_to_source[u] for u in urls if u in url_to_source}, key=str.casefold)
+        result.append(BusinessNewsItem(topic=topic, summary=summary, urls=urls, sources=sources))
+    return result
+
+
 def analyze_digest(client: Anthropic, items: list) -> DigestAnalysis:
     if not items:
         return empty_analysis("No new articles today.")
@@ -384,9 +471,18 @@ Analyze these as a set and call {TOOL_NAME}. Only use urls that appear in the ar
     tool_use = next(b for b in response.content if b.type == "tool_use")
     data = tool_use.input
 
+    microbrands = _merge_microbrands(data.get("microbrands", []), valid_urls, url_to_source)
+    microbrand_names = {g.brand.casefold() for g in microbrands}
+
+    brands_discussed = _merge_brands_discussed(data.get("brands_discussed", []), valid_urls, url_to_source)
+    # "Mainstream Brands" is defined as brands NOT already covered in Microbrands —
+    # enforced here rather than trusted from the model, same as url validation above.
+    brands_discussed = [b for b in brands_discussed if b.brand.casefold() not in microbrand_names]
+
     return DigestAnalysis(
         summary_bullets=_process_summary_bullets(data.get("summary_bullets", []), valid_urls),
-        microbrands=_merge_microbrands(data.get("microbrands", []), valid_urls, url_to_source),
-        brands_discussed=_merge_brands_discussed(data.get("brands_discussed", []), valid_urls, url_to_source),
+        microbrands=microbrands,
+        brands_discussed=brands_discussed,
         new_releases=_merge_new_releases(data.get("new_releases", []), valid_urls, url_to_source),
+        business_news=_merge_business_news(data.get("business_news", []), valid_urls, url_to_source),
     )
