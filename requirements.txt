@@ -1,0 +1,9 @@
+feedparser
+requests
+beautifulsoup4
+lxml
+trafilatura
+anthropic
+python-dotenv
+jinja2
+pyyaml

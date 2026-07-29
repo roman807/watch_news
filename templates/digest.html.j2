@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Watch News — {{ date_str }}</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #92400e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #d97706;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .wrap { max-width: 720px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+  }
+  h3.source {
+    font-size: 1.05rem;
+    margin: 2rem 0 0.75rem;
+    color: var(--accent);
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.4rem;
+  }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  article.item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+    margin-bottom: 0.75rem;
+  }
+  article.item h3 { margin: 0 0 0.35rem; font-size: 1rem; }
+  article.item h3 a { color: var(--text); text-decoration: none; }
+  article.item h3 a:hover { text-decoration: underline; }
+  article.item p { margin: 0; color: var(--muted); font-size: 0.92rem; }
+  .published { display: block; margin-top: 0.4rem; font-size: 0.78rem; color: var(--muted); }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .heading .sources { font-weight: 400; color: var(--muted); font-size: 0.85rem; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { color: var(--accent); text-decoration: none; }
+  .group .links a:hover { text-decoration: underline; }
+  .group .links .sep { color: var(--muted); margin: 0 0.35rem; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Watch News Digest</h1>
+    <div class="meta">{{ date_str }} · {{ total }} new article{{ "s" if total != 1 else "" }}</div>
+  </header>
+
+  {% if not grouped %}
+    <p class="empty">No new articles since the last run.</p>
+  {% else %}
+
+  <h2 class="section">Summary</h2>
+  {% if analysis.summary_bullets %}
+    <ul class="summary-bullets">
+      {% for bullet in analysis.summary_bullets %}
+        <li>
+          {{ bullet.text }}
+          {% if bullet.urls %}
+            <span class="bullet-links">{% for url in bullet.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}</span>
+          {% endif %}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">No summary available.</p>
+  {% endif %}
+
+  <h2 class="section">Microbrands</h2>
+  {% if analysis.microbrands %}
+    {% for group in analysis.microbrands %}
+      <div class="group">
+        <div class="heading">{{ group.brand }}{% if group.model %} — {{ group.model }}{% endif %}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
+        {% if group.note %}<p class="note">{{ group.note }}</p>{% endif %}
+        <div class="links">
+          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="empty">No microbrand articles today.</p>
+  {% endif %}
+
+  <h2 class="section">Brands Discussed</h2>
+  {% if analysis.brands_discussed %}
+    {% for group in analysis.brands_discussed %}
+      <div class="group">
+        <div class="heading">{{ group.brand }}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
+        {% if group.models %}<p class="models">{{ group.models|join(", ") }}</p>{% endif %}
+        <div class="links">
+          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="empty">No brands identified today.</p>
+  {% endif %}
+
+  <h2 class="section">New Releases</h2>
+  {% if analysis.new_releases %}
+    {% for group in analysis.new_releases %}
+      {% set specs = group.specs %}
+      <div class="group">
+        <div class="heading">{{ group.brand }} — {{ group.model }}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
+        {% if specs.size or specs.movement or specs.water_resistance or specs.case_material or specs.notable_features or specs.price %}
+          <ul class="specs">
+            {% if specs.size %}<li>Size: {{ specs.size }}</li>{% endif %}
+            {% if specs.movement %}<li>Movement: {{ specs.movement }}</li>{% endif %}
+            {% if specs.water_resistance %}<li>Water resistance: {{ specs.water_resistance }}</li>{% endif %}
+            {% if specs.case_material %}<li>Case material: {{ specs.case_material }}</li>{% endif %}
+            {% for feature in specs.notable_features %}<li>{{ feature }}</li>{% endfor %}
+            {% if specs.price %}<li>Price: {{ specs.price }}</li>{% endif %}
+          </ul>
+        {% endif %}
+        <div class="links">
+          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="empty">No new releases identified today.</p>
+  {% endif %}
+
+  <h2 class="section">All Articles</h2>
+  {% for source, items in grouped.items() %}
+    <h3 class="source">{{ source }}</h3>
+    {% for item in items %}
+      <article class="item">
+        <h3><a href="{{ item.url }}" target="_blank" rel="noopener">{{ item.title }}</a></h3>
+        <p>{{ item.summary }}</p>
+        {% if item.published %}<span class="published">{{ item.published }}</span>{% endif %}
+      </article>
+    {% endfor %}
+  {% endfor %}
+
+  {% endif %}
+</div>
+</body>
+</html>

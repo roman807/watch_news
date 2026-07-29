@@ -1,0 +1,47 @@
+# Watch news sources.
+#
+# feed_url: RSS/Atom feed to parse (preferred). Leave blank/omit to fall back
+#           to generic HTML scraping of `homepage`.
+# max_initial: cap on how many of a brand-new source's most recent entries
+#              get summarized the first time it's ever seen (avoids a huge
+#              first digest / API bill).
+
+- name: Hodinkee
+  homepage: https://www.hodinkee.com/
+  feed_url: https://www.hodinkee.com/articles
+  max_initial: 10
+
+- name: Fratello
+  homepage: https://www.fratellowatches.com/
+  feed_url: https://www.fratellowatches.com/feed
+  max_initial: 10
+
+- name: Revolution
+  homepage: https://revolutionwatch.com/
+  feed_url: https://revolutionwatch.com/feed
+  max_initial: 10
+
+- name: Monochrome
+  homepage: https://monochrome-watches.com/
+  feed_url: https://monochrome-watches.com/feed
+  max_initial: 10
+
+- name: Time+Tide
+  homepage: https://timeandtidewatches.com/
+  feed_url: https://timeandtidewatches.com/feed
+  max_initial: 10
+
+- name: Worn & Wound
+  homepage: https://wornandwound.com/
+  feed_url: https://wornandwound.com/feed
+  max_initial: 10
+
+- name: SJX
+  homepage: https://watchesbysjx.com/
+  feed_url: https://watchesbysjx.com/feed
+  max_initial: 10
+
+- name: Wrist Enthusiast
+  homepage: https://www.wristenthusiast.com/
+  feed_url: https://www.wristenthusiast.com/latest?format=rss
+  max_initial: 10
