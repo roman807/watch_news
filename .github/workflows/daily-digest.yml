@@ -2,10 +2,12 @@ name: Daily Watch News Digest
 
 on:
   schedule:
-    # 18:00 CET (UTC+1) -- used roughly late Oct through late Mar
-    - cron: '0 17 * * *'
-    # 18:00 CEST (UTC+2) -- used roughly late Mar through late Oct
-    - cron: '0 16 * * *'
+    # 17:58 CET (UTC+1) -- used roughly late Oct through late Mar.
+    # 2 minutes before the hour on purpose: GitHub's scheduler is most
+    # likely to delay runs queued for exactly the top of the hour.
+    - cron: '58 16 * * *'
+    # 17:58 CEST (UTC+2) -- used roughly late Mar through late Oct
+    - cron: '58 15 * * *'
   workflow_dispatch: {}
 
 permissions:
@@ -17,7 +19,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check whether this cron firing matches 6pm in Europe/Berlin
+      - name: Check whether this cron firing matches 17:58 in Europe/Berlin
         id: gate
         run: |
           if [ "${{ github.event_name }}" != "schedule" ]; then
@@ -27,8 +29,8 @@ jobs:
           offset=$(TZ="Europe/Berlin" date +%z)
           hour_utc=$(date -u +%H)
           should_run=false
-          if [ "$offset" = "+0100" ] && [ "$hour_utc" = "17" ]; then should_run=true; fi
-          if [ "$offset" = "+0200" ] && [ "$hour_utc" = "16" ]; then should_run=true; fi
+          if [ "$offset" = "+0100" ] && [ "$hour_utc" = "16" ]; then should_run=true; fi
+          if [ "$offset" = "+0200" ] && [ "$hour_utc" = "15" ]; then should_run=true; fi
           echo "should_run=$should_run" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
