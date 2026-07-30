@@ -37,6 +37,48 @@ KNOWN_INDEPENDENT_BRANDS = [
     "Vault", "Vianney Halter", "Voutilainen",
 ]
 
+# Non-exhaustive seed list of mainstream/established brands (owned by a major
+# group, or otherwise clearly mass-market/heritage rather than independent or
+# a small microbrand). Same role as KNOWN_INDEPENDENT_BRANDS above.
+KNOWN_MAINSTREAM_BRANDS = [
+    "Casio", "Citizen", "Festina", "Fossil", "MVMT", "Orient", "Seiko",
+    "Swatch", "Timex", "Alpina", "Certina", "Concord", "Doxa", "Eterna",
+    "Hamilton", "Junghans", "Laco", "Luminox", "Maurice Lacroix", "Mido",
+    "Movado", "Orient Star", "Rado", "Seagull 1963", "Tissot", "Traser",
+    "Vulcain", "Zodiac", "Baume & Mercier", "Breitling", "Bremont", "Bulgari",
+    "Carl F. Bucherer", "Cartier", "Chanel", "Ebel", "Favre Leuba",
+    "Frederique Constant", "Grand Seiko", "Hermes", "IWC", "Longines",
+    "Montblanc", "Omega", "Panerai", "Perrelet", "Porsche Design", "Rolex",
+    "Tag Heuer", "Tudor", "Universal Genève", "Zenith", "A. Lange & Söhne",
+    "Angelus", "Arnold & Son", "Blancpain", "Breguet", "Corum",
+    "Credor", "Daniel Roth", "De Bethune", "Ferdinand Berthoud",
+    "Gérald Genta", "Girard-Perregaux", "Glashütte Original",
+    "Harry Winston", "Hublot", "Jaeger LeCoultre", "Lang & Heyne",
+    "Louis Vuitton", "Piaget", "Roger Dubuis", "Singer", "Vacheron Constantin",
+]
+
+# Non-exhaustive seed list of microbrands (typically $500-$3,000, independent).
+# Same role as KNOWN_INDEPENDENT_BRANDS above.
+KNOWN_MICROBRANDS = [
+    "AIGI", "Brew Watch Co", "Erebus", "Havaan Tuvali", "Mr Jones",
+    "Spinnaker", "True North Watch Co.", "Ventus", "Wolbrook", "Aera",
+    "Agelocer", "Anoma", "AnOrdain", "Arken", "Artel Rotec", "Awake",
+    "Ba111od", "Baltic", "Batavi", "Beaubleu", "Boldr Supply Company",
+    "Botta", "Creux Automatiq", "Davosa", "Dennison", "Direnzo", "DUG",
+    "Earthen", "Echo/Neutra", "Elka", "Elliot Brown", "Eza", "Farer",
+    "Furlan Marri", "Galo", "Gavox", "Gyavius", "Heinrich", "Henry Archer",
+    "HTD", "Ianos", "Isotope", "Jack Mason", "Jurmo", "Kiwame Tokyo",
+    "Lebond", "Lorier", "MAEN", "Makina", "MALM", "March LA.B", "Max Twelve",
+    "Micromilspec", "Monta", "Nezumi", "Nivada Grenchen", "Nodus", "Nuncier",
+    "Ocean To Orbit", "Ochs und Junior", "Ollech & Wajs", "Peren", "Selten",
+    "Straum", "Studio Underd0g", "Toledano & Chan", "Traska", "Typsim",
+    "U-Boat", "Unimatic", "Venezianico", "VERO", "VPC", "William Wood",
+    "Wise", "Wren", "Zelos", "Zentier", "Arcanaut", "Atelier Wen", "Aurelia",
+    "Barrelhand", "Code41", "Edouard Koehn", "Fears", "Habring2",
+    "Kurono Tokyo", "Laventure", "LOTH", "Mermont", "Parterra",
+    "SeL Instrument", "Sherpa", "Staudt", "Trilobe", "White Star",
+]
+
 _MICROBRAND_ITEM_SCHEMA = {
     "type": "object",
     "properties": {
@@ -182,7 +224,11 @@ TOOL_SCHEMA = {
                 "type": "array",
                 "description": (
                     "Articles discussing microbrands: independent/smaller brands, typically in "
-                    "the $500-$3,000 range."
+                    "the $500-$3,000 range. A non-exhaustive list of known microbrands is given "
+                    "in the prompt as a strong prior; also classify other brands into this "
+                    "category using your own judgment when they fit the definition. Do not "
+                    "include a brand here if it's in the known independent or known mainstream "
+                    "brand lists given in the prompt."
                 ),
                 "items": _MICROBRAND_ITEM_SCHEMA,
             },
@@ -195,7 +241,8 @@ TOOL_SCHEMA = {
                     "independent brands is given in the prompt as a strong prior; also classify "
                     "other brands into this category using your own knowledge when they fit the "
                     "definition (small, independently owned, high price tier). Do not include a "
-                    "brand here if it's already a microbrand above."
+                    "brand here if it's already a microbrand above, or if it's in the known "
+                    "mainstream brand list given in the prompt."
                 ),
                 "items": _MICROBRAND_ITEM_SCHEMA,
             },
@@ -230,7 +277,10 @@ TOOL_SCHEMA = {
                 "description": (
                     "Mainstream/established brands that get substantive coverage today — one "
                     "entry per brand, not per model — with the model(s) discussed and the "
-                    "article urls that back it. Do NOT include a brand here if it's a microbrand "
+                    "article urls that back it. A non-exhaustive list of known mainstream "
+                    "brands is given in the prompt as a strong prior; also classify other "
+                    "brands here using your own judgment when they don't fit the microbrand or "
+                    "independent definitions. Do NOT include a brand here if it's a microbrand "
                     "or an independent already captured in the lists above — this list is for "
                     "everything else, and each brand should appear in exactly one of the three "
                     "lists. Inclusion bar: only include a brand if at least one article is "
@@ -509,14 +559,23 @@ def analyze_digest(client: Anthropic, items: list) -> DigestAnalysis:
     )
 
     known_independents = ", ".join(KNOWN_INDEPENDENT_BRANDS)
+    known_mainstream = ", ".join(KNOWN_MAINSTREAM_BRANDS)
+    known_microbrands = ", ".join(KNOWN_MICROBRANDS)
 
     prompt = f"""Here are today's watch-news articles (source, title, url, summary):
 
 {listing}
 
-Known independent brands (non-exhaustive — use as a strong prior for the "independents" \
-field, and also classify other brands into it using your own judgment when they fit the \
-definition given there): {known_independents}
+These seed lists are non-exhaustive strong priors for brand classification — a brand on \
+one of these lists should always go in the matching field below, never one of the other \
+two. For brands not on any list, classify using your own judgment per the definition given \
+in each field's description.
+
+Known independent brands (-> "independents" field): {known_independents}
+
+Known mainstream brands (-> "brands_discussed" field): {known_mainstream}
+
+Known microbrands (-> "microbrands" field): {known_microbrands}
 
 Analyze these as a set and call {TOOL_NAME}. Only use urls that appear in the article list above — never invent one."""
 
@@ -542,13 +601,31 @@ Analyze these as a set and call {TOOL_NAME}. Only use urls that appear in the ar
     independent_names = {g.brand.casefold() for g in independents}
     microbrands = [g for g in microbrands if g.brand.casefold() not in independent_names]
 
-    exclusive_names = {g.brand.casefold() for g in microbrands} | independent_names
+    # The seed lists are the user's own curated ground truth, so they're enforced
+    # here too — never trust the model over them, same principle as url validation.
+    independent_seed = {b.casefold() for b in KNOWN_INDEPENDENT_BRANDS}
+    mainstream_seed = {b.casefold() for b in KNOWN_MAINSTREAM_BRANDS}
+    microbrand_seed = {b.casefold() for b in KNOWN_MICROBRANDS}
+
+    microbrands = [
+        g for g in microbrands if g.brand.casefold() not in independent_seed | mainstream_seed
+    ]
+    independents = [
+        g for g in independents if g.brand.casefold() not in microbrand_seed | mainstream_seed
+    ]
+
+    exclusive_names = {g.brand.casefold() for g in microbrands} | {g.brand.casefold() for g in independents}
 
     brands_discussed = _merge_brands_discussed(data.get("brands_discussed", []), valid_urls, url_to_source)
     # "Mainstream Brands" is defined as brands NOT already covered in Microbrands or
     # Independents — enforced here rather than trusted from the model, same as url
     # validation above.
-    brands_discussed = [b for b in brands_discussed if b.brand.casefold() not in exclusive_names]
+    brands_discussed = [
+        b
+        for b in brands_discussed
+        if b.brand.casefold() not in exclusive_names
+        and b.brand.casefold() not in independent_seed | microbrand_seed
+    ]
 
     return DigestAnalysis(
         summary_bullets=_process_summary_bullets(data.get("summary_bullets", []), valid_urls),

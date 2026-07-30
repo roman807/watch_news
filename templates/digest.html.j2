@@ -10,6 +10,7 @@
 <div class="container">
   {% if not grouped %}
     <header>
+      <a class="back-link" href="index.html">← Back to archive</a>
       <h1>Daily Watch News Digest</h1>
       <div class="meta">{{ date_str }} {{ time_str }} · {{ total }} new article{{ "s" if total != 1 else "" }}</div>
     </header>
@@ -27,6 +28,7 @@
     </nav>
     <div class="wrap">
       <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
         <h1>Daily Watch News Digest</h1>
         <div class="meta">{{ date_str }} {{ time_str }} · {{ total }} new article{{ "s" if total != 1 else "" }}</div>
       </header>
@@ -48,7 +50,7 @@
         <li>
           {{ bullet.text }}
           {% if bullet.urls %}
-            <span class="bullet-links">{% for url in bullet.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}</span>
+            <span class="bullet-links">{% for url in bullet.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ source_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}</span>
           {% endif %}
         </li>
       {% endfor %}
@@ -61,10 +63,10 @@
   {% if analysis.business_news %}
     {% for item in analysis.business_news %}
       <div class="group">
-        <div class="heading">{{ item.topic }}{% if item.sources %} <span class="sources">({{ item.sources|join(", ") }})</span>{% endif %}</div>
+        <div class="heading">{{ item.topic }}</div>
         <p class="note">{{ item.summary }}</p>
         <div class="links">
-          {% for url in item.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+          {% for url in item.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ source_by_url.get(url, "") }}: {{ title_by_url.get(url, url) }}</a>{% endfor %}
         </div>
       </div>
     {% endfor %}
@@ -77,7 +79,7 @@
     {% for group in analysis.new_releases %}
       {% set specs = group.specs %}
       <div class="group">
-        <div class="heading">{{ group.brand }} — {{ group.model }}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
+        <div class="heading">{{ group.brand }} — {{ group.model }}</div>
         {% if specs.size or specs.movement or specs.water_resistance or specs.case_material or specs.notable_features or specs.price %}
           <ul class="specs">
             {% if specs.size %}<li>Size: {{ specs.size }}</li>{% endif %}
@@ -89,7 +91,7 @@
           </ul>
         {% endif %}
         <div class="links">
-          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ source_by_url.get(url, "") }}: {{ title_by_url.get(url, url) }}</a>{% endfor %}
         </div>
       </div>
     {% endfor %}
@@ -103,10 +105,10 @@
   {% if analysis.microbrands %}
     {% for group in analysis.microbrands %}
       <div class="group">
-        <div class="heading">{{ group.brand }}{% if group.model %} — {{ group.model }}{% endif %}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
+        <div class="heading">{{ group.brand }}{% if group.model %} — {{ group.model }}{% endif %}</div>
         {% if group.note %}<p class="note">{{ group.note }}</p>{% endif %}
         <div class="links">
-          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ source_by_url.get(url, "") }}: {{ title_by_url.get(url, url) }}</a>{% endfor %}
         </div>
       </div>
     {% endfor %}
@@ -118,10 +120,10 @@
   {% if analysis.independents %}
     {% for group in analysis.independents %}
       <div class="group">
-        <div class="heading">{{ group.brand }}{% if group.model %} — {{ group.model }}{% endif %}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
+        <div class="heading">{{ group.brand }}{% if group.model %} — {{ group.model }}{% endif %}</div>
         {% if group.note %}<p class="note">{{ group.note }}</p>{% endif %}
         <div class="links">
-          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ source_by_url.get(url, "") }}: {{ title_by_url.get(url, url) }}</a>{% endfor %}
         </div>
       </div>
     {% endfor %}
@@ -133,10 +135,10 @@
   {% if analysis.brands_discussed %}
     {% for group in analysis.brands_discussed %}
       <div class="group">
-        <div class="heading">{{ group.brand }}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
+        <div class="heading">{{ group.brand }}</div>
         {% if group.models %}<p class="models">{{ group.models|join(", ") }}</p>{% endif %}
         <div class="links">
-          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ source_by_url.get(url, "") }}: {{ title_by_url.get(url, url) }}</a>{% endfor %}
         </div>
       </div>
     {% endfor %}
