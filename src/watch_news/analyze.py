@@ -15,6 +15,28 @@ TOOL_NAME = "submit_digest_analysis"
 SUMMARY_MAX_TOTAL_WORDS = 100
 SUMMARY_MAX_URLS_PER_BULLET = 3
 
+# Non-exhaustive seed list of independent watch brands (upper luxury segment,
+# not owned by a major group/conglomerate). Passed to the model as a strong
+# prior in the prompt; it's expected to extend this using its own judgment
+# per the definition in the "independents" schema field below.
+KNOWN_INDEPENDENT_BRANDS = [
+    "Otsuka Lotec", "Reservoir", "RGM Watch Co", "Zeitwinkel", "Akrivia",
+    "Armando Legin", "Andersen Genève", "Andreas Strehler", "Armin Strom",
+    "Artime Creations", "ArtyA", "Berneron", "Bianchet", "Biver", "Bovet",
+    "Charles Frodsham", "Christian Klings", "Christian vaan der Klaauw",
+    "Christophe Claret", "Cyrus", "Czapek", "Dominique Renaud", "Fam Al Hut",
+    "Felipe Pikullik", "Fleming", "F.P. Journe", "Franck Muller",
+    "Gerald Charles", "Greubel Forsey", "Hautlence", "H. Moser & Cie.",
+    "Hysek", "HYT", "J.N. Shapiro", "Jacob & Co.", "Konstantin Chaykin",
+    "Krayon", "Laurent Ferrier", "Lederer", "Linde Werdelin", "Lorige",
+    "Louis Moinet", "Luca Soprana", "Marco Lang", "Mauron Musy", "MB&F",
+    "Moritz Grossmann", "Naoya Hida & Co", "Parmigiani Fleurier",
+    "Petermann Bédat", "Purnell", "Qian GuoBiao", "Rebellion", "Rémy Cools",
+    "Ressence", "Roger W. Smith", "Romain Gauthier", "Sylvain Pinaud",
+    "Simon Brette", "Ulysse Nardin", "Urban Jürgensen", "Urwerk", "Vanguart",
+    "Vault", "Vianney Halter", "Voutilainen",
+]
+
 _MICROBRAND_ITEM_SCHEMA = {
     "type": "object",
     "properties": {
@@ -164,6 +186,19 @@ TOOL_SCHEMA = {
                 ),
                 "items": _MICROBRAND_ITEM_SCHEMA,
             },
+            "independents": {
+                "type": "array",
+                "description": (
+                    "Independent watch brands in the upper luxury segment — not owned by a "
+                    "major group/conglomerate (e.g. LVMH, Richemont, Swatch Group, Kering) — "
+                    "typically $10,000+ and mostly $50,000+. A non-exhaustive list of known "
+                    "independent brands is given in the prompt as a strong prior; also classify "
+                    "other brands into this category using your own knowledge when they fit the "
+                    "definition (small, independently owned, high price tier). Do not include a "
+                    "brand here if it's already a microbrand above."
+                ),
+                "items": _MICROBRAND_ITEM_SCHEMA,
+            },
             "new_releases": {
                 "type": "array",
                 "description": (
@@ -190,9 +225,9 @@ TOOL_SCHEMA = {
                     "Mainstream/established brands that get substantive coverage today — one "
                     "entry per brand, not per model — with the model(s) discussed and the "
                     "article urls that back it. Do NOT include a brand here if it's a microbrand "
-                    "already captured in the microbrands list above — this list is for "
-                    "mainstream brands only, and each brand should appear in exactly one of the "
-                    "two lists. Inclusion bar: only include a brand if at least one article is "
+                    "or an independent already captured in the lists above — this list is for "
+                    "everything else, and each brand should appear in exactly one of the three "
+                    "lists. Inclusion bar: only include a brand if at least one article is "
                     "dedicated to it, or gives it a whole standalone section within an article "
                     "covering multiple brands/models (e.g. one write-up in a roundup, one item in "
                     "a 'top 5 watches' list). Do NOT include a brand solely because it's "
@@ -204,7 +239,14 @@ TOOL_SCHEMA = {
                 "items": _BRAND_DISCUSSED_ITEM_SCHEMA,
             },
         },
-        "required": ["summary_bullets", "microbrands", "new_releases", "business_news", "brands_discussed"],
+        "required": [
+            "summary_bullets",
+            "microbrands",
+            "independents",
+            "new_releases",
+            "business_news",
+            "brands_discussed",
+        ],
         "additionalProperties": False,
     },
     "strict": True,
@@ -273,6 +315,7 @@ class BusinessNewsItem:
 class DigestAnalysis:
     summary_bullets: list
     microbrands: list
+    independents: list
     brands_discussed: list
     new_releases: list
     business_news: list
@@ -281,7 +324,12 @@ class DigestAnalysis:
 def empty_analysis(note: str = "") -> DigestAnalysis:
     bullets = [SummaryBullet(text=note, urls=[])] if note else []
     return DigestAnalysis(
-        summary_bullets=bullets, microbrands=[], brands_discussed=[], new_releases=[], business_news=[]
+        summary_bullets=bullets,
+        microbrands=[],
+        independents=[],
+        brands_discussed=[],
+        new_releases=[],
+        business_news=[],
     )
 
 
@@ -310,7 +358,8 @@ def _process_summary_bullets(raw_bullets: list, valid_urls: set) -> list:
     return bullets
 
 
-def _merge_microbrands(raw_groups: list, valid_urls: set, url_to_source: dict) -> list:
+def _merge_brand_groups(raw_groups: list, valid_urls: set, url_to_source: dict) -> list:
+    """Shared brand+model+note+urls merge, used for both Microbrands and Independents."""
     merged: dict = {}
     for entry in raw_groups:
         brand = (entry.get("brand") or "").strip()
@@ -453,9 +502,15 @@ def analyze_digest(client: Anthropic, items: list) -> DigestAnalysis:
         for item in items
     )
 
+    known_independents = ", ".join(KNOWN_INDEPENDENT_BRANDS)
+
     prompt = f"""Here are today's watch-news articles (source, title, url, summary):
 
 {listing}
+
+Known independent brands (non-exhaustive — use as a strong prior for the "independents" \
+field, and also classify other brands into it using your own judgment when they fit the \
+definition given there): {known_independents}
 
 Analyze these as a set and call {TOOL_NAME}. Only use urls that appear in the article list above — never invent one."""
 
@@ -471,17 +526,28 @@ Analyze these as a set and call {TOOL_NAME}. Only use urls that appear in the ar
     tool_use = next(b for b in response.content if b.type == "tool_use")
     data = tool_use.input
 
-    microbrands = _merge_microbrands(data.get("microbrands", []), valid_urls, url_to_source)
-    microbrand_names = {g.brand.casefold() for g in microbrands}
+    microbrands = _merge_brand_groups(data.get("microbrands", []), valid_urls, url_to_source)
+    independents = _merge_brand_groups(data.get("independents", []), valid_urls, url_to_source)
+
+    # A brand should appear in exactly one of the three brand sections. Microbrand
+    # ($500-3,000) and Independent ($10k+) are mutually exclusive by definition, but
+    # the model can still occasionally misclassify the same brand into both lists —
+    # Independents wins ties since it's the narrower, more specific bar.
+    independent_names = {g.brand.casefold() for g in independents}
+    microbrands = [g for g in microbrands if g.brand.casefold() not in independent_names]
+
+    exclusive_names = {g.brand.casefold() for g in microbrands} | independent_names
 
     brands_discussed = _merge_brands_discussed(data.get("brands_discussed", []), valid_urls, url_to_source)
-    # "Mainstream Brands" is defined as brands NOT already covered in Microbrands —
-    # enforced here rather than trusted from the model, same as url validation above.
-    brands_discussed = [b for b in brands_discussed if b.brand.casefold() not in microbrand_names]
+    # "Mainstream Brands" is defined as brands NOT already covered in Microbrands or
+    # Independents — enforced here rather than trusted from the model, same as url
+    # validation above.
+    brands_discussed = [b for b in brands_discussed if b.brand.casefold() not in exclusive_names]
 
     return DigestAnalysis(
         summary_bullets=_process_summary_bullets(data.get("summary_bullets", []), valid_urls),
         microbrands=microbrands,
+        independents=independents,
         brands_discussed=brands_discussed,
         new_releases=_merge_new_releases(data.get("new_releases", []), valid_urls, url_to_source),
         business_news=_merge_business_news(data.get("business_news", []), valid_urls, url_to_source),

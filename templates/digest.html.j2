@@ -17,10 +17,12 @@
   <div class="layout">
     <nav class="sidebar">
       <a href="#summary">Summary</a>
-      <a href="#microbrands">Microbrands</a>
-      <a href="#mainstream-brands">Mainstream Brands</a>
-      <a href="#new-releases">New Releases</a>
       <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
     </nav>
     <div class="wrap">
       <header>
@@ -29,6 +31,11 @@
       </header>
 
   <h2 class="section" id="summary">Summary</h2>
+  {% if source_counts %}
+    <p class="discovery-line">
+      We discovered {{ total }} new article{{ "s" if total != 1 else "" }}{% if source_counts %} — {% for sc in source_counts %}{{ sc.count }} from <a href="{{ sc.homepage }}" target="_blank" rel="noopener">{{ sc.name }}</a>{% if not loop.last %}{% if loop.revindex0 == 1 %}{{ ", and " if source_counts|length > 2 else " and " }}{% else %}, {% endif %}{% endif %}{% endfor %}{% endif %}.
+    </p>
+  {% endif %}
   {% if analysis.summary_bullets %}
     <ul class="summary-bullets">
       {% for bullet in analysis.summary_bullets %}
@@ -44,34 +51,19 @@
     <p class="empty">No summary available.</p>
   {% endif %}
 
-  <h2 class="section" id="microbrands">Microbrands</h2>
-  {% if analysis.microbrands %}
-    {% for group in analysis.microbrands %}
+  <h2 class="section" id="business-news">Business News</h2>
+  {% if analysis.business_news %}
+    {% for item in analysis.business_news %}
       <div class="group">
-        <div class="heading">{{ group.brand }}{% if group.model %} — {{ group.model }}{% endif %}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
-        {% if group.note %}<p class="note">{{ group.note }}</p>{% endif %}
+        <div class="heading">{{ item.topic }}{% if item.sources %} <span class="sources">({{ item.sources|join(", ") }})</span>{% endif %}</div>
+        <p class="note">{{ item.summary }}</p>
         <div class="links">
-          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+          {% for url in item.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
         </div>
       </div>
     {% endfor %}
   {% else %}
-    <p class="empty">No microbrand articles today.</p>
-  {% endif %}
-
-  <h2 class="section" id="mainstream-brands">Mainstream Brands</h2>
-  {% if analysis.brands_discussed %}
-    {% for group in analysis.brands_discussed %}
-      <div class="group">
-        <div class="heading">{{ group.brand }}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
-        {% if group.models %}<p class="models">{{ group.models|join(", ") }}</p>{% endif %}
-        <div class="links">
-          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
-        </div>
-      </div>
-    {% endfor %}
-  {% else %}
-    <p class="empty">No mainstream brands identified today.</p>
+    <p class="empty">No business news today.</p>
   {% endif %}
 
   <h2 class="section" id="new-releases">New Releases</h2>
@@ -99,19 +91,51 @@
     <p class="empty">No new releases identified today.</p>
   {% endif %}
 
-  <h2 class="section" id="business-news">Business News</h2>
-  {% if analysis.business_news %}
-    {% for item in analysis.business_news %}
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  {% if analysis.microbrands %}
+    {% for group in analysis.microbrands %}
       <div class="group">
-        <div class="heading">{{ item.topic }}{% if item.sources %} <span class="sources">({{ item.sources|join(", ") }})</span>{% endif %}</div>
-        <p class="note">{{ item.summary }}</p>
+        <div class="heading">{{ group.brand }}{% if group.model %} — {{ group.model }}{% endif %}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
+        {% if group.note %}<p class="note">{{ group.note }}</p>{% endif %}
         <div class="links">
-          {% for url in item.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
         </div>
       </div>
     {% endfor %}
   {% else %}
-    <p class="empty">No business news today.</p>
+    <p class="empty">No microbrand articles today.</p>
+  {% endif %}
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  {% if analysis.independents %}
+    {% for group in analysis.independents %}
+      <div class="group">
+        <div class="heading">{{ group.brand }}{% if group.model %} — {{ group.model }}{% endif %}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
+        {% if group.note %}<p class="note">{{ group.note }}</p>{% endif %}
+        <div class="links">
+          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="empty">No independent-brand articles today.</p>
+  {% endif %}
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  {% if analysis.brands_discussed %}
+    {% for group in analysis.brands_discussed %}
+      <div class="group">
+        <div class="heading">{{ group.brand }}{% if group.sources %} <span class="sources">({{ group.sources|join(", ") }})</span>{% endif %}</div>
+        {% if group.models %}<p class="models">{{ group.models|join(", ") }}</p>{% endif %}
+        <div class="links">
+          {% for url in group.urls %}<a href="{{ url }}" target="_blank" rel="noopener">{{ title_by_url.get(url, url) }}</a>{% if not loop.last %}<span class="sep">·</span>{% endif %}{% endfor %}
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <p class="empty">No mainstream brands identified today.</p>
   {% endif %}
 
     </div>

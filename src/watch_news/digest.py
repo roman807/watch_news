@@ -6,7 +6,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
 
-from .config import OUTPUT_DIR, TEMPLATES_DIR
+from .config import OUTPUT_DIR, TEMPLATES_DIR, load_sources
 
 
 @dataclass(frozen=True)
@@ -24,6 +24,16 @@ def _render_html(grouped: dict[str, list[DigestItem]], analysis, today: date, no
     non_empty = {name: items for name, items in grouped.items() if items}
     total = sum(len(items) for items in non_empty.values())
     title_by_url = {item.url: item.title for items in non_empty.values() for item in items}
+
+    homepage_by_source = {s.name: s.homepage for s in load_sources()}
+    source_counts = sorted(
+        (
+            {"name": name, "count": len(items), "homepage": homepage_by_source.get(name, "")}
+            for name, items in non_empty.items()
+        ),
+        key=lambda sc: (-sc["count"], sc["name"].casefold()),
+    )
+
     return template.render(
         date_str=today.isoformat(),
         time_str=now.strftime("%H:%M"),
@@ -31,6 +41,7 @@ def _render_html(grouped: dict[str, list[DigestItem]], analysis, today: date, no
         total=total,
         analysis=analysis,
         title_by_url=title_by_url,
+        source_counts=source_counts,
     )
 
 

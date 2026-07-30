@@ -48,6 +48,7 @@
     border-left: 2px solid var(--border);
   }
   .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
   .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
   @media (max-width: 780px) {
     .layout { flex-direction: column; }
@@ -69,6 +70,15 @@
     border-bottom: 2px solid var(--accent);
     scroll-margin-top: 1rem;
   }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
   ul.summary-bullets {
     background: var(--card);
     border: 1px solid var(--border);
