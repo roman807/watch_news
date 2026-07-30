@@ -1,12 +1,19 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 from jinja2 import Environment, FileSystemLoader
 
 from .config import OUTPUT_DIR, TEMPLATES_DIR, load_sources
+
+# The digest is scheduled and framed as a CET/CEST (Central European) product,
+# regardless of what timezone the machine actually running it is in (e.g. UTC
+# on GitHub Actions runners) — always convert and label the displayed time
+# explicitly rather than relying on the runner's local clock.
+CET_TZ = ZoneInfo("Europe/Berlin")
 
 
 @dataclass(frozen=True)
@@ -17,7 +24,7 @@ class DigestItem:
     published: str | None
 
 
-def _render_html(grouped: dict[str, list[DigestItem]], analysis, today: date, now: datetime) -> str:
+def _render_html(grouped: dict[str, list[DigestItem]], analysis, today: date, now_cet: datetime) -> str:
     env = Environment(loader=FileSystemLoader(str(TEMPLATES_DIR)), autoescape=True)
     template = env.get_template("digest.html.j2")
 
@@ -45,7 +52,7 @@ def _render_html(grouped: dict[str, list[DigestItem]], analysis, today: date, no
 
     return template.render(
         date_str=today.isoformat(),
-        time_str=now.strftime("%H:%M"),
+        time_str=f"{now_cet.strftime('%H:%M')} {now_cet.tzname()}",
         grouped=non_empty,
         total=total,
         analysis=analysis,
@@ -57,9 +64,9 @@ def _render_html(grouped: dict[str, list[DigestItem]], analysis, today: date, no
 
 
 def render_digest(grouped: dict[str, list[DigestItem]], analysis, today: date | None = None) -> "tuple[str, str]":
-    now = datetime.now()
-    today = today or now.date()
-    html = _render_html(grouped, analysis, today, now)
+    now_cet = datetime.now(timezone.utc).astimezone(CET_TZ)
+    today = today or now_cet.date()
+    html = _render_html(grouped, analysis, today, now_cet)
 
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     dated_path = OUTPUT_DIR / f"{today.isoformat()}.html"
@@ -74,9 +81,9 @@ def publish_archive(
 ) -> "tuple[str, str]":
     """Writes today's digest into publish_dir (e.g. a GitHub Pages docs/
     folder) and regenerates a chronological archive index alongside it."""
-    now = datetime.now()
-    today = today or now.date()
-    html = _render_html(grouped, analysis, today, now)
+    now_cet = datetime.now(timezone.utc).astimezone(CET_TZ)
+    today = today or now_cet.date()
+    html = _render_html(grouped, analysis, today, now_cet)
 
     out_dir = Path(publish_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
