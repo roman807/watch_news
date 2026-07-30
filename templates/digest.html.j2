@@ -34,14 +34,10 @@
       </header>
 
   <h2 class="section" id="summary">Summary</h2>
-  {% if source_counts %}
+  {% if source_counts or zero_sources %}
     <p class="discovery-line">
-      We discovered {{ total }} new article{{ "s" if total != 1 else "" }}{% if source_counts %} — {% for sc in source_counts %}{{ sc.count }} from <a href="{{ sc.homepage }}" target="_blank" rel="noopener">{{ sc.name }}</a>{% if not loop.last %}{% if loop.revindex0 == 1 %}{{ ", and " if source_counts|length > 2 else " and " }}{% else %}, {% endif %}{% endif %}{% endfor %}{% endif %}.
-    </p>
-  {% endif %}
-  {% if zero_sources %}
-    <p class="discovery-line">
-      No new articles from {% for s in zero_sources %}<a href="{{ s.homepage }}" target="_blank" rel="noopener">{{ s.name }}</a>{% if not loop.last %}{% if loop.revindex0 == 1 %} and {% else %}, {% endif %}{% endif %}{% endfor %}.
+      {% if source_counts %}We discovered {{ total }} new article{{ "s" if total != 1 else "" }} — {% for sc in source_counts %}{{ sc.count }} from <a href="{{ sc.homepage }}" target="_blank" rel="noopener">{{ sc.name }}</a>{% if not loop.last %}{% if loop.revindex0 == 1 %}{{ ", and " if source_counts|length > 2 else " and " }}{% else %}, {% endif %}{% endif %}{% endfor %}.{% endif %}
+      {% if zero_sources %} No new articles from {% for s in zero_sources %}<a href="{{ s.homepage }}" target="_blank" rel="noopener">{{ s.name }}</a>{% if not loop.last %}{% if loop.revindex0 == 1 %} and {% else %}, {% endif %}{% endif %}{% endfor %}.{% endif %}
     </p>
   {% endif %}
   {% if analysis.summary_bullets %}

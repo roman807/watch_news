@@ -1,8 +1,14 @@
 from __future__ import annotations
 
+import re
 from dataclasses import dataclass, field
 
 from anthropic import Anthropic
+
+# The model is prompted to exclude retrospective/review framing (e.g. "Hands-On")
+# from New Releases, but that's a soft instruction it doesn't always follow —
+# this is the deterministic backstop, matched against the article's actual title.
+_HANDS_ON_TITLE_RE = re.compile(r"\bhands[\s-]?on\b", re.IGNORECASE)
 
 MODEL = "claude-opus-5"
 # Structured output across a full day's articles (summary + microbrands + new
@@ -471,12 +477,16 @@ def _merge_brands_discussed(raw_groups: list, valid_urls: set, url_to_source: di
     return sorted(result, key=lambda b: b.brand.casefold())
 
 
-def _merge_new_releases(raw_groups: list, valid_urls: set, url_to_source: dict) -> list:
+def _merge_new_releases(raw_groups: list, valid_urls: set, url_to_source: dict, title_by_url: dict) -> list:
     merged: dict = {}
     for entry in raw_groups:
         brand = (entry.get("brand") or "").strip()
         model = (entry.get("model") or "").strip()
-        urls = [u for u in entry.get("urls", []) if u in valid_urls]
+        urls = [
+            u
+            for u in entry.get("urls", [])
+            if u in valid_urls and not _HANDS_ON_TITLE_RE.search(title_by_url.get(u, ""))
+        ]
         if not brand or not urls:
             continue
 
@@ -553,6 +563,7 @@ def analyze_digest(client: Anthropic, items: list) -> DigestAnalysis:
 
     valid_urls = {item.url for item in items}
     url_to_source = {item.url: item.source for item in items}
+    title_by_url = {item.url: item.title for item in items}
     listing = "\n".join(
         f"- source: {item.source} | title: {item.title} | url: {item.url}\n  summary: {item.summary}"
         for item in items
@@ -632,6 +643,6 @@ Analyze these as a set and call {TOOL_NAME}. Only use urls that appear in the ar
         microbrands=microbrands,
         independents=independents,
         brands_discussed=brands_discussed,
-        new_releases=_merge_new_releases(data.get("new_releases", []), valid_urls, url_to_source),
+        new_releases=_merge_new_releases(data.get("new_releases", []), valid_urls, url_to_source, title_by_url),
         business_news=_merge_business_news(data.get("business_news", []), valid_urls, url_to_source),
     )
