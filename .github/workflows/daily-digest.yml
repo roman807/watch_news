@@ -1,0 +1,59 @@
+name: Daily Watch News Digest
+
+on:
+  schedule:
+    # 18:00 CET (UTC+1) -- used roughly late Oct through late Mar
+    - cron: '0 17 * * *'
+    # 18:00 CEST (UTC+2) -- used roughly late Mar through late Oct
+    - cron: '0 16 * * *'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check whether this cron firing matches 6pm in Europe/Berlin
+        id: gate
+        run: |
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            echo "should_run=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+          offset=$(TZ="Europe/Berlin" date +%z)
+          hour_utc=$(date -u +%H)
+          should_run=false
+          if [ "$offset" = "+0100" ] && [ "$hour_utc" = "17" ]; then should_run=true; fi
+          if [ "$offset" = "+0200" ] && [ "$hour_utc" = "16" ]; then should_run=true; fi
+          echo "should_run=$should_run" >> "$GITHUB_OUTPUT"
+
+      - name: Set up Python
+        if: steps.gate.outputs.should_run == 'true'
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        if: steps.gate.outputs.should_run == 'true'
+        run: |
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: Run digest and publish to docs/
+        if: steps.gate.outputs.should_run == 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: python -m watch_news.main --publish-dir docs
+
+      - name: Commit and push updates
+        if: steps.gate.outputs.should_run == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/seen.db docs/
+          git diff --cached --quiet || git commit -m "Daily watch news digest for $(date -u +%F)"
+          git push

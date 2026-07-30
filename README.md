@@ -4,12 +4,13 @@ Pulls new articles from a configurable list of watch-news sites, summarizes
 each one with the Claude API, and writes a daily HTML digest you can open
 in your browser.
 
-The digest has five sections: a one-paragraph **Summary** of what stands out
-(watches covered by multiple sources, major brand releases, notable
-journalists, etc.), **Microbrands** (independent brands roughly $500-$3,000),
-**Brands Discussed** (every brand + model mentioned, alphabetized, with all
-its article links merged into one entry), **New Releases** (same, for newly
-announced models), and **All Articles** (the full per-source list). The same
+The digest has five sections, navigable via a sidebar: a bullet-point
+**Summary** of what stands out (watches covered by multiple sources, major
+brand releases, notable journalists, etc.), **Microbrands** (independent
+brands roughly $500-$3,000), **Mainstream Brands** (every other brand + model
+mentioned, alphabetized, with all its article links and covering outlets
+merged into one entry), **New Releases** (same, for newly announced models,
+plus key specs), and **Business News** (industry/financial stories). The same
 article commonly appears in several sections — that's expected.
 
 Per-article summaries and the cross-article analysis both use
@@ -38,6 +39,8 @@ cp .env.example .env   # then add your ANTHROPIC_API_KEY
 - `--days N` — only consider articles published within the last N days
   (default 2).
 - `--open` — open the generated digest in your default browser when done.
+- `--publish-dir DIR` — also write the digest and a regenerated chronological
+  archive index into `DIR` (see "Automated daily runs" below).
 
 Output is written to `output/<YYYY-MM-DD>.html` and `output/latest.html`.
 
@@ -73,13 +76,31 @@ a generic scrape of `homepage` (looks for links inside `<article>` tags,
 then common heading selectors). This fallback is best-effort — sites with
 unusual markup may need custom selectors added to `fetch.py`.
 
-## Scheduling
+## Automated daily runs + GitHub Pages archive
 
-Currently manual. To automate later, add a cron entry or a macOS `launchd`
-job that runs:
+`.github/workflows/daily-digest.yml` runs the digest automatically once a
+day at 6pm Central European time (both CET and CEST are handled — GitHub
+Actions cron is UTC-only and doesn't shift for daylight saving, so the
+workflow schedules both UTC offsets and a guard step picks the correct one)
+and publishes it to a GitHub Pages site with a chronological archive
+(newest first) as the homepage.
 
-```
-/full/path/to/watch_news/venv/bin/python -m watch_news.main
-```
+One-time setup:
 
-from the project's `src` directory (or set `PYTHONPATH`/install the package).
+1. **Add your API key as a repo secret**: repo Settings → Secrets and
+   variables → Actions → New repository secret → name it
+   `ANTHROPIC_API_KEY`.
+2. **Enable Pages**: repo Settings → Pages → Source: "Deploy from a branch"
+   → Branch `main`, folder `/docs` → Save. It's fine to do this before
+   `docs/` has any content.
+3. Either wait for the next scheduled run, or trigger it immediately from
+   the Actions tab → "Daily Watch News Digest" → "Run workflow" (this spends
+   real API credit, same as any real run).
+
+Each run commits `data/seen.db` (the dedup state — no longer gitignored, so
+it persists across the ephemeral GitHub Actions runners) and `docs/` (the
+published HTML) back to the repo.
+
+Prefer to run it yourself instead? A local cron entry or macOS `launchd` job
+running `/full/path/to/watch_news/venv/bin/python -m watch_news.main` works
+the same way — just skip the GitHub Actions setup above.

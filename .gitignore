@@ -1,6 +1,5 @@
 venv/
 .env
-data/*.db
 output/*.html
 __pycache__/
 *.pyc

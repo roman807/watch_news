@@ -4,12 +4,12 @@ import argparse
 import webbrowser
 from datetime import datetime, timedelta, timezone
 
-from . import analyze, extract, fetch, store, summarize
+from . import analyze, digest, extract, fetch, store, summarize
 from .config import anthropic_api_key, load_sources
 from .digest import DigestItem, render_digest
 
 
-def run(days: int, dry_run: bool, open_browser: bool) -> None:
+def run(days: int, dry_run: bool, open_browser: bool, publish_dir: str | None = None) -> None:
     sources = load_sources()
     conn = store.get_connection()
     store.init_db(conn)
@@ -104,6 +104,11 @@ def run(days: int, dry_run: bool, open_browser: bool) -> None:
 
     dated_path, latest_path = render_digest(grouped, digest_analysis)
     print(f"Digest written to {dated_path}")
+
+    if publish_dir:
+        archive_dated, archive_index = digest.publish_archive(grouped, digest_analysis, publish_dir)
+        print(f"Published to {archive_dated} (archive index: {archive_index})")
+
     if open_browser:
         webbrowser.open(f"file://{latest_path}")
 
@@ -119,8 +124,14 @@ def main() -> None:
     parser.add_argument(
         "--open", action="store_true", dest="open_browser", help="Open the digest in the default browser."
     )
+    parser.add_argument(
+        "--publish-dir",
+        type=str,
+        default=None,
+        help="Also publish the digest and a chronological archive index into this directory (e.g. docs/ for GitHub Pages).",
+    )
     args = parser.parse_args()
-    run(days=args.days, dry_run=args.dry_run, open_browser=args.open_browser)
+    run(days=args.days, dry_run=args.dry_run, open_browser=args.open_browser, publish_dir=args.publish_dir)
 
 
 if __name__ == "__main__":

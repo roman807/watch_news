@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Watch News Digest — Archive</title>
+{% include "_style.html.j2" %}
+</head>
+<body>
+<div class="container">
+  <header>
+    <h1>Watch News Digest</h1>
+    <div class="meta">Archive — all daily digests, most recent first</div>
+  </header>
+
+  {% if entries %}
+    <ul class="archive-list">
+      {% for entry in entries %}
+        <li><a href="{{ entry.filename }}">{{ entry.display }}</a></li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p class="empty">No digests published yet.</p>
+  {% endif %}
+</div>
+</body>
+</html>
