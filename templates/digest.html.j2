@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Watch News — {{ date_str }}</title>
 {% include "_style.html.j2" %}
 </head>
@@ -9,7 +10,7 @@
 <div class="container">
   {% if not grouped %}
     <header>
-      <h1>Watch News Digest</h1>
+      <h1>Daily Watch News Digest</h1>
       <div class="meta">{{ date_str }} {{ time_str }} · {{ total }} new article{{ "s" if total != 1 else "" }}</div>
     </header>
     <p class="empty">No new articles since the last run.</p>
@@ -26,7 +27,7 @@
     </nav>
     <div class="wrap">
       <header>
-        <h1>Watch News Digest</h1>
+        <h1>Daily Watch News Digest</h1>
         <div class="meta">{{ date_str }} {{ time_str }} · {{ total }} new article{{ "s" if total != 1 else "" }}</div>
       </header>
 
