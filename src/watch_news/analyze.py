@@ -202,8 +202,14 @@ TOOL_SCHEMA = {
             "new_releases": {
                 "type": "array",
                 "description": (
-                    "Newly announced/released models today, one entry per brand+model, with "
-                    "article links and key specs pulled from the article."
+                    "Newly announced/released models — only include an article if it frames "
+                    "the watch as a new announcement (e.g. 'Introducing', 'announces', "
+                    "'unveils', 'debut', 'coming soon'). Exclude articles framed as a "
+                    "retrospective/review of an already-released watch (e.g. 'Hands-On', "
+                    "'Owner's Review'). Do not use the presence or absence of full specs as a "
+                    "signal either way — a genuine new-release announcement often also gives "
+                    "full specs. One entry per brand+model, with article links and key specs "
+                    "pulled from the article."
                 ),
                 "items": _NEW_RELEASE_ITEM_SCHEMA,
             },

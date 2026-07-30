@@ -33,6 +33,14 @@ def _render_html(grouped: dict[str, list[DigestItem]], analysis, today: date, no
         ),
         key=lambda sc: (-sc["count"], sc["name"].casefold()),
     )
+    zero_sources = sorted(
+        (
+            {"name": name, "homepage": homepage_by_source.get(name, "")}
+            for name, items in grouped.items()
+            if not items
+        ),
+        key=lambda s: s["name"].casefold(),
+    )
 
     return template.render(
         date_str=today.isoformat(),
@@ -42,6 +50,7 @@ def _render_html(grouped: dict[str, list[DigestItem]], analysis, today: date, no
         analysis=analysis,
         title_by_url=title_by_url,
         source_counts=source_counts,
+        zero_sources=zero_sources,
     )
 
 
