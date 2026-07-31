@@ -19,18 +19,23 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Check whether this cron firing matches 16:58 in Europe/Berlin
+      - name: Check whether this cron entry matches the current CET/CEST offset
         id: gate
         run: |
           if [ "${{ github.event_name }}" != "schedule" ]; then
             echo "should_run=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
+          # Match on which cron *expression* fired (fixed at schedule-definition
+          # time) rather than the current wall-clock hour — GitHub Actions
+          # schedules can be delayed by hours, and by execution time the hour
+          # may no longer match the intended slot even though this is still
+          # the correct, DST-appropriate firing for today.
           offset=$(TZ="Europe/Berlin" date +%z)
-          hour_utc=$(date -u +%H)
+          schedule="${{ github.event.schedule }}"
           should_run=false
-          if [ "$offset" = "+0100" ] && [ "$hour_utc" = "15" ]; then should_run=true; fi
-          if [ "$offset" = "+0200" ] && [ "$hour_utc" = "14" ]; then should_run=true; fi
+          if [ "$offset" = "+0100" ] && [ "$schedule" = "58 15 * * *" ]; then should_run=true; fi
+          if [ "$offset" = "+0200" ] && [ "$schedule" = "58 14 * * *" ]; then should_run=true; fi
           echo "should_run=$should_run" >> "$GITHUB_OUTPUT"
 
       - name: Set up Python
