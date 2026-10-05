@@ -1,13 +1,10 @@
 name: Daily Watch News Digest
 
 on:
-  schedule:
-    # 16:58 CET (UTC+1) -- used roughly late Oct through late Mar.
-    # 2 minutes before the hour on purpose: GitHub's scheduler is most
-    # likely to delay runs queued for exactly the top of the hour.
-    - cron: '58 15 * * *'
-    # 16:58 CEST (UTC+2) -- used roughly late Mar through late Oct
-    - cron: '58 14 * * *'
+  # The daily run moved to the Gallo24 agent on its VPS (16:58 Europe/Zurich,
+  # swiss models, pushes with a deploy key) on 2026-10-05. This workflow is
+  # kept as a manual fallback only: Actions → "Daily Watch News Digest" →
+  # Run workflow (uses Claude via the ANTHROPIC_API_KEY secret).
   workflow_dispatch: {}
 
 permissions:
