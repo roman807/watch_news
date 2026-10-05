@@ -1,7 +1,8 @@
 from __future__ import annotations
 
-from anthropic import Anthropic
+from .llm import Client
 
+# Anthropic backend; the OpenAI-compatible one uses WATCH_NEWS_SUMMARY_MODEL (see llm.py).
 MODEL = "claude-haiku-4-5"  #"claude-opus-5"
 MAX_SUMMARY_TOKENS = 200
 
@@ -18,19 +19,11 @@ news. Focus on the concrete news (what watch/brand/event, what's new or \
 notable). No preamble, no markdown, just the summary text."""
 
 
-def summarize_article(client: Anthropic, *, source: str, title: str, text: str) -> str:
+def summarize_article(client: Client, *, source: str, title: str, text: str) -> str:
     text = text.strip() or "(no article text available, summarize from the title only)"
-    response = client.messages.create(
-        model=MODEL,
-        max_tokens=MAX_SUMMARY_TOKENS,
-        messages=[
-            {
-                "role": "user",
-                "content": PROMPT_TEMPLATE.format(source=source, title=title, text=text),
-            }
-        ],
+    return client.complete(
+        "summary", MODEL, PROMPT_TEMPLATE.format(source=source, title=title, text=text), MAX_SUMMARY_TOKENS
     )
-    return "".join(block.text for block in response.content if block.type == "text").strip()
 
 
 def fallback_summary(text: str, title: str) -> str:

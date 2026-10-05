@@ -4,8 +4,8 @@ import argparse
 import webbrowser
 from datetime import datetime, timedelta, timezone
 
-from . import analyze, digest, extract, fetch, store, summarize
-from .config import anthropic_api_key, load_sources
+from . import analyze, digest, extract, fetch, llm, store, summarize
+from .config import load_sources
 from .digest import DigestItem, render_digest
 
 
@@ -16,15 +16,7 @@ def run(days: int, dry_run: bool, open_browser: bool, publish_dir: str | None = 
 
     client = None
     if not dry_run:
-        api_key = anthropic_api_key()
-        if not api_key:
-            raise SystemExit(
-                "ANTHROPIC_API_KEY is not set. Add it to .env, or pass --dry-run "
-                "to test without calling the Claude API."
-            )
-        from anthropic import Anthropic
-
-        client = Anthropic(api_key=api_key)
+        client = llm.make_client()  # Claude by default; see llm.py for the OpenAI-compatible option
 
     now = datetime.now(timezone.utc)
     cutoff = now - timedelta(days=days)
@@ -119,7 +111,7 @@ def main() -> None:
         "--days", type=int, default=2, help="Only consider entries published within N days (default: 2)."
     )
     parser.add_argument(
-        "--dry-run", action="store_true", help="Skip Anthropic API calls; use raw RSS text instead."
+        "--dry-run", action="store_true", help="Skip all model calls; use raw RSS text instead."
     )
     parser.add_argument(
         "--open", action="store_true", dest="open_browser", help="Open the digest in the default browser."

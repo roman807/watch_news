@@ -38,6 +38,3 @@ def load_sources() -> list[Source]:
         for item in raw
     ]
 
-
-def anthropic_api_key() -> str | None:
-    return os.environ.get("ANTHROPIC_API_KEY")

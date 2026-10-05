@@ -20,6 +20,23 @@ once per new article), swap the `MODEL` constant in `summarize.py` for
 more from Opus-tier reasoning (brand/microbrand classification, merging
 duplicate mentions) so it's worth keeping as-is.
 
+## Model backends
+
+Model calls go through `src/watch_news/llm.py`, which supports two backends:
+
+- **Claude (default):** set `ANTHROPIC_API_KEY`. Models are the `MODEL`
+  constants in `summarize.py` and `analyze.py`.
+- **Any OpenAI-compatible server** (e.g. the Gallo24 agent, which forwards to
+  Infomaniak's swiss-hosted models): set `OPENAI_BASE_URL`,
+  `WATCH_NEWS_SUMMARY_MODEL` and `WATCH_NEWS_ANALYZE_MODEL` (plus
+  `OPENAI_API_KEY` if the server needs one). The summary model should answer
+  directly — "thinking" models can spend the whole 200-token budget thinking
+  and return an empty summary. The analysis model must support a forced tool
+  call (`tool_choice` naming the function).
+
+The daily run is done by the Gallo24 agent on its VPS (Gemma 4 31B for
+summaries, Kimi K2.6 for the analysis), pushing with a repo-scoped deploy key.
+
 ## Setup
 
 ```bash

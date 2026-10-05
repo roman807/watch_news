@@ -3,13 +3,14 @@ from __future__ import annotations
 import re
 from dataclasses import dataclass, field
 
-from anthropic import Anthropic
+from .llm import Client
 
 # The model is prompted to exclude retrospective/review framing (e.g. "Hands-On")
 # from New Releases, but that's a soft instruction it doesn't always follow —
 # this is the deterministic backstop, matched against the article's actual title.
 _HANDS_ON_TITLE_RE = re.compile(r"\bhands[\s-]?on\b", re.IGNORECASE)
 
+# Anthropic backend; the OpenAI-compatible one uses WATCH_NEWS_ANALYZE_MODEL (see llm.py).
 MODEL = "claude-opus-5"
 # Structured output across a full day's articles (summary + microbrands + new
 # releases with specs + every brand discussed) plus Opus 5's default adaptive
@@ -557,7 +558,7 @@ def _merge_business_news(raw_items: list, valid_urls: set, url_to_source: dict) 
     return result
 
 
-def analyze_digest(client: Anthropic, items: list) -> DigestAnalysis:
+def analyze_digest(client: Client, items: list) -> DigestAnalysis:
     if not items:
         return empty_analysis("No new articles today.")
 
@@ -590,17 +591,7 @@ Known microbrands (-> "microbrands" field): {known_microbrands}
 
 Analyze these as a set and call {TOOL_NAME}. Only use urls that appear in the article list above — never invent one."""
 
-    with client.messages.stream(
-        model=MODEL,
-        max_tokens=MAX_TOKENS,
-        tools=[TOOL_SCHEMA],
-        tool_choice={"type": "tool", "name": TOOL_NAME},
-        messages=[{"role": "user", "content": prompt}],
-    ) as stream:
-        response = stream.get_final_message()
-
-    tool_use = next(b for b in response.content if b.type == "tool_use")
-    data = tool_use.input
+    data = client.forced_tool_call("analyze", MODEL, prompt, TOOL_SCHEMA, MAX_TOKENS)
 
     microbrands = _merge_brand_groups(data.get("microbrands", []), valid_urls, url_to_source)
     independents = _merge_brand_groups(data.get("independents", []), valid_urls, url_to_source)
