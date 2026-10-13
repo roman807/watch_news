@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-10-13</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-10-13 17:01 CEST · 23 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 23 new articles — 5 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 5 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 3 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 3 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 2 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>, 2 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 2 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, and 1 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          MB&amp;F LM1 EVO headlines with a 42mm case, 80m water resistance, and FlexRing shock absorption for the line’s 15th anniversary.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/intro-mbandf-lm1-evo" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://monochrome-watches.com/the-mbf-legacy-machine-1-is-back-and-ready-for-action-as-the-lm1-evo/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://timeandtidewatches.com/mbf-lm1-evo-introducing/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Garmin’s third-gen MARQ adds nano-molded titanium, LTE, and a new Diver across six specialized models.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/garmin-marq-3-live-photos" target="_blank" rel="noopener">Hodinkee</a></span>
+          
+        </li>
+      
+        <li>
+          RGM launches the 501-PC perpetual calendar with an enamel dial and Dubois-Depraz module for $39,900.
+          
+            <span class="bullet-links"><a href="https://wornandwound.com/rgm-introduces-the-new-501-pc-perpetual-calendar/" target="_blank" rel="noopener">Worn &amp; Wound</a></span>
+          
+        </li>
+      
+        <li>
+          Bianchet reveals a black ceramic UltraFino Tonneau flying tourbillon with a rose gold “Golden Line” at CHF 80,500.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/bianchet-ultrafino-tonneau-black-ceramic-and-gold-openworked-ultra-thin-tourbillon-integrated-bracelet-introducing-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          LVMH Watches &amp; Jewelry grew 6% in Q3 2026 while overall group revenue rose just 1%.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/modest-organic-growth-for-lvmh-over-the-third-quarter-2026/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">LVMH Q3 2026 results</div>
+        <p class="note">LVMH reported modest organic revenue growth of 1% in Q3 2026, with its Watches &amp; Jewelry division up 6% for the quarter and 8% over the first nine months.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/modest-organic-growth-for-lvmh-over-the-third-quarter-2026/" target="_blank" rel="noopener">Monochrome: Industry News – Modest Organic Growth for LVMH over the Third Quarter 2026</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Bianchet — UltraFino Tonneau Black Ceramic and Gold</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Automatic, UT01</li>
+            
+            <li>Case material: Black ceramic with 18k rose gold</li>
+            <li>Flying tourbillon</li><li>Black PVD movement finish</li><li>18k rose gold ‘Golden Line’ accent</li><li>Integrated ceramic bracelet</li><li>Quick-release rubber strap</li><li>8.9mm thick</li>
+            <li>Price: CHF 80,500</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/bianchet-ultrafino-tonneau-black-ceramic-and-gold-openworked-ultra-thin-tourbillon-integrated-bracelet-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The new Bianchet UltraFino Tonneau Black Ceramic and Gold</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Garmin — Marq 3</div>
+        
+          <ul class="specs">
+            <li>Size: 47mm</li>
+            
+            
+            <li>Case material: Titanium</li>
+            <li>Nano molding technology integrating polymer-titanium</li><li>Inductive button sensors</li><li>LTE and satellite connectivity</li><li>Six specialized models including Diver and Commander</li><li>Thinner profile</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/garmin-marq-3-live-photos" target="_blank" rel="noopener">Hodinkee: Introducing: Garmin Marq 3 (Live Photos)</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">MB&amp;F — Legacy Machine 1 EVO</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            
+            <li>Water resistance: 80m</li>
+            <li>Case material: Titanium or 18k rose gold</li>
+            <li>Straumann double hairspring</li><li>Quick-change rubber straps</li><li>Revised power reserve indicator</li><li>Floating balance wheel</li><li>Dual-time display</li><li>FlexRing shock-absorption system</li><li>Screw-down crown</li><li>Limited to 33 pieces in rose gold</li>
+            <li>Price: $109,000 (titanium); $137,000 (rose gold)</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/intro-mbandf-lm1-evo" target="_blank" rel="noopener">Hodinkee: Introducing: The Original MB&amp;F Legacy Machine 1 Gets The EVO Treatment</a><a href="https://monochrome-watches.com/the-mbf-legacy-machine-1-is-back-and-ready-for-action-as-the-lm1-evo/" target="_blank" rel="noopener">Monochrome: First Look – The MB&amp;F Legacy Machine 1 Is Back and Ready for Action as the LM1 EVO</a><a href="https://timeandtidewatches.com/mbf-lm1-evo-introducing/" target="_blank" rel="noopener">Time+Tide: MB&amp;F finally gives its original Legacy Machine design the sporty EVO treatment after 15 years</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">MeisterSinger — No03 and Perigraph Special Editions</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: Automatic, Sellita SW300</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Turquoise-blue lacquered dials</li><li>Single-hand display</li><li>Perigraph adds rotating date disc</li>
+            <li>Price: EUR 2,190 (No03); EUR 2,490 (Perigraph)</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/meistersinger-no03-and-perigraph-special-editions-turquoise-dials-2026-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The MeisterSinger No03 and Perigraph Special Editions with Turquoise Dials</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">RGM — 501-PC Perpetual Calendar</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Automatic, Dubois-Depraz module on modified ETA 2892</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>White enamel dial</li><li>Perpetual calendar</li><li>11.5mm thick</li>
+            <li>Price: $39,900</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/rgm-introduces-the-new-501-pc-perpetual-calendar/" target="_blank" rel="noopener">Worn &amp; Wound: RGM Introduces the New 501-PC Perpetual Calendar</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Sternglas — Zirkel X</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            
+            
+            <li>Case material: Stainless steel</li>
+            <li>Bauhaus-inspired design</li><li>Vertically brushed silver domed dial</li><li>Dual sub-dials at 12 and 6 o&#39;clock</li><li>Developed with input from 5,000 community members</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-new-sternglas-zirkel-x-proves-the-circles-significance/" target="_blank" rel="noopener">Fratello: The New Sternglas Zirkel X Proves The Circle’s Significance</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Wren — Vessel</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            
+            
+            <li>Case material: 904L stainless steel</li>
+            <li>Integrated-bracelet sports watch</li><li>Angular cushion case</li><li>Complex faceted sapphire crystal</li><li>Meteorite or sunburst dials</li><li>Proprietary quick-release bracelet/strap system</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-new-wren-vessel/" target="_blank" rel="noopener">Fratello: The Wren Vessel: A Surprisingly Wearable Integrated-Bracelet Watch For The Future</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Atowak — Manta-X Violet Purple</div>
+        <p class="note">Futuristic Grade 5 titanium wandering-hours watch priced under $4,000.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/watch-review-the-atowak-manta-x-violet-purple-watch-is-a-futuristic-take-on-the-centuries-old-wandering-hours-complication/" target="_blank" rel="noopener">aBlogtoWatch: Watch Review: The Atowak Manta-X Violet Purple Watch Is A Futuristic Take On The Centuries-Old Wandering Hours Complication</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">MeisterSinger — No03 and Perigraph Special Editions</div>
+        <p class="note">Turquoise-dial single-hand models in 38mm steel cases.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/meistersinger-no03-and-perigraph-special-editions-turquoise-dials-2026-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The MeisterSinger No03 and Perigraph Special Editions with Turquoise Dials</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Sternglas — Zirkel X</div>
+        <p class="note">10th anniversary Bauhaus community-designed model.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-new-sternglas-zirkel-x-proves-the-circles-significance/" target="_blank" rel="noopener">Fratello: The New Sternglas Zirkel X Proves The Circle’s Significance</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Wren — Vessel</div>
+        <p class="note">Integrated-bracelet sports watch from Wrist Enthusiast founder Craig Karger.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-new-wren-vessel/" target="_blank" rel="noopener">Fratello: The Wren Vessel: A Surprisingly Wearable Integrated-Bracelet Watch For The Future</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Bianchet — UltraFino Tonneau Black Ceramic and Gold</div>
+        <p class="note">Openworked ultra-thin flying tourbillon with integrated ceramic bracelet.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/bianchet-ultrafino-tonneau-black-ceramic-and-gold-openworked-ultra-thin-tourbillon-integrated-bracelet-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The new Bianchet UltraFino Tonneau Black Ceramic and Gold</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">MB&amp;F — LM1 EVO</div>
+        <p class="note">Sportier 15th-anniversary evolution of the original Legacy Machine 1 with a 42mm case and 80m water resistance.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/intro-mbandf-lm1-evo" target="_blank" rel="noopener">Hodinkee: Introducing: The Original MB&amp;F Legacy Machine 1 Gets The EVO Treatment</a><a href="https://monochrome-watches.com/the-mbf-legacy-machine-1-is-back-and-ready-for-action-as-the-lm1-evo/" target="_blank" rel="noopener">Monochrome: First Look – The MB&amp;F Legacy Machine 1 Is Back and Ready for Action as the LM1 EVO</a><a href="https://timeandtidewatches.com/mbf-lm1-evo-introducing/" target="_blank" rel="noopener">Time+Tide: MB&amp;F finally gives its original Legacy Machine design the sporty EVO treatment after 15 years</a><a href="https://watchesbysjx.com/2026/10/mbf-lm1-evo.html" target="_blank" rel="noopener">SJX: Hands On: MB&amp;F LM1 EVO</a><a href="https://www.ablogtowatch.com/mbf-lm1-evo-hands-on-the-two-time-hybrid-sport-heritage-watch/" target="_blank" rel="noopener">aBlogtoWatch: MB&amp;F LM1 Evo Hands-On: The Two-Time Hybrid Sport Heritage Watch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">RGM — 501-PC Perpetual Calendar</div>
+        <p class="note">First perpetual calendar from RGM since the 1990s, featuring a white enamel dial.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/rgm-introduces-the-new-501-pc-perpetual-calendar/" target="_blank" rel="noopener">Worn &amp; Wound: RGM Introduces the New 501-PC Perpetual Calendar</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">A. Lange &amp; Söhne</div>
+        <p class="models">Datograph, Split series</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/a-lange-sohne-brings-challenging-chronographs-to-singapore/" target="_blank" rel="noopener">Revolution: A. Lange &amp; Söhne Brings Challenging Chronographs to Singapore</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Breguet</div>
+        <p class="models">Marine 5517</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-updated-breguet-marine-5517-new-guilloche-dial-review-price/" target="_blank" rel="noopener">Monochrome: Hands-on – The Updated Breguet Marine 5517, Navigating a More Classical Course</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Fortis</div>
+        <p class="models">Novonaut N-42 Halo</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/fortis-novonaut-n-42-halo-hands-on/" target="_blank" rel="noopener">Time+Tide: Fortis gives its Novonaut a glow up</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Garmin</div>
+        <p class="models">Marq 3</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/garmin-marq-3-live-photos" target="_blank" rel="noopener">Hodinkee: Introducing: Garmin Marq 3 (Live Photos)</a><a href="https://www.ablogtowatch.com/garmin-launches-third-generation-premium-positioned-titanium-ceramic-marq-smartwatches/" target="_blank" rel="noopener">aBlogtoWatch: Hands-On Debut: Garmin Launches Third Generation Premium-Positioned Titanium &amp; Ceramic MARQ Smartwatches</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Movado</div>
+        <p class="models">1999 New York Knicks commemorative</p>
+        <div class="links">
+          <a href="https://wornandwound.com/knicks-in-five-but-movados-in-99/" target="_blank" rel="noopener">Worn &amp; Wound: Knicks In Five, But Movados In ’99</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Swatch</div>
+        <p class="models">Bioceramic, Sistem51</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/inside-the-swatch-sistem51-and-bioceramic-production-sites/" target="_blank" rel="noopener">Fratello: Inside The Swatch Sistem51 And Bioceramic Production Sites</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vacheron Constantin</div>
+        <p class="models">ref. 4764 &#34;Cioccolatone&#34;, ref. 6213 world time</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/vacheron-constantin-and-phillips-announce-34-finalists-for-the-inaugural-concours-delegance-horloger" target="_blank" rel="noopener">Hodinkee: Vacheron Constantin And Phillips Announce 34 Finalists For The Inaugural Concours D&#39;Élégance Horlogère</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
