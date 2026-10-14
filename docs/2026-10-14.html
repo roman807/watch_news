@@ -1,0 +1,698 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-10-14</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-10-14 22:57 CEST · 24 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 24 new articles — 7 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 5 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 4 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, 2 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 2 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 2 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 1 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, and 1 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          The Ming x Massena LAB 57.09 “Secret Honey” leads today’s coverage across three outlets, featuring a dynamic honeycomb dial built from rotating sapphire discs.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/ming-x-massena-lab-5709-secret-honey" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://monochrome-watches.com/ming-x-massena-lab-57-09-secret-honey-moving-honeycomb-dial-tri-tone-lugs-introducing-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://wornandwound.com/ming-and-massena-lab-launch-a-sequel-to-a-landmark-le-the-57-09-secret-honey/" target="_blank" rel="noopener">Worn &amp; Wound</a></span>
+          
+        </li>
+      
+        <li>
+          Ulysse Nardin celebrates the Freak’s 25th anniversary with the record-setting Super Freak dual-tourbillon and a compact new Freak X.
+          
+            <span class="bullet-links"><a href="https://revolutionwatch.com/matthieu-haverlan-ulysse-nardin/" target="_blank" rel="noopener">Revolution</a></span>
+          
+        </li>
+      
+        <li>
+          Jaeger-LeCoultre unveils the 101 Chain high-jewelry watch powered by the world’s smallest mechanical movement, while Glashütte Original partners with Meissen on a porcelain-dial Senator Cherry Blossom.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/jaeger-lecoultre-101-chain" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://www.fratellowatches.com/glashutte-original-x-meissen-senator-cherry-blossom/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          Two new watch events bookend the industry calendar: The Escapement arrives in Las Vegas in February 2027, and Windup NYC expands its October 2026 fair.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/the-organizers-behind-the-escapement-in-las-vegas-and-why-they-think-we-need-a-new-kind-of-watch-sho" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://windupwatchfair.com/news/everything-you-can-see-and-do-at-the-2026-windup-watch-fair-nyc" target="_blank" rel="noopener">Worn &amp; Wound</a></span>
+          
+        </li>
+      
+        <li>
+          Microbrand and tool-watch releases include the…
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/fortis-updates-its-space-chronograph-with-the-fully-luminous-novonaut-n-42-halo-edition-review-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://www.ablogtowatch.com/new-release-jack-mason-strat-o-timer-42-dr-pepper-2026-limited-edition-watch-refreshes-the-original-flavor/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">The Escapement Las Vegas 2027 announced</div>
+        <p class="note">A new watch event called The Escapement is scheduled for February 5–7, 2027, in Las Vegas, organized by Neeshu Hajra and Faheem Khan and featuring brands such as Greubel Forsey, Biver, and Ming.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-organizers-behind-the-escapement-in-las-vegas-and-why-they-think-we-need-a-new-kind-of-watch-sho" target="_blank" rel="noopener">Hodinkee: The Business of Watches Podcast: The Organizers Behind The Escapement In Las Vegas And Why They Think It&#39;s Time For A New Kind Of Watch Show</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Windup Watch Fair NYC 2026 preview</div>
+        <p class="note">The Windup Watch Fair returns to NYC’s Center415 from October 16–18, expanding into the North Hall with lead sponsors Bremont, Christopher Ward, and Oris, plus an eBay Live streaming studio and debut releases.</p>
+        <div class="links">
+          <a href="https://windupwatchfair.com/news/everything-you-can-see-and-do-at-the-2026-windup-watch-fair-nyc" target="_blank" rel="noopener">Worn &amp; Wound: Everything You Can See and Do at the 2026 Windup Watch Fair NYC</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Cyma — Grand Maestro &#39;The Chess&#39; Chronograph Triple Calendar</div>
+        
+          <ul class="specs">
+            <li>Size: 43.5mm</li>
+            <li>Movement: ETA 7751</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Triple calendar and moonphase</li><li>Chronograph</li><li>40-piece limited edition luxury version</li>
+            <li>Price: USD 4,515 (starting); USD 4,950 (LE)</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/cyma-grand-maestro-the-chess-moonphase-chronograph-triple-calendar-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Cyma Grand Maestro “The Chess” Chronograph Triple Calendar</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Czapek — Antarctique Tourbillon Victory Green</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: In-house calibre 9 automatic</li>
+            
+            <li>Case material: Yellow gold with PVD forest green</li>
+            <li>Vertically aligned flying tourbillon</li><li>Hand-guilloché Singularité vortex dial</li><li>72-hour power reserve</li><li>Limited to 10 pieces</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/czapek-antarctique-tourbillon-victory-green-yellow-gold-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The new Czapek Antarctique Tourbillon Victory Green</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Fortis — Novonaut N-42 Halo Editions</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: Calibre Werk 17</li>
+            
+            <li>Case material: Recycled stainless steel</li>
+            <li>Dials made entirely of Lumicast</li><li>High-contrast panda layouts in black, blue, and green</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/fortis-updates-its-space-chronograph-with-the-fully-luminous-novonaut-n-42-halo-edition-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Fortis Updates its Space Chronograph with the Fully Luminous Novonaut N-42 Halo Editions</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Garmin — MARQ 3</div>
+        
+          <ul class="specs">
+            <li>Size: 46mm</li>
+            
+            
+            <li>Case material: Grade 5 titanium</li>
+            <li>1.4-inch AMOLED touchscreen</li><li>inReach technology</li><li>Global maps</li><li>Built-in flashlight</li><li>Ceramic bezel inserts</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/reconsidering-a-smartwatch-the-garmin-marq-3/" target="_blank" rel="noopener">Worn &amp; Wound: Reconsidering A Smartwatch: The Garmin MARQ 3</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Glashütte Original — Senator Cherry Blossom</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Hand-painted porcelain dial by Meissen depicting winter cherry blossoms</li><li>Meissen crossed-swords trademark</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/glashutte-original-x-meissen-senator-cherry-blossom/" target="_blank" rel="noopener">Fratello: Picking A Saxonian Watch Bouquet: Introducing The Glashütte Original × Meissen Senator Cherry Blossom</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Hermès — H08 Bleu de Malte / Blanc Chantilly</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Manufacture H1837 automatic</li>
+            
+            <li>Case material: Braided glass fiber composite</li>
+            <li>Lighter case without slate dust coating</li><li>Blue and white ceramic accents and dials</li>
+            <li>Price: $8,600</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/hermes-h08-bleu-de-malte-and-blanc-chantilly" target="_blank" rel="noopener">Hodinkee: Introducing: Hermès H08 Bleu de Malte And Blanc Chantilly</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Jack Mason — Strat-O-Timer 42 Dr Pepper 2026 Limited Edition</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: Miyota 9075 automatic</li>
+            <li>Water resistance: 200 meters</li>
+            
+            <li>Flier-style GMT functionality</li><li>Skeletonized gold rotor</li><li>Hidden lume detail referencing vintage Dr Pepper slogan</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/new-release-jack-mason-strat-o-timer-42-dr-pepper-2026-limited-edition-watch-refreshes-the-original-flavor/" target="_blank" rel="noopener">aBlogtoWatch: New Release: Jack Mason Strat-O-Timer 42 Dr Pepper 2026 Limited-Edition Watch Refreshes The Original Flavor</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Jaeger-LeCoultre — 101 Chain</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Calibre 101 manually wound</li>
+            
+            <li>Case material: 18K pink-gold</li>
+            <li>World’s smallest manually wound mechanical movement</li><li>Black HyCeram and diamond bands</li><li>Only a few dozen pieces produced per year</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/jaeger-lecoultre-101-chain" target="_blank" rel="noopener">Hodinkee: Introducing: Jaeger-LeCoultre 101 Chain</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Jaquet Droz — Petite Heure Minute Les Volumes du Temps</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Cal. JD2653</li>
+            
+            <li>Case material: 18k white gold</li>
+            <li>Unique piece with abstract multi-layered enamel dial by Académie de Meuron student</li><li>Dragging hour and minute discs</li><li>Auction at Phillips TimeForArt Dec 5, 2026</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/10/jaquet-droz-petite-heure-minute-les-volumes-du-temps-timeforart.html" target="_blank" rel="noopener">SJX: Jaquet Droz Unveils Pièce Unique for TimeForArt</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Louis Vuitton — Monterey Ceramic</div>
+        
+          <ul class="specs">
+            <li>Size: 37mm</li>
+            
+            
+            <li>Case material: High-tech ceramic (zirconium oxide)</li>
+            <li>Pebble-shaped 1988 Gae Aulenti design revival</li><li>Hand-polished</li><li>12 o&#39;clock crown</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/louis-vuitton-monterey-hands-on-2/" target="_blank" rel="noopener">Time+Tide: The Louis Vuitton Monterey gets a sleek ceramic upgrade</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Mido — Multifort TV Big Date Chronometer</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: COSC-certified Calibre 80</li>
+            
+            
+            <li>80-hour power reserve</li><li>Sunray blue dial with rectangular checkerboard pattern</li><li>Large date display</li>
+            <li>Price: US$1,650</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/mido-multifort-tv-chronometer-introducing/" target="_blank" rel="noopener">Time+Tide: Mido brings COSC certification to the Multifort TV Big Date with its new Multifort TV Big Date Chronometer</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Ming — 57.09 &#39;Secret Honey&#39;</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: Sellita 330.M2</li>
+            
+            <li>Case material: Grade 5 titanium</li>
+            <li>Multi-layered honeycomb dial with rotating sapphire discs</li><li>Tri-color finished case</li><li>Limited to 125 pieces</li>
+            <li>Price: CHF 7,250</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/ming-x-massena-lab-5709-secret-honey" target="_blank" rel="noopener">Hodinkee: Introducing: Ming x Massena Lab 57.09 &#39;Secret Honey&#39;</a><a href="https://monochrome-watches.com/ming-x-massena-lab-57-09-secret-honey-moving-honeycomb-dial-tri-tone-lugs-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Ming x Massena LAB 57.09 Secret Honey, with Honeycomb Dial in Constant Motion</a><a href="https://wornandwound.com/ming-and-massena-lab-launch-a-sequel-to-a-landmark-le-the-57-09-secret-honey/" target="_blank" rel="noopener">Worn &amp; Wound: Ming and Massena LAB Launch a Sequel to a Landmark LE: the 57.09 “Secret Honey”</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Paulin — Hodinkee limited edition</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Limited to 250 numbered pieces</li><li>Presale at Windup NYC Oct 16–18, public launch Oct 19</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/paulin-hodinkee" target="_blank" rel="noopener">Hodinkee: Coming Soon: Paulin × Hodinkee</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Ralph Lauren — Western Cushion 38mm</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: RL514 self-winding (Piaget-made)</li>
+            
+            <li>Case material: Hand-engraved sterling silver</li>
+            <li>Available in black lacquer, off-white lacquer, or natural turquoise stone dial</li>
+            <li>Price: $26,000 – $29,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-ralph-lauren-western-cushion-is-back-with-a-38mm-case" target="_blank" rel="noopener">Hodinkee: Introducing: The Ralph Lauren Western Cushion Is Back With A 38mm Case</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Ulysse Nardin — Super Freak / Freak X</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Super Freak: two tourbillons, industry’s smallest differential</li><li>Freak X: more compact case, DIAMonSIL escapement, interchangeable straps</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/matthieu-haverlan-ulysse-nardin/" target="_blank" rel="noopener">Revolution: Freaking Out with Matthieu Haverlan</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Jack Mason — Strat-O-Timer 42 Dr Pepper 2026 Limited Edition</div>
+        <p class="note">42mm travel watch with flier-style GMT, Miyota 9075, and hidden lume detail referencing Dr Pepper’s vintage slogan.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/new-release-jack-mason-strat-o-timer-42-dr-pepper-2026-limited-edition-watch-refreshes-the-original-flavor/" target="_blank" rel="noopener">aBlogtoWatch: New Release: Jack Mason Strat-O-Timer 42 Dr Pepper 2026 Limited-Edition Watch Refreshes The Original Flavor</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ming — 57.09 &#39;Secret Honey&#39;</div>
+        <p class="note">Collaboration with Massena LAB; CHF 7,250, grade-5 titanium tri-tone case, 125 pieces.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/ming-x-massena-lab-5709-secret-honey" target="_blank" rel="noopener">Hodinkee: Introducing: Ming x Massena Lab 57.09 &#39;Secret Honey&#39;</a><a href="https://monochrome-watches.com/ming-x-massena-lab-57-09-secret-honey-moving-honeycomb-dial-tri-tone-lugs-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Ming x Massena LAB 57.09 Secret Honey, with Honeycomb Dial in Constant Motion</a><a href="https://wornandwound.com/ming-and-massena-lab-launch-a-sequel-to-a-landmark-le-the-57-09-secret-honey/" target="_blank" rel="noopener">Worn &amp; Wound: Ming and Massena LAB Launch a Sequel to a Landmark LE: the 57.09 “Secret Honey”</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Paulin — Hodinkee limited edition</div>
+        <p class="note">250 numbered pieces; presale at Windup NYC Oct 16–18, public launch Oct 19.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/paulin-hodinkee" target="_blank" rel="noopener">Hodinkee: Coming Soon: Paulin × Hodinkee</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Straum — Jan Mayen Stormy Seas</div>
+        <p class="note">Titanium collaboration with The Real Time Show; owner&#39;s review highlighting durability in salt-water and outdoor environments.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/review/owners-review-the-straum-jan-mayen-stormy-seas/" target="_blank" rel="noopener">Worn &amp; Wound: Owner’s Review: the Straum Jan Mayen Stormy Seas</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Czapek — Antarctique Tourbillon Victory Green</div>
+        <p class="note">Limited to 10 pieces; yellow gold with PVD forest green, vertically aligned flying tourbillon, in-house calibre 9 automatic with 72-hour power reserve.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/czapek-antarctique-tourbillon-victory-green-yellow-gold-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The new Czapek Antarctique Tourbillon Victory Green</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ulysse Nardin — Super Freak / Freak X</div>
+        <p class="note">25th anniversary collection; Super Freak carries two tourbillons and the industry’s smallest differential, while the updated Freak X adds a DIAMonSIL escapement and compact case.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/matthieu-haverlan-ulysse-nardin/" target="_blank" rel="noopener">Revolution: Freaking Out with Matthieu Haverlan</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">A. Lange &amp; Söhne</div>
+        <p class="models">Datograph Perpetual Calendar, Triple Split</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-2026-audrain-newport-concours-delegance-with-a-lange-and-sohne" target="_blank" rel="noopener">Hodinkee: Photo Report: The 2026 Audrain Newport Concours d&#39;Elegance With A. Lange &amp; Söhne</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Cyma</div>
+        <p class="models">Grand Maestro The Chess</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/cyma-grand-maestro-the-chess-moonphase-chronograph-triple-calendar-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Cyma Grand Maestro “The Chess” Chronograph Triple Calendar</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Fortis</div>
+        <p class="models">Novonaut N-42 Halo Editions</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/fortis-updates-its-space-chronograph-with-the-fully-luminous-novonaut-n-42-halo-edition-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Fortis Updates its Space Chronograph with the Fully Luminous Novonaut N-42 Halo Editions</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Garmin</div>
+        <p class="models">MARQ 3</p>
+        <div class="links">
+          <a href="https://wornandwound.com/reconsidering-a-smartwatch-the-garmin-marq-3/" target="_blank" rel="noopener">Worn &amp; Wound: Reconsidering A Smartwatch: The Garmin MARQ 3</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Glashütte Original</div>
+        <p class="models">70s Watch, Senator Cherry Blossom</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/glashutte-original-x-meissen-senator-cherry-blossom/" target="_blank" rel="noopener">Fratello: Picking A Saxonian Watch Bouquet: Introducing The Glashütte Original × Meissen Senator Cherry Blossom</a><a href="https://www.ablogtowatch.com/hands-on-the-revised-glashutte-original-70s-watch-is-an-understated-excellent-dark-horse/" target="_blank" rel="noopener">aBlogtoWatch: Hands-On: The Revised Glashütte Original 70s Watch Is An Understated, Excellent Dark Horse</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hermès</div>
+        <p class="models">H08 Blanc Chantilly, H08 Bleu de Malte</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/hermes-h08-bleu-de-malte-and-blanc-chantilly" target="_blank" rel="noopener">Hodinkee: Introducing: Hermès H08 Bleu de Malte And Blanc Chantilly</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Jaeger-LeCoultre</div>
+        <p class="models">101 Chain</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/jaeger-lecoultre-101-chain" target="_blank" rel="noopener">Hodinkee: Introducing: Jaeger-LeCoultre 101 Chain</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Jaquet Droz</div>
+        <p class="models">Petite Heure Minute Les Volumes du Temps</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/10/jaquet-droz-petite-heure-minute-les-volumes-du-temps-timeforart.html" target="_blank" rel="noopener">SJX: Jaquet Droz Unveils Pièce Unique for TimeForArt</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Louis Vuitton</div>
+        <p class="models">Monterey Ceramic</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/louis-vuitton-monterey-hands-on-2/" target="_blank" rel="noopener">Time+Tide: The Louis Vuitton Monterey gets a sleek ceramic upgrade</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Mido</div>
+        <p class="models">Multifort TV Big Date Chronometer</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/mido-multifort-tv-chronometer-introducing/" target="_blank" rel="noopener">Time+Tide: Mido brings COSC certification to the Multifort TV Big Date with its new Multifort TV Big Date Chronometer</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Miyota</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/portrait-miyota-the-engine-behind-the-watch-and-the-rise-of-the-japanese-movement-maker-interview-yoshio-miura-miyota-brand-manager/" target="_blank" rel="noopener">Monochrome: Portrait – Miyota, The Engine Behind the Watch, And The Rise of the Japanese Movement Maker</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ralph Lauren</div>
+        <p class="models">Western Cushion</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-ralph-lauren-western-cushion-is-back-with-a-38mm-case" target="_blank" rel="noopener">Hodinkee: Introducing: The Ralph Lauren Western Cushion Is Back With A 38mm Case</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Rolex</div>
+        <p class="models">Submariner</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/is-the-tudor-pelagos-39-better-than-a-rolex-submariner/" target="_blank" rel="noopener">Fratello: Is The Tudor Pelagos 39 Better Than A Rolex Submariner?</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tudor</div>
+        <p class="models">Pelagos 39</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/is-the-tudor-pelagos-39-better-than-a-rolex-submariner/" target="_blank" rel="noopener">Fratello: Is The Tudor Pelagos 39 Better Than A Rolex Submariner?</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
