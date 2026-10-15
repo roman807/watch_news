@@ -9,6 +9,8 @@ so the same code can run on either backend:
   Selected by setting OPENAI_BASE_URL, plus:
     WATCH_NEWS_SUMMARY_MODEL   model for the per-article summaries
     WATCH_NEWS_ANALYZE_MODEL   model for the cross-article analysis
+    WATCH_NEWS_ANALYZE_FALLBACK_MODEL  optional: tried once if the analysis
+                               model fails (e.g. overloaded/timing out)
     OPENAI_API_KEY             if the server needs one (any value otherwise)
 """
 
@@ -77,12 +79,16 @@ class OpenAICompatibleClient(Client):
     def __init__(self) -> None:
         from openai import OpenAI
 
-        # Analysis of a full day's articles can take minutes.
+        # Analysis of a full day's articles can take many minutes on a slow
+        # day. One automatic retry at most: a model that's failing tends to
+        # keep failing, and the fallback model (below) is the better retry.
         self._client = OpenAI(
             base_url=os.environ["OPENAI_BASE_URL"],
             api_key=os.environ.get("OPENAI_API_KEY") or "unused",
-            timeout=900,
+            timeout=2400,
+            max_retries=1,
         )
+        self._analyze_fallback = os.environ.get("WATCH_NEWS_ANALYZE_FALLBACK_MODEL") or None
         self._models = {
             "summary": os.environ["WATCH_NEWS_SUMMARY_MODEL"],
             "analyze": os.environ["WATCH_NEWS_ANALYZE_MODEL"],
@@ -97,8 +103,18 @@ class OpenAICompatibleClient(Client):
         return (response.choices[0].message.content or "").strip()
 
     def forced_tool_call(self, task, anthropic_model, prompt, tool, max_tokens):
+        try:
+            return self._forced_tool_call(self._models[task], prompt, tool, max_tokens)
+        except Exception as e:
+            if task != "analyze" or not self._analyze_fallback:
+                raise
+            print(f"Analysis with {self._models[task]} failed ({type(e).__name__}: {str(e)[:120]}); "
+                  f"retrying with {self._analyze_fallback}")
+            return self._forced_tool_call(self._analyze_fallback, prompt, tool, max_tokens)
+
+    def _forced_tool_call(self, model, prompt, tool, max_tokens):
         response = self._client.chat.completions.create(
-            model=self._models[task],
+            model=model,
             max_tokens=max_tokens,
             tools=[
                 {
