@@ -1,0 +1,684 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-10-20</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-10-20 17:14 CEST · 34 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 34 new articles — 7 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 7 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 6 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 4 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 3 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 3 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, 2 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, and 2 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          H. Moser &amp; Cie. partners with NFL star Saquon Barkley on a 97-piece limited-edition cylindrical tourbillon, covered by Hodinkee, Monochrome, and Time+Tide.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/introducing-hmoser-saquon-barkley" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://monochrome-watches.com/h-moser-cie-pioneer-cylindrical-tourbillon-skeleton-aventurine-saquon-barkley-edition-introducing-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://timeandtidewatches.com/h-moser-cie-pioneer-cylindrical-tourbillon-skeleton-aventurine-saquon-barkley-introducing/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Renaud Tixier&#39;s Monday Skeleton draws triple coverage for its patented micro-rotor system and CHF 129,000 price point.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/innovation-on-display-renaud-tixier-introduces-the-monday-skeleton/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://monochrome-watches.com/renaud-tixiers-monday-skeleton-micro-rotor-review/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://watchesbysjx.com/2026/10/renaud-tixier-monday-skeleton.html" target="_blank" rel="noopener">SJX</a></span>
+          
+        </li>
+      
+        <li>
+          The 1916 Company formally consolidates Govberg, WatchBox, Radcliffe, and Hyde Park under a single identity.
+          
+            <span class="bullet-links"><a href="https://revolutionwatch.com/the-family-business-rewritten/" target="_blank" rel="noopener">Revolution</a></span>
+          
+        </li>
+      
+        <li>
+          Zenith debuts the time-only Chronomaster Solo Sport in Sydney using a high-frequency El Primero movement.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/zenith-chronomaster-solo-sport-sydney-events/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Several microbrand newcomers and collaborations launch today, including EXOFI’s debut diver, the Paulin × Hodinkee Mara, Brew’s NYC Taxi chronograph, and the Timex × Dimepiece Blackout.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/exofi-wolf-rock-42-micro-mondays/" target="_blank" rel="noopener">Time+Tide</a><span class="sep">·</span><a href="https://www.hodinkee.com/articles/the-paulin-mara-limited-edition-for-hodinkee" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://timeandtidewatches.com/brew-metric-chrono-taxi-introducing/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">The 1916 Company merges legacy retailers and WatchBox</div>
+        <p class="note">The 1916 Company officially consolidates Govberg Jewelers, WatchBox, Radcliffe Jewelers, and Hyde Park Jewelers into a single identity combining regional retail with global pre-owned operations.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/the-family-business-rewritten/" target="_blank" rel="noopener">Revolution: The Family Business Rewritten</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Milano Watch Week 2026 expansion</div>
+        <p class="note">Milano Watch Week 2026 has grown to 57 brands and over 14,000 attendees, reinforcing Milan&#39;s emergence as a global watch hub outside Switzerland.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/milano-watch-week-2026-events/" target="_blank" rel="noopener">Time+Tide: Milano Watch Week 2026 proves Milan is becoming a watch capital</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vintage Omega Speedmaster market slump</div>
+        <p class="note">Fratello&#39;s podcast examines the current downturn in vintage Omega Speedmaster prices and discusses whether modern limited editions could reignite collector demand.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/fratello-on-air-what-will-it-take-to-turn-the-vintage-speedmaster-market-around/" target="_blank" rel="noopener">Fratello: Fratello On Air: What Will It Take To Turn The Vintage Speedmaster Market Around?</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Armin Strom — Mirrored Force Resonance Zeitgeist 1665 3N</div>
+        
+          <ul class="specs">
+            <li>Size: 43mm</li>
+            
+            
+            <li>Case material: Steel</li>
+            <li>Patented resonance clutch</li><li>Yellow gold-coated bridges (3N)</li><li>Retro-futuristic design</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/a-new-gold-tone-for-the-armin-strom-mirrored-force-resonance-zeitgeist-1665-3n/" target="_blank" rel="noopener">Monochrome: Introducing – A new Gold Tone for the Armin Strom Mirrored Force Resonance Zeitgeist 1665 3N</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Brew Watch Co. — Metric Chrono Taxi</div>
+        
+          <ul class="specs">
+            <li>Size: 36mm</li>
+            <li>Movement: Chronograph</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Tribute to New York City yellow cabs</li><li>Black dial with vibrant yellow accents and checkerboard pattern</li><li>Limited to 1,000 pieces</li><li>Launched for WindUp 2026</li>
+            <li>Price: US$495</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/brew-metric-chrono-taxi-introducing/" target="_blank" rel="noopener">Time+Tide: Brew brings a NYC icon to the wrist with new Brew Metric Chrono Taxi</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">EXOFI — Wolf Rock 42</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            
+            <li>Water resistance: 200m</li>
+            <li>Case material: 316L stainless steel</li>
+            <li>Brushed black ceramic bezel</li><li>Matte black dial with oversized Super-LumiNova indices</li><li>Tool-inspired dive watch designed by a marine infrastructure expert</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/exofi-wolf-rock-42-micro-mondays/" target="_blank" rel="noopener">Time+Tide: Aussie brand EXOFI launches debut dive watch, the Wolf Rock 42</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">H. Moser &amp; Cie. — Pioneer Cylindrical Tourbillon Skeleton Aventurine Saquon Barkley Edition</div>
+        
+          <ul class="specs">
+            <li>Size: 42.8mm</li>
+            <li>Movement: Automatic, HMC 811</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Skeletonized movement</li><li>Flying cylindrical tourbillon</li><li>Blue aventurine subdial</li><li>Limited to 97 pieces</li><li>Subtle nods to Saquon Barkley’s career and alma mater</li>
+            <li>Price: USD 99,600</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/introducing-hmoser-saquon-barkley" target="_blank" rel="noopener">Hodinkee: Introducing: H. Moser &amp; Cie. x Saquon Barkley Pioneer Cylindrical Tourbillon Skeleton Aventurine Limited Edition (Live Pics)</a><a href="https://monochrome-watches.com/h-moser-cie-pioneer-cylindrical-tourbillon-skeleton-aventurine-saquon-barkley-edition-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – H. Moser &amp; Cie. Pioneer Cylindrical Tourbillon Skeleton Aventurine Saquon Barkley Edition</a><a href="https://timeandtidewatches.com/h-moser-cie-pioneer-cylindrical-tourbillon-skeleton-aventurine-saquon-barkley-introducing/" target="_blank" rel="noopener">Time+Tide: H. Moser &amp; Cie. debuts its first limited edition with NFL superstar Saquon Barkley</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Paulin — Mara Limited Edition For Hodinkee</div>
+        
+          <ul class="specs">
+            <li>Size: 39.7mm</li>
+            
+            
+            
+            <li>Traditional galvanic gilt dial process</li><li>Limited to 250 pieces</li><li>Dive watch</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-paulin-mara-limited-edition-for-hodinkee" target="_blank" rel="noopener">Hodinkee: Introducing: The Paulin Mara Limited Edition For Hodinkee</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Perrelet — Cleopatra and Eleonore collections</div>
+        
+          <ul class="specs">
+            <li>Size: 36.5mm</li>
+            <li>Movement: Automatic, double rotor complication</li>
+            
+            <li>Case material: Grade 5 titanium</li>
+            <li>Diamond-set rotating assemblies</li><li>High jewelry integration</li><li>Available in various colors including mother-of-pearl</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/perrelet-sets-diamonds-into-elegant-motion-with-cleopatra-and-eleonore-watch-collections/" target="_blank" rel="noopener">aBlogtoWatch: Perrelet Sets Diamonds Into Elegant Motion With Cleopatra And Eleonore Watch Collections</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Renaud Tixier — Monday Skeleton</div>
+        
+          <ul class="specs">
+            <li>Size: 40.8mm</li>
+            <li>Movement: Automatic, RVI2025</li>
+            
+            <li>Case material: Gray gold</li>
+            <li>Fully skeletonized</li><li>Hand-finished with 262 components and 238 inward angles</li><li>Patented dancer micro-rotor system</li><li>72-hour power reserve</li><li>Limited to 15 pieces each in green and blue</li>
+            <li>Price: CHF 129,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/innovation-on-display-renaud-tixier-introduces-the-monday-skeleton/" target="_blank" rel="noopener">Fratello: Innovation On Display: Renaud Tixier Introduces The Monday Skeleton</a><a href="https://monochrome-watches.com/renaud-tixiers-monday-skeleton-micro-rotor-review/" target="_blank" rel="noopener">Monochrome: First Look – The new Renaud Tixier Monday Skeleton</a><a href="https://watchesbysjx.com/2026/10/renaud-tixier-monday-skeleton.html" target="_blank" rel="noopener">SJX: Renaud Tixier’s Monday Skeleton Makes Depth a Virtue</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Ressence — Type 10 Dark Night</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Automatic, ROCS system</li>
+            
+            
+            <li>Monochromatic deep blue hue</li><li>Handless, crownless design</li><li>Rotating dials mimic a digital screen</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/ressence-debuts-a-fully-blued-out-version-with-its-new-type-10-dark-night/" target="_blank" rel="noopener">Worn &amp; Wound: Ressence Debuts a Fully Blued-Out Version with Its New Type 10 Dark Night</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Timex — Intrepid x Dimepiece ‘Blackout’ Edition</div>
+        
+          <ul class="specs">
+            <li>Size: 36mm</li>
+            <li>Movement: Quartz</li>
+            <li>Water resistance: 100m</li>
+            <li>Case material: Black PVD-coated stainless steel</li>
+            <li>Indiglo functionality</li><li>Dive bezel</li><li>Limited edition</li><li>Gender-neutral size</li>
+            <li>Price: $269</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-timex-intrepid-x-dimepiece-blackout-edition" target="_blank" rel="noopener">Hodinkee: Introducing: The Timex Intrepid x Dimepiece ‘Blackout’ Edition</a><a href="https://timeandtidewatches.com/timex-intrepid-x-dimepiece-blackout-edition-introducing/" target="_blank" rel="noopener">Time+Tide: Lights Out: Introducing the 36mm Timex Intrepid x Dimepiece ‘Blackout’ Edition</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Union Glashütte — Belisar Chronograph Speedster 2026</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: Automatic, Valjoux 7750-based</li>
+            
+            
+            <li>Inspired by classic Porsche 911</li><li>Reduced from 44mm to 40mm</li><li>Beige dial with orange accents</li><li>Limited to 288 pieces</li><li>Includes rally-style leather strap and steel bracelet</li>
+            <li>Price: EUR 3,450</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/union-glashutte-brings-the-more-compact-belisar-chronograph-speedster-2026/" target="_blank" rel="noopener">Monochrome: Introducing – Union Glashütte Introduces the More Compact Belisar Chronograph Speedster 2026</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Version Watches — V0201-TH</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: Automatic, SW200-1</li>
+            
+            <li>Case material: Steel</li>
+            <li>Semi-openworked dial</li><li>Available in azure blue, emerald green, or blood orange</li><li>Limited edition of 300 pieces</li><li>Kickstarter launch</li>
+            <li>Price: EUR 850–1,495</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/the-semi-openworked-version-watches-v0201-th-now-on-kickstarter/" target="_blank" rel="noopener">Monochrome: Introducing – The Semi-Openworked Version Watches V0201-TH, now on Kickstarter</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Zenith — Chronomaster Solo Sport</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Automatic, El Primero</li>
+            
+            
+            <li>Time-only model using high-frequency El Primero movement typically reserved for chronographs</li><li>Available in black and white</li><li>New ZENCLASP</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/zenith-chronomaster-solo-sport-sydney-events/" target="_blank" rel="noopener">Time+Tide: Zenith’s Chronomaster Solo Sport gets a five-course introduction in Sydney</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Brew Watch Co. — Metric Chrono Taxi</div>
+        <p class="note">Limited-edition NYC yellow cab tribute launched for WindUp 2026.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/brew-metric-chrono-taxi-introducing/" target="_blank" rel="noopener">Time+Tide: Brew brings a NYC icon to the wrist with new Brew Metric Chrono Taxi</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">EXOFI — Wolf Rock 42</div>
+        <p class="note">Australian debut dive watch with 200m water resistance and black ceramic bezel.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/exofi-wolf-rock-42-micro-mondays/" target="_blank" rel="noopener">Time+Tide: Aussie brand EXOFI launches debut dive watch, the Wolf Rock 42</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Lebois &amp; Co — Heritage Small Seconds (Numeral, Baton, Script)</div>
+        <p class="note">37.8mm dress watches inspired by 1940s/50s archives with COSC-certified movement.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/lebois-co-heritage-numeral-baton-script-small-seconds/" target="_blank" rel="noopener">Fratello: Harnessing Heritage: The Lebois &amp; Co Numeral, Baton, And Script Small Seconds</a><a href="https://monochrome-watches.com/lebois-co-heritage-small-seconds-chronometer-review-price/" target="_blank" rel="noopener">Monochrome: Hands-on – The Lebois &amp; Co Heritage Small Seconds, Three Ways to Wear Vintage Elegance</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Paulin — Mara Limited Edition For Hodinkee</div>
+        <p class="note">Inaugural diver with traditional galvanic gilt dial process; limited to 250 pieces.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-paulin-mara-limited-edition-for-hodinkee" target="_blank" rel="noopener">Hodinkee: Introducing: The Paulin Mara Limited Edition For Hodinkee</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vaer — Solar Hiker (Vaer x Topo x W&amp;W)</div>
+        <p class="note">Solar-powered field watch returning for 2026 with two new colorways and updated straps.</p>
+        <div class="links">
+          <a href="https://windupwatchshop.com/pages/the-vaer-x-topo-x-w-w-solar-hiker-returns-for-2026" target="_blank" rel="noopener">Worn &amp; Wound: The Vaer x Topo x W&amp;W Solar Hiker Returns for 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Version Watches — V0201-TH</div>
+        <p class="note">Semi-openworked dial steel watch on Kickstarter; limited to 300 pieces.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/the-semi-openworked-version-watches-v0201-th-now-on-kickstarter/" target="_blank" rel="noopener">Monochrome: Introducing – The Semi-Openworked Version Watches V0201-TH, now on Kickstarter</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Armin Strom — Mirrored Force Resonance Zeitgeist 1665 3N</div>
+        <p class="note">New yellow gold–coated bridges edition maintaining the patented resonance clutch.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/a-new-gold-tone-for-the-armin-strom-mirrored-force-resonance-zeitgeist-1665-3n/" target="_blank" rel="noopener">Monochrome: Introducing – A new Gold Tone for the Armin Strom Mirrored Force Resonance Zeitgeist 1665 3N</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">H. Moser &amp; Cie. — Pioneer Cylindrical Tourbillon Skeleton Aventurine Saquon Barkley Edition</div>
+        <p class="note">97-piece LE with HMC 811 skeletonized movement, blue aventurine subdial, and nods to Barkley.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/introducing-hmoser-saquon-barkley" target="_blank" rel="noopener">Hodinkee: Introducing: H. Moser &amp; Cie. x Saquon Barkley Pioneer Cylindrical Tourbillon Skeleton Aventurine Limited Edition (Live Pics)</a><a href="https://monochrome-watches.com/h-moser-cie-pioneer-cylindrical-tourbillon-skeleton-aventurine-saquon-barkley-edition-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – H. Moser &amp; Cie. Pioneer Cylindrical Tourbillon Skeleton Aventurine Saquon Barkley Edition</a><a href="https://timeandtidewatches.com/h-moser-cie-pioneer-cylindrical-tourbillon-skeleton-aventurine-saquon-barkley-introducing/" target="_blank" rel="noopener">Time+Tide: H. Moser &amp; Cie. debuts its first limited edition with NFL superstar Saquon Barkley</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">MB&amp;F — LM1 EVO</div>
+        <p class="note">Refined 42mm dual-time watch with 60-hour power reserve and shock protection.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-mbf-revives-lm1-hublot-revisits-1980/" target="_blank" rel="noopener">Revolution: Last Week in Watches: MB&amp;F Revives LM1, Hublot Revisits 1980</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Renaud Tixier — Monday Skeleton</div>
+        <p class="note">Fully skeletonized gray-gold watch with patented dancer micro-rotor and 72-hour power reserve.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/innovation-on-display-renaud-tixier-introduces-the-monday-skeleton/" target="_blank" rel="noopener">Fratello: Innovation On Display: Renaud Tixier Introduces The Monday Skeleton</a><a href="https://monochrome-watches.com/renaud-tixiers-monday-skeleton-micro-rotor-review/" target="_blank" rel="noopener">Monochrome: First Look – The new Renaud Tixier Monday Skeleton</a><a href="https://watchesbysjx.com/2026/10/renaud-tixier-monday-skeleton.html" target="_blank" rel="noopener">SJX: Renaud Tixier’s Monday Skeleton Makes Depth a Virtue</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ressence — Type 10 Dark Night</div>
+        <p class="note">Monochromatic deep-blue ROCS model with handless, crownless design.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/ressence-debuts-a-fully-blued-out-version-with-its-new-type-10-dark-night/" target="_blank" rel="noopener">Worn &amp; Wound: Ressence Debuts a Fully Blued-Out Version with Its New Type 10 Dark Night</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">URWERK — UR-300 Time Quantum</div>
+        <p class="note">Limited-edition wandering hours piece with unique T-shaped module configuration.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-mbf-revives-lm1-hublot-revisits-1980/" target="_blank" rel="noopener">Revolution: Last Week in Watches: MB&amp;F Revives LM1, Hublot Revisits 1980</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Apple</div>
+        <p class="models">Apple Watch Series 12 Ceramic</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/apple-watch-series-12-ceramic-smartwatch-is-the-future-tech-we-were-all-promised-review/" target="_blank" rel="noopener">aBlogtoWatch: Apple Watch Series 12 Ceramic Smartwatch Is The Future Tech We Were All Promised: Review</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Bremont</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/tested-beyond-endurance-a-conversation-with-aldo-kane-about-bremont-watches/" target="_blank" rel="noopener">Monochrome: Portrait – Tested Beyond Endurance – A Conversation with Aldo Kane about Bremont Watches</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Gallet</div>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/invitation-gallet-x-fratello-evening-november-10th/" target="_blank" rel="noopener">Fratello: Event Invitation: Join Us For A Gallet × Fratello Evening On November 10th</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hermès</div>
+        <p class="models">Cape Cod Titanium</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-hermes-cape-cod-titanium/" target="_blank" rel="noopener">Fratello: The New Hermès Cape Cod In Titanium — A Dressy, Feminine Watch Turned Sporty And Masculine</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hublot</div>
+        <p class="models">Classic Fusion Tributo</p>
+        <div class="links">
+          <a href="https://wornandwound.com/ode-to-a-legend-with-the-hublot-classic-fusion-tributo/" target="_blank" rel="noopener">Worn &amp; Wound: Ode to a Legend with the Hublot Classic Fusion Tributo</a><a href="https://revolutionwatch.com/last-week-in-watches-mbf-revives-lm1-hublot-revisits-1980/" target="_blank" rel="noopener">Revolution: Last Week in Watches: MB&amp;F Revives LM1, Hublot Revisits 1980</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Louis Vuitton</div>
+        <p class="models">Monterey</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-the-new-louis-vuitton-monterey/" target="_blank" rel="noopener">Fratello: Hands-On: The New Louis Vuitton Monterey In Green And Black Ceramic</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Movado</div>
+        <p class="models">Heritage Kingmatic</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/mid-century-manliness-movado-heritage-kingmatic-automatic-watch-review/" target="_blank" rel="noopener">aBlogtoWatch: Mid-Century Manliness: Movado Heritage Kingmatic Automatic Watch Review</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Omega</div>
+        <p class="models">Speedmaster Professional Apollo 11 50th Anniversary</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-best-watch-ive-ever-owned-the-omega-speedmaster-professional-apollo-11-50th-anniversary/" target="_blank" rel="noopener">Fratello: The Best Watch I’ve Ever Owned: The Omega Speedmaster Professional Apollo 11 50th Anniversary</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Perrelet</div>
+        <p class="models">Cleopatra and Eleonore</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/perrelet-sets-diamonds-into-elegant-motion-with-cleopatra-and-eleonore-watch-collections/" target="_blank" rel="noopener">aBlogtoWatch: Perrelet Sets Diamonds Into Elegant Motion With Cleopatra And Eleonore Watch Collections</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Timex</div>
+        <p class="models">Intrepid x Dimepiece Blackout Edition</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-timex-intrepid-x-dimepiece-blackout-edition" target="_blank" rel="noopener">Hodinkee: Introducing: The Timex Intrepid x Dimepiece ‘Blackout’ Edition</a><a href="https://timeandtidewatches.com/timex-intrepid-x-dimepiece-blackout-edition-introducing/" target="_blank" rel="noopener">Time+Tide: Lights Out: Introducing the 36mm Timex Intrepid x Dimepiece ‘Blackout’ Edition</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Union Glashütte</div>
+        <p class="models">Belisar Chronograph Speedster 2026</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/union-glashutte-brings-the-more-compact-belisar-chronograph-speedster-2026/" target="_blank" rel="noopener">Monochrome: Introducing – Union Glashütte Introduces the More Compact Belisar Chronograph Speedster 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Zenith</div>
+        <p class="models">Chronomaster Solo Sport</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/zenith-chronomaster-solo-sport-sydney-events/" target="_blank" rel="noopener">Time+Tide: Zenith’s Chronomaster Solo Sport gets a five-course introduction in Sydney</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
