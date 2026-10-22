@@ -1,0 +1,795 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-10-22</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-10-22 17:02 CEST · 42 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 42 new articles — 9 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 8 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 8 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 5 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 4 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 4 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, 2 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, and 2 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Breitling adds two 41mm manual-wind Navitimers (B09 and Cosmonaute) to its core collection.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/breitling-navitimer-b09-and-b02-cosmonaute-41mm-chronographs" target="_blank" rel="noopener">Hodinkee</a></span>
+          
+        </li>
+      
+        <li>
+          Oris launches the Aquis Date Kelp Forest Limited Edition with a 3D-printed dial, highlighted alongside major players at the record-breaking WindUp NYC fair.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/the-oris-kelp-forest-limited-edition" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://timeandtidewatches.com/windup-2026-events/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Tissot and Damian Lillard debut a 44mm PRX Skeleton that converts into a pocket watch.
+          
+            <span class="bullet-links"><a href="https://www.ablogtowatch.com/new-release-tissot-prx-skeleton-damian-lillard-special-edition-watch-is-a-bold-handwound-take-on-a-modern-classic/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+        <li>
+          Standalone high-complication introductions include Minerva’s Exo Tourbillon Skeleton, Chopard’s L.U.C Full Strike Día de los Muertos unique piece, and Yema’s sidereal-time flying tourbillon.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/minerva-goddess-returns-to-villeret-on-the-minerva-exo-tourbillon-skeleton-limited-edition-18-ref-137551-review/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://monochrome-watches.com/2026-chopard-l-u-c-full-strike-dia-de-los-muertos-edition-13-introducing-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://monochrome-watches.com/yema-spacegraf-heure-siderale-tourbillon-volant-millesime-2026-limited-edition-introducing-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Accessible releases span Certina’s blacked-out DS Action line, Maurice Lacroix’s refined 42mm Aikon Chronograph, and Panerai’s 42mm Luminor trio with 500m water resistance.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/introducing-four-blacked-out-certina-ds-action-watches/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://monochrome-watches.com/2026-maurice-lacroix-aikon-automatic-chronograph-updated-smaller-case-introducing-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://timeandtidewatches.com/panerai-luminor-42mm-pam01710-pam01711-pam01714-hands-on/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Phillips and The…
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/george-daniels-100-exhibition" target="_blank" rel="noopener">Hodinkee</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">George Daniels 100 exhibition announced for Singapore and London</div>
+        <p class="note">Phillips and The Hour Glass will present the &#39;George Daniels 100&#39; exhibition in Singapore from November 13–15, 2026, reuniting 22 rare pieces including Space Traveller I and II; the exhibition will travel to London in 2027.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/george-daniels-100-exhibition" target="_blank" rel="noopener">Hodinkee: Happenings: &#34;George Daniels 100&#34; Exhibition To Celebrate The Legendary Watchmaker With Some Of His Rarest Pieces In Singapore</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Jaeger-LeCoultre appoints Robert Pattinson global ambassador</div>
+        <p class="note">Jaeger-LeCoultre has named actor Robert Pattinson as its new global ambassador for the Master of Precision campaign, following his red carpet appearance wearing the Master Control Chronometer Perpetual Calendar in rose gold.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/jaeger-lecoultre-robert-pattinson/" target="_blank" rel="noopener">Revolution: Master of Control: Robert Pattinson</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">WindUp 2026 NYC draws record attendance</div>
+        <p class="note">The WindUp 2026 Watch Fair in New York City marked its largest edition yet, hosting over 160 brands from microbrands to major players with record-breaking attendance.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/windup-2026-events/" target="_blank" rel="noopener">Time+Tide: WindUp 2026 takes over an entire NYC block for its biggest iteration yet</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">SJX explores artisanal craftsmanship inside major brands</div>
+        <p class="note">SJX examines the blurring lines between independent and corporate watchmaking, arguing that high-end artisanal work from major brands is often undervalued.</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/10/industrial-artisanship-paradox-independence-editorial.html" target="_blank" rel="noopener">SJX: Artisanal “Indies” Hidden in Plain Sight</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Atelier de Chronométrie — ADC16</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Cal. S440 (heavily modified Valjoux 23)</li>
+            
+            
+            <li>Bespoke dual-register chronograph</li><li>Instantaneous minutes counter</li><li>Redesigned bridges</li><li>High degree of customization</li>
+            <li>Price: Starting at €140,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/10/atelier-de-chronometrie-adc16.html" target="_blank" rel="noopener">SJX: Atelier de Chronométrie’s ADC16 Elevates a Classic</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Breitling — Navitimer B09 Chronograph 41 / B02 Chronograph 41 Cosmonaute</div>
+        
+          <ul class="specs">
+            <li>Size: 41mm</li>
+            <li>Movement: Manual-wind, B09 and B02</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Circular slide rule</li><li>Reverse panda dials</li><li>Vintage Twin Jet logo</li><li>13mm case height</li>
+            <li>Price: $7,900 (B09) / $10,600 (Cosmonaute)</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/breitling-navitimer-b09-and-b02-cosmonaute-41mm-chronographs" target="_blank" rel="noopener">Hodinkee: Introducing: Breitling Navitimer B09 And B02 Cosmonaute 41mm Chronographs</a><a href="https://www.fratellowatches.com/breitling-adds-two-new-manual-wind-navitimers-to-the-core-collection/" target="_blank" rel="noopener">Fratello: Breitling Adds Two New Manual-Wind Navitimers To The Core Collection</a><a href="https://wornandwound.com/breitling-at-long-last-adds-manually-wound-navitimers-to-the-core-collection/" target="_blank" rel="noopener">Worn &amp; Wound: Breitling, at Long Last, Adds Manually Wound Navitimers to the Core Collection</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Certina — DS Action</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm (divers) / 42mm (chronos)</li>
+            <li>Movement: Powermatic 80 (automatic) / Precidrive quartz</li>
+            <li>Water resistance: 300m</li>
+            <li>Case material: PVD-coated</li>
+            <li>Blacked-out design</li><li>Orange/green/blue accents</li><li>Padel sports inspiration</li>
+            <li>Price: $1,000 (auto) / $690 (quartz)</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/introducing-four-blacked-out-certina-ds-action-watches/" target="_blank" rel="noopener">Fratello: Four New Blacked-Out Certina DS Action Watches: Two 38mm Divers And Two Quartz Chronos</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Chopard — L.U.C Full Strike Día de los Muertos Edition 13</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: In-house minute repeater, blue CVD-treated</li>
+            
+            <li>Case material: 18k rose gold (hand-engraved)</li>
+            <li>Eggshell marquetry</li><li>Deep-blue straw marquetry</li><li>Calavera dial</li><li>Unique piece</li>
+            <li>Price: Available upon request</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-chopard-l-u-c-full-strike-dia-de-los-muertos-edition-13-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The Mexican-Themed Chopard L.U.C Full Strike Día de los Muertos Edition 13</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Doxa — SUB 200T Afterglow</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Automatic, Sellita SW200-1</li>
+            <li>Water resistance: 200m</li>
+            
+            <li>Pink sunray dial</li><li>Limited to 50 pieces</li><li>Florida peninsula caseback engraving</li><li>Exclusive to Exquisite Timepieces</li>
+            <li>Price: $1,990</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/introducing-doxa-sub-200t-afterglow-exquisite-timepieces-napels-florida-sellita-sw200-pink-limited-edition-specs-price/" target="_blank" rel="noopener">Monochrome: Introducing – The New Doxa SUB 200T Afterglow Brings Us Sunset in Naples</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Jaeger-LeCoultre — Master Ultra Thin Moon 36mm</div>
+        
+          <ul class="specs">
+            <li>Size: 36mm</li>
+            <li>Movement: Automatic, Calibre 925 (70h power reserve)</li>
+            
+            <li>Case material: 18k pink gold</li>
+            <li>Moonphase and pointer-date complication</li><li>Silvered sunray dial</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/jaeger-lecoultre-master-ultra-thin-moon-36mm-pink-gold/" target="_blank" rel="noopener">Fratello: The Jaeger-LeCoultre Master Ultra Thin Moon 36mm Returns In A Classy Pink Gold Case</a><a href="https://monochrome-watches.com/the-jaeger-lecoultre-master-ultra-thin-moon-now-in-an-elegant-36mm-pink-gold-case/" target="_blank" rel="noopener">Monochrome: Introducing – The Jaeger-LeCoultre Master Ultra Thin Moon, now in an Elegant 36mm Pink Gold Case</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Louis Erard — Dia De Los Muertos Black</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: Automatic, Sellita SW261</li>
+            
+            <li>Case material: Black PVD-coated</li>
+            <li>Colorful floral-motif skull</li><li>Limited to 10 pieces</li>
+            <li>Price: CHF 3,490</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/louis-erard-introduces-the-dia-de-los-muertos-black/" target="_blank" rel="noopener">Worn &amp; Wound: Louis Erard Introduces the Dia De Los Muertos Black</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Maurice Lacroix — Aikon Automatic Chronograph</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: Automatic, ML112 (Sellita base, 60h+ power reserve)</li>
+            
+            
+            <li>Reduced from 44mm to 42mm</li><li>Rectangular pushers</li><li>Enhanced Clous de Paris dial</li><li>Five colorways</li>
+            <li>Price: CHF 3,150</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-maurice-lacroix-aikon-automatic-chronograph-updated-smaller-case-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Maurice Lacroix Refines the Aikon Automatic Chronograph for its Tenth Anniversary</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Minerva — Exo Tourbillon Skeleton Limited Edition</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Hand-wound calibre M18.69</li>
+            
+            <li>Case material: Rose gold</li>
+            <li>Agate cameo of goddess Minerva</li><li>Fluted bezel</li><li>Patented Exo Tourbillon</li><li>Limited to 18 pieces</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/minerva-goddess-returns-to-villeret-on-the-minerva-exo-tourbillon-skeleton-limited-edition-18-ref-137551-review/" target="_blank" rel="noopener">Monochrome: First Look – The Goddess Returns to Villeret on the Minerva Exo Tourbillon Skeleton Limited Edition</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">NOMOS — Metro Date Power Reserve Ice Blue</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Hand-wound DUW 4701 (in-house)</li>
+            
+            
+            <li>Galvanized metallic ice-blue dial</li><li>Extended power reserve</li><li>Patented quick-set date mechanism</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/nomos-metro-date-power-reserve-ice-blue-watch-debuts-with-new-in-house-movement/" target="_blank" rel="noopener">aBlogtoWatch: NOMOS Metro Date Power Reserve Ice Blue Watch Debuts With New In-House Movement</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Ochs und Junior — Perpetual Calendar Holiday Edition 2026</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: Ludwig Oechslin gear-based perpetual calendar</li>
+            
+            <li>Case material: Titanium</li>
+            <li>Minimalist anthracite dial</li><li>Festive white gold accents</li>
+            <li>Price: CHF 15,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/introducing-ochs-und-junior-perpetual-calendar-holiday-edition-2026/" target="_blank" rel="noopener">Monochrome: Introducing – Ochs und Junior Releases its Perpetual Calendar Holiday Edition 2026</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Oris — Aquis Date Kelp Forest Limited Edition</div>
+        
+          <ul class="specs">
+            <li>Size: 41.5mm</li>
+            <li>Movement: Automatic, Oris Calibre 733</li>
+            <li>Water resistance: 300m</li>
+            <li>Case material: Stainless steel</li>
+            <li>3D-printed/textured green dial</li><li>Limited to 1,000 pieces</li><li>Iridescent green-to-gold dial effect</li>
+            <li>Price: $2,950</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-oris-kelp-forest-limited-edition" target="_blank" rel="noopener">Hodinkee: Introducing: The Oris Kelp Forest Limited Edition</a><a href="https://www.fratellowatches.com/oris-introduces-the-aquis-date-kelp-forest-limited-edition/" target="_blank" rel="noopener">Fratello: Oris Introduces The Aquis Date Kelp Forest Limited Edition</a><a href="https://monochrome-watches.com/oris-aquis-date-kelp-forest-limited-edition-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Oris Aquis Date Kelp Forest Limited Edition</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Ressence — Type 10 DN (Dark Knight)</div>
+        
+          <ul class="specs">
+            <li>Size: 41.5mm</li>
+            <li>Movement: RW-01 calibre</li>
+            
+            <li>Case material: Polished grade 5 titanium</li>
+            <li>Oil-filled</li><li>First RW-01 in oil-filled model</li><li>Temperature indicator for oil</li><li>120-second running indicator</li><li>Limited to 100 pieces</li>
+            <li>Price: CHF 45,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/the-impossibly-smooth-ressence-type-10-dn-dark-knight/" target="_blank" rel="noopener">Revolution: The Impossibly Smooth Ressence Type 10 DN (Dark Knight)</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">RZE — UTD-8080-ST</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: RZE-8080 digital module (in-house)</li>
+            
+            <li>Case material: Titanium (white Cerakote)</li>
+            <li>FSTN LCD</li><li>Dual-time</li><li>Countdown timer</li><li>Backwards-compatible upgrade program</li><li>Module platform open to third-party brands</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/new-release-rze-utd-8080-st-watch-and-rze-8080-module-upgrade-program-for-existing-utd-8000-owners/" target="_blank" rel="noopener">aBlogtoWatch: New Release: RZE UTD-8080-ST Watch And RZE-8080 Module Upgrade Program For Existing UTD-8000 Owners</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Tissot — PRX Skeleton Damian Lillard Special Edition</div>
+        
+          <ul class="specs">
+            <li>Size: 44mm</li>
+            <li>Movement: Manual-winding, ETA 6497-1</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Skeletonized dial</li><li>Burgundy accents</li><li>Pocket-watch conversion system</li><li>Milk-crate patterned rubber strap</li>
+            <li>Price: CHF 1,735</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/tissot-prx-skeleton-damian-lillard-edition/" target="_blank" rel="noopener">Fratello: Tissot’s Boldest PRX Yet: The Damian Lillard Skeleton Transforms Into A Pocket Watch</a><a href="https://monochrome-watches.com/first-look-tissot-prx-skeleton-damian-lillard-special-edition-eta-unitas-6497-burgundy-pocket-watch/" target="_blank" rel="noopener">Monochrome: First Look – Tissot Pumps Up and Opens Up the PRX for Damian Lillard</a><a href="https://timeandtidewatches.com/its-dame-time-the-new-manual-wind-tissot-prx-skeleton-special-edition/" target="_blank" rel="noopener">Time+Tide: It’s Dame Time: The New Manual-Wind Tissot PRX Skeleton Special Edition</a><a href="https://www.ablogtowatch.com/new-release-tissot-prx-skeleton-damian-lillard-special-edition-watch-is-a-bold-handwound-take-on-a-modern-classic/" target="_blank" rel="noopener">aBlogtoWatch: New Release: Tissot PRX Skeleton Damian Lillard Special-Edition Watch Is A Bold, Handwound Take On A Modern Classic</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Yema — Spacegraf Heure Sidérale Tourbillon Volant</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: French-made CMM.32 calibre</li>
+            
+            <li>Case material: Grade 5 titanium</li>
+            <li>Flying tourbillon</li><li>Celestial sidereal time disc</li><li>105-hour power reserve</li><li>High shock resistance</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/yema-spacegraf-heure-siderale-tourbillon-volant-millesime-2026-limited-edition-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Yema’s Ambitious new Spacegraf Heure Siderale Tourbillon Volant Limited Edition</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Beaubleu — La Pièce No. 1</div>
+        <p class="note">39mm dress watch featuring signature circular floating hands and a coin-struck off-center dial made in collaboration with the Monnaie de Paris.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/beaubleu-la-piece-no-1-in-the-shop/" target="_blank" rel="noopener">Time+Tide: The Beaubleu La Pièce No. 1 is a wonderfully eccentric celebration of French watchmaking</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Briston — Clubmaster Legend Compressor</div>
+        <p class="note">42mm cushion-shaped diver in polished steel or tortoise acetate with internal bezel operated by a crown at 2 o&#39;clock; powered by a Seiko NH35A.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-the-refreshingly-different-briston-clubmaster-legend-compressor/" target="_blank" rel="noopener">Fratello: Hands-On: The Refreshingly Different Briston Clubmaster Legend Compressor</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Fears — (brand portfolio; perpetual calendar discussed)</div>
+        <p class="note">Founder Nicholas Bowman-Scargill discusses the 2016 Bristol revival and scaling challenges on The Business of Watches podcast.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/nicholas-bowman-scargill-founder-and-chief-executive-officer-of-fears" target="_blank" rel="noopener">Hodinkee: The Business of Watches Podcast: Nicholas Bowman-Scargill, Founder And Chief Executive Officer Of Fears</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Louis Erard — Dia De Los Muertos Black</div>
+        <p class="note">Black PVD 42mm limited edition of 10 pieces with a colorful floral skull motif; powered by a Sellita SW261 automatic.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/louis-erard-introduces-the-dia-de-los-muertos-black/" target="_blank" rel="noopener">Worn &amp; Wound: Louis Erard Introduces the Dia De Los Muertos Black</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Nodus — Obscura II</div>
+        <p class="note">Film-photography tool watch with a patented exposure gauge bezel, fume grain-textured dial, and refined bezel action in 40mm brushed steel or DLC.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/review/hands-on-exploring-film-photography-with-the-nodus-obscura-ii/" target="_blank" rel="noopener">Worn &amp; Wound: Hands-On: Exploring Film Photography with the Nodus Obscura II</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ochs und Junior — Perpetual Calendar Holiday Edition 2026</div>
+        <p class="note">Anthracite dial with white gold accents in a 42mm titanium case; Ludwig Oechslin gear-based perpetual calendar available to order until January 6, 2027.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/introducing-ochs-und-junior-perpetual-calendar-holiday-edition-2026/" target="_blank" rel="noopener">Monochrome: Introducing – Ochs und Junior Releases its Perpetual Calendar Holiday Edition 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">RZE — UTD-8080-ST</div>
+        <p class="note">White Cerakote titanium digital watch with new in-house RZE-8080 module (FSTN LCD, dual-time, countdown timer) and a backwards-compatible upgrade program.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/new-release-rze-utd-8080-st-watch-and-rze-8080-module-upgrade-program-for-existing-utd-8000-owners/" target="_blank" rel="noopener">aBlogtoWatch: New Release: RZE UTD-8080-ST Watch And RZE-8080 Module Upgrade Program For Existing UTD-8000 Owners</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Unimatic — Langhe collection</div>
+        <p class="note">12 limited-edition watches across U1S, U2S, U4S, and U5S models in Moss, Fog, and Truffle colorways with Sellita SW200-1 and Fumo deer-leather straps.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-new-unimatic-modello-quattro-u4s-npb/" target="_blank" rel="noopener">Fratello: The New Unimatic Modello Quattro U4S-NPB Reflects The Moods Of Piedmont’s Langhe Region</a><a href="https://www.ablogtowatch.com/unimatic-langhe-collection-brings-fall-truffle-hunting-colors-to-its-most-popular-swiss-made-watches/" target="_blank" rel="noopener">aBlogtoWatch: UNIMATIC Langhe Collection Brings Fall ‘Truffle Hunting’ Colors To Its Most Popular Swiss-Made Watches</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Atelier de Chronométrie — ADC16</div>
+        <p class="note">Bespoke dual-register chronograph built on a heavily modified Valjoux 23 with an instantaneous minutes counter and redesigned bridges; prices start at €140,000.</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/10/atelier-de-chronometrie-adc16.html" target="_blank" rel="noopener">SJX: Atelier de Chronométrie’s ADC16 Elevates a Classic</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ressence — Type 10 DN (Dark Knight)</div>
+        <p class="note">Oil-filled limited edition of 100 pieces in grade 5 titanium debuting the RW-01 calibre; features a temperature indicator and 120-second running indicator.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/the-impossibly-smooth-ressence-type-10-dn-dark-knight/" target="_blank" rel="noopener">Revolution: The Impossibly Smooth Ressence Type 10 DN (Dark Knight)</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">A. Lange &amp; Söhne</div>
+        <p class="models">Arkade, Lange 1, Saxonia</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/nine-incredible-watches-i-saw-inside-the-archives-at-a-lange-and-sohne-hq" target="_blank" rel="noopener">Hodinkee: Just Because: Nine Incredible Watches I Saw Inside The Archives At A. Lange &amp; Söhne HQ</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Breitling</div>
+        <p class="models">B02 Chronograph 41 Cosmonaute, Navitimer B09 Chronograph 41</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/breitling-navitimer-b09-and-b02-cosmonaute-41mm-chronographs" target="_blank" rel="noopener">Hodinkee: Introducing: Breitling Navitimer B09 And B02 Cosmonaute 41mm Chronographs</a><a href="https://www.fratellowatches.com/breitling-adds-two-new-manual-wind-navitimers-to-the-core-collection/" target="_blank" rel="noopener">Fratello: Breitling Adds Two New Manual-Wind Navitimers To The Core Collection</a><a href="https://wornandwound.com/breitling-at-long-last-adds-manually-wound-navitimers-to-the-core-collection/" target="_blank" rel="noopener">Worn &amp; Wound: Breitling, at Long Last, Adds Manually Wound Navitimers to the Core Collection</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Certina</div>
+        <p class="models">DS Action</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/introducing-four-blacked-out-certina-ds-action-watches/" target="_blank" rel="noopener">Fratello: Four New Blacked-Out Certina DS Action Watches: Two 38mm Divers And Two Quartz Chronos</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Chopard</div>
+        <p class="models">L.U.C Full Strike Día de los Muertos Edition 13</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-chopard-l-u-c-full-strike-dia-de-los-muertos-edition-13-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The Mexican-Themed Chopard L.U.C Full Strike Día de los Muertos Edition 13</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Citizen</div>
+        <p class="models">The Citizen (Ref. AQ4094-58L)</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/citizen-the-citizen-japanese-high-end-quartz-super-titanium-eco-drive-watch-review/" target="_blank" rel="noopener">aBlogtoWatch: Citizen The Citizen Japanese High-End Quartz Super Titanium Eco-Drive Watch Review</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Doxa</div>
+        <p class="models">SUB 200T Afterglow</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/introducing-doxa-sub-200t-afterglow-exquisite-timepieces-napels-florida-sellita-sw200-pink-limited-edition-specs-price/" target="_blank" rel="noopener">Monochrome: Introducing – The New Doxa SUB 200T Afterglow Brings Us Sunset in Naples</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Jaeger-LeCoultre</div>
+        <p class="models">Master Control Chronometer Perpetual Calendar, Master Ultra Thin Moon 36mm</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/jaeger-lecoultre-master-ultra-thin-moon-36mm-pink-gold/" target="_blank" rel="noopener">Fratello: The Jaeger-LeCoultre Master Ultra Thin Moon 36mm Returns In A Classy Pink Gold Case</a><a href="https://monochrome-watches.com/the-jaeger-lecoultre-master-ultra-thin-moon-now-in-an-elegant-36mm-pink-gold-case/" target="_blank" rel="noopener">Monochrome: Introducing – The Jaeger-LeCoultre Master Ultra Thin Moon, now in an Elegant 36mm Pink Gold Case</a><a href="https://revolutionwatch.com/jaeger-lecoultre-robert-pattinson/" target="_blank" rel="noopener">Revolution: Master of Control: Robert Pattinson</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Marvin</div>
+        <p class="models">Flying Dutchman GMT</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/marvin-flying-dutchman-gmt-watch-revives-the-brands-aviation-heritage/" target="_blank" rel="noopener">aBlogtoWatch: Marvin Flying Dutchman GMT Watch Revives The Brand’s Aviation Heritage</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Maurice Lacroix</div>
+        <p class="models">Aikon Automatic Chronograph</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-maurice-lacroix-aikon-automatic-chronograph-updated-smaller-case-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Maurice Lacroix Refines the Aikon Automatic Chronograph for its Tenth Anniversary</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Minerva</div>
+        <p class="models">Exo Tourbillon Skeleton Limited Edition</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/minerva-goddess-returns-to-villeret-on-the-minerva-exo-tourbillon-skeleton-limited-edition-18-ref-137551-review/" target="_blank" rel="noopener">Monochrome: First Look – The Goddess Returns to Villeret on the Minerva Exo Tourbillon Skeleton Limited Edition</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">NOMOS</div>
+        <p class="models">Metro Date Power Reserve Ice Blue</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/nomos-metro-date-power-reserve-ice-blue-watch-debuts-with-new-in-house-movement/" target="_blank" rel="noopener">aBlogtoWatch: NOMOS Metro Date Power Reserve Ice Blue Watch Debuts With New In-House Movement</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Oris</div>
+        <p class="models">Aquis Date Kelp Forest Limited Edition</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-oris-kelp-forest-limited-edition" target="_blank" rel="noopener">Hodinkee: Introducing: The Oris Kelp Forest Limited Edition</a><a href="https://www.fratellowatches.com/oris-introduces-the-aquis-date-kelp-forest-limited-edition/" target="_blank" rel="noopener">Fratello: Oris Introduces The Aquis Date Kelp Forest Limited Edition</a><a href="https://monochrome-watches.com/oris-aquis-date-kelp-forest-limited-edition-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Oris Aquis Date Kelp Forest Limited Edition</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Panerai</div>
+        <p class="models">Luminor 42mm (PAM01710, PAM01711, PAM01714)</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/panerai-luminor-42mm-pam01710-pam01711-pam01714-hands-on/" target="_blank" rel="noopener">Time+Tide: Panerai shrinks its Luminor without compromising one bit</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tissot</div>
+        <p class="models">PRX Skeleton Damian Lillard Special Edition</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/tissot-prx-skeleton-damian-lillard-edition/" target="_blank" rel="noopener">Fratello: Tissot’s Boldest PRX Yet: The Damian Lillard Skeleton Transforms Into A Pocket Watch</a><a href="https://monochrome-watches.com/first-look-tissot-prx-skeleton-damian-lillard-special-edition-eta-unitas-6497-burgundy-pocket-watch/" target="_blank" rel="noopener">Monochrome: First Look – Tissot Pumps Up and Opens Up the PRX for Damian Lillard</a><a href="https://timeandtidewatches.com/its-dame-time-the-new-manual-wind-tissot-prx-skeleton-special-edition/" target="_blank" rel="noopener">Time+Tide: It’s Dame Time: The New Manual-Wind Tissot PRX Skeleton Special Edition</a><a href="https://www.ablogtowatch.com/new-release-tissot-prx-skeleton-damian-lillard-special-edition-watch-is-a-bold-handwound-take-on-a-modern-classic/" target="_blank" rel="noopener">aBlogtoWatch: New Release: Tissot PRX Skeleton Damian Lillard Special-Edition Watch Is A Bold, Handwound Take On A Modern Classic</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tudor</div>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/to-carry-and-to-keep-the-tudor-watches-of-warriors/" target="_blank" rel="noopener">Worn &amp; Wound: To Carry and To Keep: The Tudor Watches of Warriors</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Victorinox</div>
+        <p class="models">Maverick Automatic 39mm</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/victorinox-maverick-automatic-39mm-is-a-surprisingly-social-sports-watch-review/" target="_blank" rel="noopener">aBlogtoWatch: Victorinox Maverick Automatic 39mm Is A Surprisingly Social Sports Watch: Review</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Yema</div>
+        <p class="models">Spacegraf Heure Sidérale Tourbillon Volant</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/yema-spacegraf-heure-siderale-tourbillon-volant-millesime-2026-limited-edition-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Yema’s Ambitious new Spacegraf Heure Siderale Tourbillon Volant Limited Edition</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
