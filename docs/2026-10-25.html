@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-10-25</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-10-25 16:59 CET · 7 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 7 new articles — 3 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 2 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 1 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, and 1 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>.
+       No new articles from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a> and <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>.
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Tudor partners with Red Bull junior F1 team VCARB in a new motorsport alignment.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/why-does-tudor-belong-in-f1-opinion/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Luxembourg-based PANOM debuts TheHive, a 150-piece limited edition with honeycomb dial and open-heart SOPROD movement.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/panom-thehive-micro-mondays/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Orient’s new 39mm Flusso integrated-bracelet watch faces off against the Tissot PRX.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/sunday-morning-showdown-orient-flusso-vs-tissot-prx/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          Fossil releases three limited Minecraft Dungeons II chronographs with pixelated gaming aesthetics.
+          
+            <span class="bullet-links"><a href="https://www.ablogtowatch.com/hands-on-with-fossils-minecraft-dungeons-ii-game-inspired-chronograph-watches/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+        <li>
+          Monochrome’s buying guide spotlights cushion-shaped watches from Hamilton and Panerai.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/buying-guide-cushion-shaped-watches-hamilton-panerai-tag-heuer-h-moser-and-cie-timex-gerald-genta-specs-price-review/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    <p class="empty">No business news today.</p>
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">PANOM — TheHive</div>
+        
+          <ul class="specs">
+            <li>Size: 40.5mm</li>
+            <li>Movement: Automatic, SOPROD M100 Squelette</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Honeycomb dial with open-heart window</li><li>Limited to 150 pieces</li><li>Five colorways</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/panom-thehive-micro-mondays/" target="_blank" rel="noopener">Time+Tide: Does TheHive from PANOM finally put Luxembourg on the watchmaking map?</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">PANOM — TheHive</div>
+        <p class="note">Luxembourg-based debut limited to 150 pieces.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/panom-thehive-micro-mondays/" target="_blank" rel="noopener">Time+Tide: Does TheHive from PANOM finally put Luxembourg on the watchmaking map?</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    <p class="empty">No independent-brand articles today.</p>
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Fossil</div>
+        <p class="models">Minecraft Dungeons II Chronograph</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/hands-on-with-fossils-minecraft-dungeons-ii-game-inspired-chronograph-watches/" target="_blank" rel="noopener">aBlogtoWatch: Hands-On With Fossil’s Minecraft Dungeons II Game-Inspired Chronograph Watches</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hamilton</div>
+        <p class="models">American Classic Cushion</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-cushion-shaped-watches-hamilton-panerai-tag-heuer-h-moser-and-cie-timex-gerald-genta-specs-price-review/" target="_blank" rel="noopener">Monochrome: Buying Guide – Softening the Square with Six Cushion-Shaped Watches</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Orient</div>
+        <p class="models">Flusso</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/sunday-morning-showdown-orient-flusso-vs-tissot-prx/" target="_blank" rel="noopener">Fratello: Sunday Morning Showdown: Orient Flusso Vs. Tissot PRX</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Panerai</div>
+        <p class="models">Luminor 42</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-cushion-shaped-watches-hamilton-panerai-tag-heuer-h-moser-and-cie-timex-gerald-genta-specs-price-review/" target="_blank" rel="noopener">Monochrome: Buying Guide – Softening the Square with Six Cushion-Shaped Watches</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Rolex</div>
+        <p class="models">GMT-Master Ref. 6542</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/rolex-gmt-master-6542-worlds-most-infamous-watch-1959-1960/" target="_blank" rel="noopener">Fratello: Rolex GMT-Master Ref. 6542: The World’s Most Infamous Watch, 1959–1960</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tissot</div>
+        <p class="models">PRX</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/sunday-morning-showdown-orient-flusso-vs-tissot-prx/" target="_blank" rel="noopener">Fratello: Sunday Morning Showdown: Orient Flusso Vs. Tissot PRX</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tudor</div>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/why-does-tudor-belong-in-f1-opinion/" target="_blank" rel="noopener">Time+Tide: Why does Tudor belong in F1?</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
