@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-10-27</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-10-27 17:07 CET · 15 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 15 new articles — 4 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 3 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 2 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 2 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, 1 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 1 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, 1 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>, and 1 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Moritz Grossmann celebrates its founder’s 200th anniversary with limited black-enamel Hamatic editions in rose and white gold.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/moritz-grossmann-hamatic-enamel-black-dial-limited-edition-introducing-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Wren pivots from vintage divers to the integrated 904L steel sports watch Vessel with a faceted crystal.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/wren-vessel-meteorite-integrated-steel-sports-watch-review-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Two Rolex vintage stories surface: an Oscar-winning engineer’s full-set Submariner 1680 and a rare steel Ref. 6062 at auction.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/elliot-tyson-rolex-submariner-1680/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://watchesbysjx.com/2026/10/rolex-6062-triple-calendar-moon-phase-steel.html" target="_blank" rel="noopener">SJX</a></span>
+          
+        </li>
+      
+        <li>
+          Mainstream debuts include Fossil’s mid-century Signature CS-1, Timex’s WM Brown dress watch, and Sinn’s 65th-anniversary chronograph.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/fossil-signature-cs1-dialed-in" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://www.hodinkee.com/articles/wm-brown-x-timex" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://www.fratellowatches.com/new-sinn-140-a-s-anniversary/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          Elka Watch Co. channels 13th-century Neuchâtel history with the vintage-styled Tour des Chavannes R Series.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/elka-watch-co-launches-a-vintage-looking-series-with-the-tour-des-chavannes/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    <p class="empty">No business news today.</p>
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Chaumet — Joséphine Aigrette (Ref. W85845)</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Swiss quartz</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Diamond-set bezel</li><li>Sculptural buckle-free steel bracelet with V-shaped facets</li><li>Diamond-tipped aigrette ornament</li><li>Corrector on caseback to maintain crownless profile</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/chaumets-josephine-aigrette-dresses-for-the-evening/" target="_blank" rel="noopener">Revolution: Chaumet’s Joséphine Aigrette Dresses for the Evening</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Citizen — Eco-Drive AW1900 Series</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: Solar, J810 caliber</li>
+            
+            <li>Case material: Super Titanium</li>
+            <li>Available in four sunburst dial colors</li>
+            <li>Price: Under €250</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-citizen-eco-drive-aw1900-series-pushes-the-boundaries-of-affordability/" target="_blank" rel="noopener">Fratello: The Citizen Eco-Drive AW1900 Series Pushes The Boundaries Of Affordability</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Elka Watch Co. — Tour des Chavannes</div>
+        
+          <ul class="specs">
+            <li>Size: 40.8mm</li>
+            
+            
+            
+            <li>Curved case with box sapphire crystal</li><li>Two-hand dial with Roman numerals and lettering from original 18th-century plans</li><li>Two colorways: Pierre d’Hauterive and 1736 Edition</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/elka-watch-co-launches-a-vintage-looking-series-with-the-tour-des-chavannes/" target="_blank" rel="noopener">Monochrome: First Look – Elka Watch Co. Launches a Vintage-Looking Series with the “Tour des Chavannes”</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Fossil — Signature CS-1 Master Calendar Chronograph</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: Quartz, Ronda 5040F</li>
+            
+            
+            
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/fossil-signature-cs1-dialed-in" target="_blank" rel="noopener">Hodinkee: In Partnership - Dialed In: Swiss-Made, Mid-Century Inspired: Meet the Fossil Signature CS-1</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Fossil — Signature CS-1 Three Hand Date Automatic</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: Automatic, Sellita SW200-1</li>
+            
+            
+            
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/fossil-signature-cs1-dialed-in" target="_blank" rel="noopener">Hodinkee: In Partnership - Dialed In: Swiss-Made, Mid-Century Inspired: Meet the Fossil Signature CS-1</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Moritz Grossmann — Hamatic Black Enamel Dial</div>
+        
+          <ul class="specs">
+            <li>Size: 41mm</li>
+            <li>Movement: Automatic, in-house calibre 106.0</li>
+            
+            <li>Case material: Rose gold and white gold</li>
+            <li>Jet-black enamel dial with applied Arabic numerals</li><li>1875 typeface</li><li>Pendulum-style hammer winding system</li><li>Limited editions for founder&#39;s 200th anniversary</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/moritz-grossmann-hamatic-enamel-black-dial-limited-edition-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The Moritz Grossmann Hamatic, now with Black Enamel Dial</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Ralph Lauren — Nautical Collection</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: Automatic, RL514</li>
+            
+            <li>Case material: Stainless steel with weathered brass PVD finish</li>
+            
+            <li>Price: $12,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/ralph-lauren-launches-new-western-cushions-in-a-smaller-size-and-the-new-nautical-collection/" target="_blank" rel="noopener">Worn &amp; Wound: Ralph Lauren Launches New Western Cushions in a Smaller Size, and the New Nautical Collection</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Ralph Lauren — Western Cushion 38mm</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: Automatic, RL514</li>
+            
+            <li>Case material: Hand-engraved silver</li>
+            <li>Dial options in black lacquer, off-white, and turquoise stone</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/ralph-lauren-launches-new-western-cushions-in-a-smaller-size-and-the-new-nautical-collection/" target="_blank" rel="noopener">Worn &amp; Wound: Ralph Lauren Launches New Western Cushions in a Smaller Size, and the New Nautical Collection</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Sinn — 140 A S Anniversary Chronograph</div>
+        
+          <ul class="specs">
+            <li>Size: 44mm</li>
+            <li>Movement: Automatic, proprietary SZ01</li>
+            
+            <li>Case material: DLC-coated</li>
+            <li>Central 60-minute stopwatch hand</li><li>Rotatable internal minute scale</li><li>Limited edition of 300 pieces</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-sinn-140-a-s-anniversary/" target="_blank" rel="noopener">Fratello: Sinn Celebrates 65 Years With The 140 A S Anniversary Chronograph Limited Edition</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Timex — WM Brown x Timex</div>
+        
+          <ul class="specs">
+            <li>Size: 26.5 x 41.3mm</li>
+            <li>Movement: Quartz, Miyota</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Gift set includes brown leather strap and steel bracelet</li><li>Tank-shaped dress watch</li>
+            <li>Price: $349</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/wm-brown-x-timex" target="_blank" rel="noopener">Hodinkee: Introducing: WM Brown x Timex</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Elka Watch Co. — Tour des Chavannes</div>
+        <p class="note">Vintage-styled R Series inspired by a historic 13th-century Neuchâtel tower; available in two colorways.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/elka-watch-co-launches-a-vintage-looking-series-with-the-tour-des-chavannes/" target="_blank" rel="noopener">Monochrome: First Look – Elka Watch Co. Launches a Vintage-Looking Series with the “Tour des Chavannes”</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Wren — The Vessel</div>
+        <p class="note">Avant-garde integrated sports watch featuring a futuristic faceted crystal and a 39mm 904L stainless steel cushion case.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/wren-vessel-meteorite-integrated-steel-sports-watch-review-price/" target="_blank" rel="noopener">Monochrome: Hands-on – Wren’s Unexpected Take on the Integrated Sports Watch, The Vessel</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Moritz Grossmann — Hamatic Black Enamel Dial</div>
+        <p class="note">Limited rose and white gold editions celebrating the founder’s 200th anniversary with black enamel dials and calibre 106.0.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/moritz-grossmann-hamatic-enamel-black-dial-limited-edition-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The Moritz Grossmann Hamatic, now with Black Enamel Dial</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Chaumet</div>
+        <p class="models">Joséphine Aigrette (Ref. W85845)</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/chaumets-josephine-aigrette-dresses-for-the-evening/" target="_blank" rel="noopener">Revolution: Chaumet’s Joséphine Aigrette Dresses for the Evening</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Citizen</div>
+        <p class="models">Eco-Drive AW1900 Series</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-citizen-eco-drive-aw1900-series-pushes-the-boundaries-of-affordability/" target="_blank" rel="noopener">Fratello: The Citizen Eco-Drive AW1900 Series Pushes The Boundaries Of Affordability</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Doxa</div>
+        <p class="models">Sub 300 Beta ‘Frogger’</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/my-first-doxa-review-the-sub-300-beta-frogger-collab-watch/" target="_blank" rel="noopener">aBlogtoWatch: My First Doxa Review: The Sub 300 Beta ‘Frogger’ Collab Watch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Fossil</div>
+        <p class="models">Signature CS-1 Master Calendar Chronograph, Signature CS-1 Three Hand Date Automatic</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/fossil-signature-cs1-dialed-in" target="_blank" rel="noopener">Hodinkee: In Partnership - Dialed In: Swiss-Made, Mid-Century Inspired: Meet the Fossil Signature CS-1</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ralph Lauren</div>
+        <p class="models">Nautical Collection, Western Cushion 38mm</p>
+        <div class="links">
+          <a href="https://wornandwound.com/ralph-lauren-launches-new-western-cushions-in-a-smaller-size-and-the-new-nautical-collection/" target="_blank" rel="noopener">Worn &amp; Wound: Ralph Lauren Launches New Western Cushions in a Smaller Size, and the New Nautical Collection</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Rolex</div>
+        <p class="models">Ref. 6062 Triple Calendar Moon Phase, Submariner 1680</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/elliot-tyson-rolex-submariner-1680/" target="_blank" rel="noopener">Fratello: This Rolex Submariner 1680 Belonged To An Oscar-Winning Hollywood Sound Engineer</a><a href="https://watchesbysjx.com/2026/10/rolex-6062-triple-calendar-moon-phase-steel.html" target="_blank" rel="noopener">SJX: Hands On: Rolex Ref. 6062 Triple Calendar Moon Phase in Steel</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Sinn</div>
+        <p class="models">140 A S Anniversary Chronograph</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-sinn-140-a-s-anniversary/" target="_blank" rel="noopener">Fratello: Sinn Celebrates 65 Years With The 140 A S Anniversary Chronograph Limited Edition</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Timex</div>
+        <p class="models">WM Brown x Timex</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/wm-brown-x-timex" target="_blank" rel="noopener">Hodinkee: Introducing: WM Brown x Timex</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
