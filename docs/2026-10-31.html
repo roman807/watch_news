@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-10-31</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-10-31 17:00 CET · 15 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 15 new articles — 3 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 3 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 3 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, 2 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 2 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 1 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, and 1 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>.
+       No new articles from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>.
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          A. Lange &amp; Söhne, Laurent Ferrier, Vacheron Constantin, and Girard-Perregaux headline a wave of high-end releases including a platinum Datograph Perpetual and an iceberg-dial Grand Sport Tourbillon.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/girard-perregaux-laurent-ferrier-vacheron-constantin-last-week-in-watches/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Direnzo launches its first GMT, the Space Age-inspired DRZ 08 Cosmonaire, featuring an elliptical bezel and 800HV scratch-resistant coating.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/direnzo-drz-08-cosmonaire-gmt/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          Zenith may face major restructuring, with reports of job cuts at its Le Locle headquarters and a possible retail suspension until 2029.
+          
+            <span class="bullet-links"><a href="https://wornandwound.com/watches-stories-gear-a-touchscreen-macbook-a-new-porsche-collab-and-zeniths-uncertain-future/" target="_blank" rel="noopener">Worn &amp; Wound</a></span>
+          
+        </li>
+      
+        <li>
+          Lorige’s new BL-Endurance uses actual LMP2 Carbon/Carbon brake pads for its case, laser-etched with each component’s race provenance.
+          
+            <span class="bullet-links"><a href="https://www.ablogtowatch.com/lorige-x-intereuropol-competition-bl-endurance-watch-from-lmp2-brake-pads/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+        <li>
+          Microbrands expand their physical footprint: Studio Underd0g opens its Maidenhead assembly hub, while Oak…
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/studio-underd0g-d0ghouse-video/" target="_blank" rel="noopener">Time+Tide</a><span class="sep">·</span><a href="https://www.fratellowatches.com/visiting-the-oak-oscar-headquarters-in-chicago/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">Zenith restructuring and uncertain future</div>
+        <p class="note">Reports indicate potential job cuts at Zenith&#39;s Le Locle headquarters and a possible suspension of retail operations until 2029.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/watches-stories-gear-a-touchscreen-macbook-a-new-porsche-collab-and-zeniths-uncertain-future/" target="_blank" rel="noopener">Worn &amp; Wound: Watches, Stories, &amp; Gear: A Touchscreen Macbook, A New Porsche Collab, and Zenith’s Uncertain Future</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">A. Lange &amp; Söhne — Datograph Perpetual</div>
+        
+          <ul class="specs">
+            
+            
+            
+            <li>Case material: Platinum</li>
+            <li>50-piece limited edition</li><li>Five-row bracelet</li><li>20th anniversary edition</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/girard-perregaux-laurent-ferrier-vacheron-constantin-last-week-in-watches/" target="_blank" rel="noopener">Time+Tide: New releases from Girard-Perregaux, Laurent Ferrier, Vacheron Constantin and more</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Direnzo — DRZ 08 Cosmonaire GMT</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            
+            <li>Water resistance: 100m</li>
+            <li>Case material: Stainless steel or gold-PVD</li>
+            <li>Elliptical bezel</li><li>Multi-layered dial with lacquer-coated panier pattern</li><li>Scratch-resistant 800HV coating</li><li>First GMT watch</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/direnzo-drz-08-cosmonaire-gmt/" target="_blank" rel="noopener">Fratello: Roaring Through The Space Age With The Direnzo DRZ 08 Cosmonaire GMT</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Fossil — Signature CS-1</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Elevated materials and Swiss craftsmanship</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/recapping-fossil-signatures-launch-at-windup-watch-fair-nyc-2026/" target="_blank" rel="noopener">Worn &amp; Wound: Recapping Fossil Signature’s Launch at Windup Watch Fair NYC 2026</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Girard-Perregaux — Laureato Fifty Three Gold Bridges</div>
+        
+          <ul class="specs">
+            
+            
+            
+            <li>Case material: Steel</li>
+            
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/girard-perregaux-laurent-ferrier-vacheron-constantin-last-week-in-watches/" target="_blank" rel="noopener">Time+Tide: New releases from Girard-Perregaux, Laurent Ferrier, Vacheron Constantin and more</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Laurent Ferrier — Grand Sport Tourbillon</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Iceberg dial</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/girard-perregaux-laurent-ferrier-vacheron-constantin-last-week-in-watches/" target="_blank" rel="noopener">Time+Tide: New releases from Girard-Perregaux, Laurent Ferrier, Vacheron Constantin and more</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Lorige — Competition BL-Endurance</div>
+        
+          <ul class="specs">
+            
+            
+            
+            <li>Case material: Carbon/Carbon (repurposed brake pads)</li>
+            <li>Case crafted from repurposed LMP2 Carbon/Carbon brake pads</li><li>Laser-etched with specific race and car origin</li><li>Strictly limited to a few watches per brake pad</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/lorige-x-intereuropol-competition-bl-endurance-watch-from-lmp2-brake-pads/" target="_blank" rel="noopener">aBlogtoWatch: Lorige X InterEuropol Competition BL-Endurance Watch From LMP2 Brake Pads</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Vacheron Constantin — Year of the Goat</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Hand-engraved</li><li>Chinese Zodiac series</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/girard-perregaux-laurent-ferrier-vacheron-constantin-last-week-in-watches/" target="_blank" rel="noopener">Time+Tide: New releases from Girard-Perregaux, Laurent Ferrier, Vacheron Constantin and more</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Direnzo — DRZ 08 Cosmonaire GMT</div>
+        <p class="note">The brand’s first GMT with a retro-futuristic elliptical bezel and lacquer-coated panier dial.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/direnzo-drz-08-cosmonaire-gmt/" target="_blank" rel="noopener">Fratello: Roaring Through The Space Age With The Direnzo DRZ 08 Cosmonaire GMT</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">HTD — Hesagraph RitmoCorsa</div>
+        <p class="note">Limited to 99 pieces; hand-wound Sellita SW510 M with a 63-hour power reserve and a red enameled dial.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-htd-hesagraph-ritmocorsa/" target="_blank" rel="noopener">Fratello: Hands-On: The Raring-To-Race HTD Hesagraph RitmoCorsa</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Oak &amp; Oscar — Humboldt / GMT / Olmsted</div>
+        <p class="note">Fratello tours the Chicago headquarters and assembly/quality control operations; fly-fishing-dial editions shown.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/visiting-the-oak-oscar-headquarters-in-chicago/" target="_blank" rel="noopener">Fratello: Visiting The Oak &amp; Oscar Headquarters In Chicago</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Studio Underd0g — 01Series</div>
+        <p class="note">New &#39;D0ghouse&#39; facility in Maidenhead offers an experiential build-your-own-watch option for an extra £100.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/studio-underd0g-d0ghouse-video/" target="_blank" rel="noopener">Time+Tide: The Studio Underd0g D0ghouse offers a glimpse of the future for British watchmaking</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Laurent Ferrier — Grand Sport Tourbillon</div>
+        <p class="note">New &#39;Iceberg&#39; dial variant among the week’s high-end releases.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/girard-perregaux-laurent-ferrier-vacheron-constantin-last-week-in-watches/" target="_blank" rel="noopener">Time+Tide: New releases from Girard-Perregaux, Laurent Ferrier, Vacheron Constantin and more</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Lorige — Competition BL-Endurance</div>
+        <p class="note">Case machined from repurposed LMP2 Carbon/Carbon brake pads; each laser-etched with its race and car origin.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/lorige-x-intereuropol-competition-bl-endurance-watch-from-lmp2-brake-pads/" target="_blank" rel="noopener">aBlogtoWatch: Lorige X InterEuropol Competition BL-Endurance Watch From LMP2 Brake Pads</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vianney Halter — Seven Masters</div>
+        <p class="note">Featured in Marteau &amp; Co&#39;s &#39;The Blueprint&#39; auction; Louis Erard x Vianney Halter &#39;Futur Antérieur Azur&#39; also highlighted.</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/10/marteau-the-blueprint.html" target="_blank" rel="noopener">SJX: Highlights: Colour-Coordinated Watches in Marteau &amp; Co’s “The Blueprint”</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">A. Lange &amp; Söhne</div>
+        <p class="models">Datograph Perpetual</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/a-long-layover-in-newport-for-the-audrain-concours-delegance" target="_blank" rel="noopener">Hodinkee: Dispatch: A Long Layover In Newport For The Audrain Concours d&#39;Elegance</a><a href="https://timeandtidewatches.com/girard-perregaux-laurent-ferrier-vacheron-constantin-last-week-in-watches/" target="_blank" rel="noopener">Time+Tide: New releases from Girard-Perregaux, Laurent Ferrier, Vacheron Constantin and more</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Casio</div>
+        <p class="models">GWBX5600</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/mip-solar-charging-and-bluetooth-raise-the-standard-for-entry-level-casio-g-shock-watches-with-the-gwbx5600-review/" target="_blank" rel="noopener">aBlogtoWatch: MIP, Solar Charging, And Bluetooth Raise The Standard For Entry-Level Casio G-Shock Watches With The GWBX5600: Review</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">De Bethune</div>
+        <p class="models">DB25 Digitale</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/de-bethune-db25-digitale-jumping-hour-review-price/" target="_blank" rel="noopener">Monochrome: Hands-on – Up Close and Personal with the Splendid De Bethune DB25 Digitale</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Fossil</div>
+        <p class="models">Signature CS-1</p>
+        <div class="links">
+          <a href="https://wornandwound.com/recapping-fossil-signatures-launch-at-windup-watch-fair-nyc-2026/" target="_blank" rel="noopener">Worn &amp; Wound: Recapping Fossil Signature’s Launch at Windup Watch Fair NYC 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Girard-Perregaux</div>
+        <p class="models">Laureato Fifty Three Gold Bridges</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/girard-perregaux-laurent-ferrier-vacheron-constantin-last-week-in-watches/" target="_blank" rel="noopener">Time+Tide: New releases from Girard-Perregaux, Laurent Ferrier, Vacheron Constantin and more</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vacheron Constantin</div>
+        <p class="models">Year of the Goat</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/girard-perregaux-laurent-ferrier-vacheron-constantin-last-week-in-watches/" target="_blank" rel="noopener">Time+Tide: New releases from Girard-Perregaux, Laurent Ferrier, Vacheron Constantin and more</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Zenith</div>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/watches-stories-gear-a-touchscreen-macbook-a-new-porsche-collab-and-zeniths-uncertain-future/" target="_blank" rel="noopener">Worn &amp; Wound: Watches, Stories, &amp; Gear: A Touchscreen Macbook, A New Porsche Collab, and Zenith’s Uncertain Future</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
