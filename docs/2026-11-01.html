@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-01</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-01 16:59 CET · 7 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 7 new articles — 2 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 2 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 2 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, and 1 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>.
+       No new articles from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a> and <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>.
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Tudor Ranger&#39;s T-fit bracelet is a direct upgrade for the Black Bay 58, offering better fit without buying a new watch.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/should-you-upgrade-your-existing-watch-instead-of-buying-a-new-one/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          Hamilton introduces the American Classic Cushion collection, reviving 1920s Art Deco design with the new manual-wind H-42 caliber.
+          
+            <span class="bullet-links"><a href="https://www.ablogtowatch.com/the-hamilton-american-classic-cushion-collection-revives-a-defining-art-deco-watch-design/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+        <li>
+          Atelier Loreti and Arsène Lippens expand their microbrand lines with rare stone dials and cotton-bamboo textile dials respectively.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/atelier-loreti-celestial-tourbillon-collection-micro-mondays/" target="_blank" rel="noopener">Time+Tide</a><span class="sep">·</span><a href="https://timeandtidewatches.com/arsene-lippens-artigiano-collection-2026-introducing/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Monochrome spotlights emerging independents Marcu and Neode with debut titanium watches priced at CHF 59,000 and CHF 26,400.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/buying-guide-independent-watchmaking-marcu-initial-neode-n01-voxel-meridion-atelier-pieters-tourbillon-alexandre-martin-1965-specs-pics-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          A Rolex Datejust 36 &#34;Ombré&#34; faces the Grand Seiko SLGB015 &#34;Lake Suwa&#34; in a €10,000 luxury showdown.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/sunday-morning-showdown-rolex-datejust-36-ombre-vs-grand-seiko-slgb015-lake-suwa/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    <p class="empty">No business news today.</p>
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Arsène Lippens — Artigiano</div>
+        
+          <ul class="specs">
+            <li>Size: 37.5mm</li>
+            <li>Movement: Manual-wind Sellita SW210-b</li>
+            
+            
+            <li>Cotton-bamboo textile dials</li><li>Sapphire display casebacks</li>
+            <li>Price: CHF 1,500</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/arsene-lippens-artigiano-collection-2026-introducing/" target="_blank" rel="noopener">Time+Tide: Arsène Lippens adds two new dial options and display case backs to its Artigiano collection</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Atelier Loreti — Celestial Tourbillon</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            
+            <li>Water resistance: 100m</li>
+            <li>Case material: Stainless steel</li>
+            <li>Rare natural stone dials (Snowflake Obsidian and Charoite)</li><li>Open tourbillon aperture</li><li>10.85mm thickness</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/atelier-loreti-celestial-tourbillon-collection-micro-mondays/" target="_blank" rel="noopener">Time+Tide: Atelier Loreti Expands the Celestial Tourbillon Collection with Rare Stone Dials</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Hamilton — American Classic Cushion</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Manual-wind Caliber H-42</li>
+            <li>Water resistance: 50 meters</li>
+            
+            <li>57-hour power reserve</li><li>Nivachron balance spring</li><li>Anti-reflective sapphire crystal</li><li>Display caseback</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/the-hamilton-american-classic-cushion-collection-revives-a-defining-art-deco-watch-design/" target="_blank" rel="noopener">aBlogtoWatch: The Hamilton American Classic Cushion Collection Revives A Defining Art Deco Watch Design</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Arsène Lippens — Artigiano</div>
+        <p class="note">New Stelvio and Bellagio cotton-bamboo textile dial variants; CHF 1,500, 37.5mm.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/arsene-lippens-artigiano-collection-2026-introducing/" target="_blank" rel="noopener">Time+Tide: Arsène Lippens adds two new dial options and display case backs to its Artigiano collection</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Atelier Loreti — Celestial Tourbillon</div>
+        <p class="note">New limited editions with Snowflake Obsidian and Charoite stone dials; 42mm, 100m WR.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/atelier-loreti-celestial-tourbillon-collection-micro-mondays/" target="_blank" rel="noopener">Time+Tide: Atelier Loreti Expands the Celestial Tourbillon Collection with Rare Stone Dials</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Marcu — Initial</div>
+        <p class="note">High-end titanium dress watch limited to 33 pieces with hand-finished JM01 calibre; CHF 59,000.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-independent-watchmaking-marcu-initial-neode-n01-voxel-meridion-atelier-pieters-tourbillon-alexandre-martin-1965-specs-pics-price/" target="_blank" rel="noopener">Monochrome: Buying Guide – Five Indie Watchmakers Making a Solid Impression with their Debut Watches</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Neode — N01 First Edition</div>
+        <p class="note">Sporty titanium time-only watch limited to 25 pieces, created with Voutilainen and Les Cadraniers de Genève; CHF 26,400.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-independent-watchmaking-marcu-initial-neode-n01-voxel-meridion-atelier-pieters-tourbillon-alexandre-martin-1965-specs-pics-price/" target="_blank" rel="noopener">Monochrome: Buying Guide – Five Indie Watchmakers Making a Solid Impression with their Debut Watches</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Grand Seiko</div>
+        <p class="models">SLGB015 &#34;Lake Suwa&#34;</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/sunday-morning-showdown-rolex-datejust-36-ombre-vs-grand-seiko-slgb015-lake-suwa/" target="_blank" rel="noopener">Fratello: Sunday Morning Showdown: Rolex Datejust 36 “Ombré” Vs. Grand Seiko SLGB015 “Lake Suwa”</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hamilton</div>
+        <p class="models">American Classic Cushion</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/the-hamilton-american-classic-cushion-collection-revives-a-defining-art-deco-watch-design/" target="_blank" rel="noopener">aBlogtoWatch: The Hamilton American Classic Cushion Collection Revives A Defining Art Deco Watch Design</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Marvin</div>
+        <p class="models">Flying Dutchman GMT</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/watch-giveaway-marvin-flying-dutchman-gmt/" target="_blank" rel="noopener">aBlogtoWatch: WATCH GIVEAWAY: Marvin Flying Dutchman GMT</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Rolex</div>
+        <p class="models">Datejust 36 &#34;Ombré&#34;</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/sunday-morning-showdown-rolex-datejust-36-ombre-vs-grand-seiko-slgb015-lake-suwa/" target="_blank" rel="noopener">Fratello: Sunday Morning Showdown: Rolex Datejust 36 “Ombré” Vs. Grand Seiko SLGB015 “Lake Suwa”</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tudor</div>
+        <p class="models">Black Bay 58, Ranger</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/should-you-upgrade-your-existing-watch-instead-of-buying-a-new-one/" target="_blank" rel="noopener">Fratello: Should You Upgrade Your Existing Watch Instead Of Buying A New One?</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
