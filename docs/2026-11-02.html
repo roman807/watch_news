@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-02</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-02 17:09 CET · 23 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 23 new articles — 6 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 4 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 4 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 4 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 2 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, 1 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 1 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>, and 1 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Audemars Piguet unveils Minute Repeater Supersonnerie models in titanium and first-ever pink gold, plus 38mm Code 11.59 stone-dial editions.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/audemars-piguet-introduces-three-supersonnerie-watches-and-two-stone-dial-code-11-59-models/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          H. Moser &amp; Cie. drops two Heritage limited editions with drum-shaped cases, including a new 1940s-style bi-compax chronograph.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/2026-h-moser-cie-heritage-chronograph-white-fume-and-heritage-centre-seconds-espresso-fume-review-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Japanese microbrands Minase and Kiwame Tokyo debut compact 37mm models: the accessible Mastercraft J3 and the $630 red-lacquer Kubo Momiji.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/minase-mastercraft-j3-entry-level-collection-miyota-introducing-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://monochrome-watches.com/kiwame-tokyo-kubo-momiji-in-autumnal-red-introducing-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Hamilton goes retro with a Call of Duty: MW4 Khaki Field Mechanical and the new 1920s-inspired American Classic Cushion collection.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/hamilton-khaki-field-mechanical-mw4-hands-on/" target="_blank" rel="noopener">Time+Tide</a><span class="sep">·</span><a href="https://www.ablogtowatch.com/the-hamilton-american-classic-cushion-collection-revives-a-defining-art-deco-watch-design/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+        <li>
+          Artisans de Genève and marathoner Eliud Kipchoge reveal a 57g Titalum chronograph built around a skeletonized caliber 4130.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/artisans-de-geneve-x-eliud-kipchoge/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    <p class="empty">No business news today.</p>
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Artisans de Genève — Eliud Kipchoge Titalum Chronograph</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Skeletonized hand-wound caliber 4130</li>
+            
+            <li>Case material: Titalum (aluminum-titanium alloy)</li>
+            <li>57g total weight</li><li>ultra-lightweight</li><li>bespoke collaboration with marathoner Eliud Kipchoge</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/artisans-de-geneve-x-eliud-kipchoge/" target="_blank" rel="noopener">Fratello: Introducing The Artisans De Genève × Eliud Kipchoge: A Marathon-Ready 57g Titalum Chronograph</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Audemars Piguet — Code 11.59 Selfwinding</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: Selfwinding</li>
+            
+            
+            <li>Natural stone dial in gold obsidian</li><li>Natural stone dial in black onyx</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/audemars-piguet-introduces-three-supersonnerie-watches-and-two-stone-dial-code-11-59-models/" target="_blank" rel="noopener">Fratello: Audemars Piguet Introduces Three Supersonnerie Watches And Two Stone-Dial Code 11.59 Models</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Audemars Piguet — Minute Repeater Supersonnerie</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            
+            
+            <li>Case material: Titanium and pink gold</li>
+            <li>Minute repeater complication</li><li>Supersonnerie technology</li><li>first-ever pink gold execution</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/audemars-piguet-introduces-three-supersonnerie-watches-and-two-stone-dial-code-11-59-models/" target="_blank" rel="noopener">Fratello: Audemars Piguet Introduces Three Supersonnerie Watches And Two Stone-Dial Code 11.59 Models</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Citizen — ATTESA Power of Purple Aurora</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Eco-Drive</li>
+            
+            <li>Case material: Black DURATECT</li>
+            <li>Structural color film and vapor deposition dial</li><li>Purple and blue hues inspired by the northern lights</li><li>Limited edition celebrating 50 years of Eco-Drive</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/citizen-attesa-the-power-of-purple-aurora/" target="_blank" rel="noopener">Revolution: Citizen ATTESA: The Power of Purple Aurora</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">H. Moser &amp; Cie. — Heritage Centre Seconds</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Drum-shaped case</li><li>Wire lugs</li><li>Espresso fumé dial</li><li>Vintage-inspired</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-h-moser-cie-heritage-chronograph-white-fume-and-heritage-centre-seconds-espresso-fume-review-price/" target="_blank" rel="noopener">Monochrome: First Look – H. Moser &amp; Cie. Drops Two Heritage Models, Including a new Chronograph</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">H. Moser &amp; Cie. — Heritage Chronograph</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            
+            
+            
+            <li>Drum-shaped case</li><li>Wire lugs</li><li>White fumé dial</li><li>Traditional chronograph module</li><li>1940s-style bi-compax layout</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-h-moser-cie-heritage-chronograph-white-fume-and-heritage-centre-seconds-espresso-fume-review-price/" target="_blank" rel="noopener">Monochrome: First Look – H. Moser &amp; Cie. Drops Two Heritage Models, Including a new Chronograph</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Hamilton — American Classic Cushion</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Manual-wind Caliber H-42, 57-hour power reserve</li>
+            <li>Water resistance: 50m</li>
+            
+            <li>Cushion-shaped cases inspired by 1926 models</li><li>Art Deco aesthetic</li><li>Anti-reflective sapphire crystals</li><li>Display casebacks</li><li>Nivachron balance spring</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/the-hamilton-american-classic-cushion-collection-revives-a-defining-art-deco-watch-design/" target="_blank" rel="noopener">aBlogtoWatch: The Hamilton American Classic Cushion Collection Revives A Defining Art Deco Watch Design</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">IFL Watches — Bloc Large</div>
+        
+          <ul class="specs">
+            <li>Size: 27.5mm</li>
+            <li>Movement: Quartz, Miyota 2025</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Hand-painted street-art inspired dials</li><li>Three variants: Skybound, Cloudling, Bouquella</li><li>Whimsical designs omitting traditional hour markers</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/ifl-watches-laphont-bloc-limited-editions/" target="_blank" rel="noopener">Fratello: The IFL Watches × Laphont Bloc Limited Editions Aim For The Sky</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Kiwame Tokyo — Kubo Momiji</div>
+        
+          <ul class="specs">
+            <li>Size: 37mm</li>
+            <li>Movement: Automatic, Miyota 82S5</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Glossy red lacquer dial inspired by autumn foliage</li><li>Maple leaf detail in small-seconds subdial</li>
+            <li>Price: $630</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/kiwame-tokyo-kubo-momiji-in-autumnal-red-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The new Kiwame Tokyo Kubo Momiji, in Autumnal Red</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Minase — Mastercraft J3</div>
+        
+          <ul class="specs">
+            <li>Size: 37mm</li>
+            <li>Movement: Automatic, Miyota 90S5</li>
+            
+            
+            <li>Cushion-shaped case</li><li>Sand-textured dials</li><li>Sallaz polishing</li><li>Hand-finished aesthetics</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/minase-mastercraft-j3-entry-level-collection-miyota-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The Sleeker, More Compact and More Accessible Minase Mastercraft J3 Collection</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Arsène Lippens — Artigiano</div>
+        <p class="note">New Stelvio and Bellagio cotton-bamboo textile dials; 37.5mm, Sellita SW210-b, CHF 1,500.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/arsene-lippens-artigiano-collection-2026-introducing/" target="_blank" rel="noopener">Time+Tide: Arsène Lippens adds two new dial options and display case backs to its Artigiano collection</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Atelier Loreti — Celestial Tourbillon</div>
+        <p class="note">New Snowflake Obsidian and Charoite stone dials; 42mm steel, 100m water resistance.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/atelier-loreti-celestial-tourbillon-collection-micro-mondays/" target="_blank" rel="noopener">Time+Tide: Atelier Loreti Expands the Celestial Tourbillon Collection with Rare Stone Dials</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">echo/neutra — Rivanera Piccolo &#34;Rosa d&#39;Epoca&#34;</div>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/best-titanium-watches/" target="_blank" rel="noopener">Time+Tide: 14 of the best titanium watches to solve your lightweight needs</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">IFL Watches — Bloc Large</div>
+        <p class="note">Collaboration with Laphont; three street-art dial variants: Skybound, Cloudling, Bouquella.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/ifl-watches-laphont-bloc-limited-editions/" target="_blank" rel="noopener">Fratello: The IFL Watches × Laphont Bloc Limited Editions Aim For The Sky</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Kiwame Tokyo — Kubo Momiji</div>
+        <p class="note">37mm stainless steel, $630, red lacquer dial.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/kiwame-tokyo-kubo-momiji-in-autumnal-red-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The new Kiwame Tokyo Kubo Momiji, in Autumnal Red</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Marvin — Flying Dutchman GMT</div>
+        <p class="note">41mm, in-house automatic MAR620A.G, airport-code dial, $799.99 retail.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/watch-giveaway-marvin-flying-dutchman-gmt/" target="_blank" rel="noopener">aBlogtoWatch: WATCH GIVEAWAY: Marvin Flying Dutchman GMT</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Minase — Mastercraft J3</div>
+        <p class="note">37mm cushion-shaped entry-level model with Miyota 90S5.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/minase-mastercraft-j3-entry-level-collection-miyota-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The Sleeker, More Compact and More Accessible Minase Mastercraft J3 Collection</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Sicura — Hexa 400 Sea Green</div>
+        <p class="note">40mm 316L steel, ceramic bezel, dual-crown internal dual-time bezel.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/sicura-hexa-400-sea-green-watch-combines-versatile-functionality-with-oceanic-color/" target="_blank" rel="noopener">aBlogtoWatch: Sicura Hexa 400 Sea Green Watch Combines Versatile Functionality With Oceanic Color</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Artisans de Genève — Eliud Kipchoge Titalum Chronograph</div>
+        <p class="note">57g aluminum-titanium case, skeletonized hand-wound caliber 4130.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/artisans-de-geneve-x-eliud-kipchoge/" target="_blank" rel="noopener">Fratello: Introducing The Artisans De Genève × Eliud Kipchoge: A Marathon-Ready 57g Titalum Chronograph</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Atælier Haute Complication — Dual Time</div>
+        <p class="note">Dark blue PVD unique piece for Christie&#39;s Watches for ELA charity auction.</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/christies-watches-for-ela.html" target="_blank" rel="noopener">SJX: Highlights: Indies Step Up for Charity with Watches for ELA</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Cédric Johner — Abyss</div>
+        <p class="note">Hand-shaped case, brain-neuron engraved movement, unique piece for charity.</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/christies-watches-for-ela.html" target="_blank" rel="noopener">SJX: Highlights: Indies Step Up for Charity with Watches for ELA</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">H. Moser &amp; Cie. — Heritage Centre Seconds</div>
+        <p class="note">Espresso fumé dial, drum-shaped case, wire lugs.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-h-moser-cie-heritage-chronograph-white-fume-and-heritage-centre-seconds-espresso-fume-review-price/" target="_blank" rel="noopener">Monochrome: First Look – H. Moser &amp; Cie. Drops Two Heritage Models, Including a new Chronograph</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">H. Moser &amp; Cie. — Heritage Chronograph</div>
+        <p class="note">White fumé dial, 42mm, 1940s-style bi-compax layout.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-h-moser-cie-heritage-chronograph-white-fume-and-heritage-centre-seconds-espresso-fume-review-price/" target="_blank" rel="noopener">Monochrome: First Look – H. Moser &amp; Cie. Drops Two Heritage Models, Including a new Chronograph</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Marcu — Initial</div>
+        <p class="note">High-end titanium dress watch limited to 33 pieces, hand-finished JM01 calibre, CHF 59,000.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-independent-watchmaking-marcu-initial-neode-n01-voxel-meridion-atelier-pieters-tourbillon-alexandre-martin-1965-specs-pics-price/" target="_blank" rel="noopener">Monochrome: Buying Guide – Five Indie Watchmakers Making a Solid Impression with their Debut Watches</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Neode — N01 First Edition</div>
+        <p class="note">Sporty titanium limited to 25 pieces, collaborations with Voutilainen and Les Cadraniers de Genève, CHF 26,400.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-independent-watchmaking-marcu-initial-neode-n01-voxel-meridion-atelier-pieters-tourbillon-alexandre-martin-1965-specs-pics-price/" target="_blank" rel="noopener">Monochrome: Buying Guide – Five Indie Watchmakers Making a Solid Impression with their Debut Watches</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Arnold &amp; Son</div>
+        <p class="models">DSTB Stop-Seconds</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-arnold-and-son-dtsb-stop-seconds" target="_blank" rel="noopener">Hodinkee: Hands-On: The Arnold &amp; Son DSTB Stop-Seconds</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Audemars Piguet</div>
+        <p class="models">Code 11.59 Selfwinding, Minute Repeater Supersonnerie</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/audemars-piguet-introduces-three-supersonnerie-watches-and-two-stone-dial-code-11-59-models/" target="_blank" rel="noopener">Fratello: Audemars Piguet Introduces Three Supersonnerie Watches And Two Stone-Dial Code 11.59 Models</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Bell &amp; Ross</div>
+        <p class="models">BR-05 Chrono Snow Rocket</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-louis-erard-x-vianney-halter-glashutte-original-goes-aventurine/" target="_blank" rel="noopener">Revolution: Last Week in Watches: Louis Erard x Vianney Halter, Glashütte Original Goes Aventurine</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Citizen</div>
+        <p class="models">ATTESA Power of Purple Aurora</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/citizen-attesa-the-power-of-purple-aurora/" target="_blank" rel="noopener">Revolution: Citizen ATTESA: The Power of Purple Aurora</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ebel</div>
+        <p class="models">Sport Chronograph &#39;El Primero&#39;</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/time-machines-accidentally-ahead-of-the-investor-curve-with-the-ebel-sport-chronograph-el-primero-watch/" target="_blank" rel="noopener">aBlogtoWatch: Time Machines: Accidentally Ahead Of The Investor Curve With The Ebel Sport Chronograph ‘El Primero’ Watch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Glashütte Original</div>
+        <p class="models">Senator Atelier</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-louis-erard-x-vianney-halter-glashutte-original-goes-aventurine/" target="_blank" rel="noopener">Revolution: Last Week in Watches: Louis Erard x Vianney Halter, Glashütte Original Goes Aventurine</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Grand Seiko</div>
+        <p class="models">SLGB015 &#34;Lake Suwa&#34;</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/sunday-morning-showdown-rolex-datejust-36-ombre-vs-grand-seiko-slgb015-lake-suwa/" target="_blank" rel="noopener">Fratello: Sunday Morning Showdown: Rolex Datejust 36 “Ombré” Vs. Grand Seiko SLGB015 “Lake Suwa”</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hamilton</div>
+        <p class="models">American Classic Cushion Collection, Khaki Field Mechanical MW4, Khaki Field Titanium 38</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/hamilton-khaki-field-mechanical-mw4-hands-on/" target="_blank" rel="noopener">Time+Tide: Hamilton’s Khaki Field Mechanical gives Modern Warfare 4 a suitably hardcore tribute</a><a href="https://www.ablogtowatch.com/the-hamilton-american-classic-cushion-collection-revives-a-defining-art-deco-watch-design/" target="_blank" rel="noopener">aBlogtoWatch: The Hamilton American Classic Cushion Collection Revives A Defining Art Deco Watch Design</a><a href="https://timeandtidewatches.com/best-titanium-watches/" target="_blank" rel="noopener">Time+Tide: 14 of the best titanium watches to solve your lightweight needs</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Louis Erard</div>
+        <p class="models">Futur Antérieur</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-louis-erard-x-vianney-halter-glashutte-original-goes-aventurine/" target="_blank" rel="noopener">Revolution: Last Week in Watches: Louis Erard x Vianney Halter, Glashütte Original Goes Aventurine</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Montblanc</div>
+        <p class="models">Star Legacy Nicolas Rieussec Chronograph 43mm</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-with-the-montblanc-star-legacy-nicolas-rieussec-chronograph/" target="_blank" rel="noopener">Fratello: Hands-On: The Montblanc Star Legacy Nicolas Rieussec Chronograph 43mm Limited Edition</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Rolex</div>
+        <p class="models">Datejust 36 &#34;Ombré&#34;</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/sunday-morning-showdown-rolex-datejust-36-ombre-vs-grand-seiko-slgb015-lake-suwa/" target="_blank" rel="noopener">Fratello: Sunday Morning Showdown: Rolex Datejust 36 “Ombré” Vs. Grand Seiko SLGB015 “Lake Suwa”</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tudor</div>
+        <p class="models">Black Bay 58, Ranger</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/should-you-upgrade-your-existing-watch-instead-of-buying-a-new-one/" target="_blank" rel="noopener">Fratello: Should You Upgrade Your Existing Watch Instead Of Buying A New One?</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
