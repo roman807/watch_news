@@ -11,6 +11,9 @@ so the same code can run on either backend:
     WATCH_NEWS_ANALYZE_MODEL   model for the cross-article analysis
     WATCH_NEWS_ANALYZE_FALLBACK_MODEL  optional: tried once if the analysis
                                model fails (e.g. overloaded/timing out)
+    WATCH_NEWS_ANALYZE_MAX_TOKENS  optional: output budget for the analysis
+                               (default: analyze.MAX_TOKENS). "Thinking" models
+                               spend much of it before answering.
     OPENAI_API_KEY             if the server needs one (any value otherwise)
 """
 
@@ -89,6 +92,7 @@ class OpenAICompatibleClient(Client):
             max_retries=1,
         )
         self._analyze_fallback = os.environ.get("WATCH_NEWS_ANALYZE_FALLBACK_MODEL") or None
+        self._analyze_max_tokens = int(os.environ.get("WATCH_NEWS_ANALYZE_MAX_TOKENS") or 0) or None
         self._models = {
             "summary": os.environ["WATCH_NEWS_SUMMARY_MODEL"],
             "analyze": os.environ["WATCH_NEWS_ANALYZE_MODEL"],
@@ -103,6 +107,8 @@ class OpenAICompatibleClient(Client):
         return (response.choices[0].message.content or "").strip()
 
     def forced_tool_call(self, task, anthropic_model, prompt, tool, max_tokens):
+        if task == "analyze" and self._analyze_max_tokens:
+            max_tokens = self._analyze_max_tokens
         try:
             return self._forced_tool_call(self._models[task], prompt, tool, max_tokens)
         except Exception as e:
