@@ -1,0 +1,646 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-06</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-06 17:06 CET · 34 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 34 new articles — 7 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 7 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 5 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 4 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 3 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 3 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, 3 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, and 2 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Serica&#39;s 8315 Golden Green GMT and Piaget&#39;s Andy Warhol Camouflage dominated today&#39;s coverage, each appearing across four outlets.
+          
+            <span class="bullet-links"><a href="https://wornandwound.com/serica-introduces-the-8315-3-golden-green-travel-chronometer/" target="_blank" rel="noopener">Worn &amp; Wound</a><span class="sep">·</span><a href="https://watchesbysjx.com/2026/11/piaget-andy-warhol-camouflage.html" target="_blank" rel="noopener">SJX</a><span class="sep">·</span><a href="https://timeandtidewatches.com/piaget-andy-warhol-watch-camouflage-limited-edition-video/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Breguet added a platinum case to its GPHG-winning Classique Souscription and updated the Marine line with new guilloché dials.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/breguet-classique-souscription-platinum-2026pt-review-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://www.fratellowatches.com/introducing-the-breguet-classique-souscription-in-platinum/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://www.fratellowatches.com/video-hands-on-with-the-new-breguet-marine-collection/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          Omega silently introduced blue and brown ceramic Seamaster Diver 300M models, while Louis Vuitton launched a hardened-steel Tambour Convergence at $25,200.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/omega-silently-introduces-two-new-seamaster-diver-300m-models-in-blue-and-brown-ceramic/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://www.hodinkee.com/articles/louis-vuitton-tambour-convergence-mirror-steel" target="_blank" rel="noopener">Hodinkee</a></span>
+          
+        </li>
+      
+        <li>
+          William Massena and Louis Westphalen-Lemaitre debuted Ateliers Associés, a new business incubator for independent watchmakers.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/ateliers-associes-brings-the-business-incubator-concept-to-independent-watchmaking" target="_blank" rel="noopener">Hodinkee</a></span>
+          
+        </li>
+      
+        <li>
+          Casio unveiled its first purely analog G-Shock with the 2500 Series, and Andersen Genève released a Concorde-themed platinum worldtimer.
+          
+            <span class="bullet-links"><a href="https://revolutionwatch.com/casios-power-move/" target="_blank" rel="noopener">Revolution</a><span class="sep">·</span><a href="https://monochrome-watches.com/introducing-andesen-geneve-communication-45-supersonic-london-edition-concorde-a-schild-worldtimer-specs-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">Ateliers Associés independent watchmaking incubator launch</div>
+        <p class="note">Industry veterans William Massena and Louis Westphalen-Lemaitre launched Ateliers Associés, a business incubator providing funding and infrastructure to independent watchmakers in exchange for minority equity, with the first project by Mickaël Gaspar to be revealed November 12 at IAMWATCH in Singapore.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/ateliers-associes-brings-the-business-incubator-concept-to-independent-watchmaking" target="_blank" rel="noopener">Hodinkee: Business News: Ateliers Associés Brings The Business Incubator Concept To Independent Watchmaking</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Watches of Switzerland to host 2026 GPHG winners exhibition</div>
+        <p class="note">Watches of Switzerland will host the first public exhibition of the 2026 Grand Prix d&#39;Horlogerie de Genève winners at its Knightsbridge showroom from November 19 to 23, 2026.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/watches-of-switzerland-2026-gphg-winners-in-london-first" target="_blank" rel="noopener">Hodinkee: In Partnership - Happenings: Watches of Switzerland to Host First Public Exhibit of 2026 GPHG Winners In London</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Andersen Genève — Communication 45 Supersonic London</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            
+            
+            <li>Case material: Platinum</li>
+            <li>Cloisonné enamel dial depicting Concorde over Tower Bridge</li><li>Worldtimer</li><li>Recessed crowns</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/introducing-andesen-geneve-communication-45-supersonic-london-edition-concorde-a-schild-worldtimer-specs-price/" target="_blank" rel="noopener">Monochrome: Introducing – The Andersen Geneve Communication 45 Supersonic London Takes Flight</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Breguet — Classique Souscription Platinum</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: Hand-wound, VS00</li>
+            
+            <li>Case material: 950 platinum</li>
+            <li>Single-hand display</li><li>White grand feu enamel dial with blue petit feu enamel numerals and signature</li>
+            <li>Price: €68,000 / CHF 58,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/introducing-the-breguet-classique-souscription-in-platinum/" target="_blank" rel="noopener">Fratello: Introducing: The Breguet Classique Souscription In Platinum</a><a href="https://monochrome-watches.com/breguet-classique-souscription-platinum-2026pt-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Breguet Classique Souscription, now in Platinum</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Briston — Clubmaster Legend Compressor</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            
+            <li>Water resistance: 200m</li>
+            <li>Case material: Polished steel or tortoiseshell cellulose acetate</li>
+            <li>Dual-crown super-compressor layout</li><li>Bidirectional inner bezel</li><li>Cushion-shaped case</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/briston-new-clubmaster-legend-compressor-collection-in-steel-and-acetate-accessible-automatic-dive-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Briston Presents the New Clubmaster Legend Compressor Collection in Steel and Signature Acetate</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Casio — G-Shock 2500 Series</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: New shock-resistant analog movement</li>
+            
+            
+            <li>First purely analog G-Shock with no digital display</li><li>Small seconds sub-dial</li><li>Magnetic holding structure for hand stability</li><li>Full-auto calendar</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/casios-power-move/" target="_blank" rel="noopener">Revolution: Casio’s Power Move</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Fossil — Signature CS-1</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Swiss-made</li><li>Launched in Jaipur with brand ambassador Prince Sawai Padmanabh Singh</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/fossil-launches-premium-signature-cs-1-swiss-made-watch-collection-with-royal-descendants-in-historic-jaipur-india/" target="_blank" rel="noopener">aBlogtoWatch: Fossil Launches Premium ‘Signature’ CS-1 Swiss-Made Watch Collection With Royal Descendants In Historic Jaipur, India</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Louis Vuitton — Tambour Convergence Mirror Steel</div>
+        
+          <ul class="specs">
+            <li>Size: 37mm</li>
+            <li>Movement: Automatic, Cal. LFT MA01.01</li>
+            
+            <li>Case material: Proprietary hardened stainless steel</li>
+            <li>Dragging hour and minute discs displayed via an arched aperture</li><li>1,130 Vickers hardness rating</li>
+            <li>Price: $25,200</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/louis-vuitton-tambour-convergence-mirror-steel" target="_blank" rel="noopener">Hodinkee: Introducing: Louis Vuitton Tambour Convergence Mirror Steel</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Nomos Glashütte — Club Sport Neomatik 34 All Silver</div>
+        
+          <ul class="specs">
+            <li>Size: 34mm</li>
+            <li>Movement: Automatic, DUW 3001</li>
+            <li>Water resistance: 200m</li>
+            <li>Case material: Stainless steel</li>
+            <li>Silver-plated sunburst dial</li><li>Rhodium-plated hands</li><li>Available with sapphire or solid steel caseback</li>
+            <li>Price: EUR 2,720–EUR 3,020</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/nomos-club-sport-neomatik-34-all-silver-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The New, Monochromatic Nomos Club Sport Neomatik 34 All Silver</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Omega — Seamaster Diver 300M (Blue and Brown Ceramic)</div>
+        
+          <ul class="specs">
+            <li>Size: 43.5mm</li>
+            <li>Movement: Co-Axial Master Chronometer Caliber 8806</li>
+            
+            <li>Case material: Ceramic with Grade 5 titanium or 18K Sedna Gold accents</li>
+            <li>Blue ceramic case and dial with Grade 5 titanium</li><li>Brown ceramic with 18K Sedna Gold accents</li><li>Curved-end rubber straps</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/omega-silently-introduces-two-new-seamaster-diver-300m-models-in-blue-and-brown-ceramic/" target="_blank" rel="noopener">Fratello: Omega Silently Introduces Two New Seamaster Diver 300M Models In Blue And Brown Ceramic</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Piaget — Andy Warhol &#34;Camouflage&#34; Limited Edition</div>
+        
+          <ul class="specs">
+            <li>Size: 45mm</li>
+            <li>Movement: Automatic, Cal. 501P1</li>
+            
+            <li>Case material: White gold</li>
+            <li>Dial composed of 27 pieces of sodalite, turquoise, yellow gold, and rose gold</li><li>Limited to 86 pieces</li><li>Marquetry dial inspired by Warhol&#39;s 1986 self-portraits</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/piaget-andy-warhol-camouflage-limited-edition-watch/" target="_blank" rel="noopener">Fratello: Introducing: The Piaget Andy Warhol “Camouflage” Limited Edition</a><a href="https://monochrome-watches.com/piaget-andy-warhol-camouflage-limited-edition-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The New Piaget Andy Warhol Camouflage, A Dial Made of Art</a><a href="https://watchesbysjx.com/2026/11/piaget-andy-warhol-camouflage.html" target="_blank" rel="noopener">SJX: Magnificent Marquetry: Piaget’s Andy Warhol ‘Camouflage’</a><a href="https://timeandtidewatches.com/piaget-andy-warhol-watch-camouflage-limited-edition-video/" target="_blank" rel="noopener">Time+Tide: Piaget introduces its second Andy Warhol Watch Limited Edition</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Praesidus — Montar Ranger Ana-Digi and GMT</div>
+        
+          <ul class="specs">
+            <li>Size: 44mm (Ana-Digi), 43mm (GMT)</li>
+            
+            <li>Water resistance: 100m</li>
+            <li>Case material: Matte black steel (Ana-Digi), polycarbonate (GMT)</li>
+            <li>Ana-Digi with compass bezel and digital display</li><li>GMT with bold high-contrast colorways</li><li>Sapphire-coated mineral glass</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/introducing-the-praesidus-montar-ranger-ana-digi-and-gmt/" target="_blank" rel="noopener">Worn &amp; Wound: Introducing the Praesidus Montar Ranger Ana-Digi and GMT</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Serica — 8315 Travel Chronometer Golden Green</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Automatic, Soprod Calibre C125 (COSC-certified)</li>
+            <li>Water resistance: 200m</li>
+            <li>Case material: Stainless steel</li>
+            <li>Dark olive green enamel dial</li><li>Asymmetric AM/PM scale</li><li>Two-tone ceramic bezel in golden green and ivory</li><li>Caller GMT functionality</li>
+            <li>Price: €2,090</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/the-new-serica-travel-chronometer-golden-green-ref-8315-3/" target="_blank" rel="noopener">Monochrome: First Look – The New Serica Travel Chronometer Golden Green Ref. 8315-3</a><a href="https://timeandtidewatches.com/serica-ref8315-03-golden-green-introducing/" target="_blank" rel="noopener">Time+Tide: Serica preps its Travel Chronometer for the golden hour with the new Golden Green Ref. 8315-03</a><a href="https://wornandwound.com/serica-introduces-the-8315-3-golden-green-travel-chronometer/" target="_blank" rel="noopener">Worn &amp; Wound: Serica Introduces the 8315-3 Golden Green Travel Chronometer</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Trafford Watch Co. — Violet Crown</div>
+        
+          <ul class="specs">
+            <li>Size: 39.5mm</li>
+            <li>Movement: Automatic, modified Miyota 9075</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Blue-to-pink gradient dial inspired by Austin sunsets</li><li>Limited to 200 numbered pieces</li>
+            <li>Price: US$799</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/trafford-violet-crown-introducing/" target="_blank" rel="noopener">Time+Tide: The Trafford Violet Crown captures the spectacular sunsets of Austin, Texas</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Yema — Senans Grand Lune</div>
+        
+          <ul class="specs">
+            <li>Size: 38.5mm</li>
+            <li>Movement: Automatic, CMM.20 micro-rotor</li>
+            
+            <li>Case material: Steel</li>
+            <li>Moon phase complication using rotating mechanical bilobe</li><li>3D luminous moon sculpted from Grade X Super-LumiNova</li><li>Slim 8.70mm thickness</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/yema-senans-grand-lune-cmm-22-micro-rotor-new-dress-watch-collection-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Yema Unveils a New Dress Watch Collection with the Senans Grand Lune CMM.22</a><a href="https://timeandtidewatches.com/yema-senans-grande-lune-cmm-22-hands-on/" target="_blank" rel="noopener">Time+Tide: Yema reaches for the Moon with the new Senans Grande Lune CMM.22</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Briston — Clubmaster Legend Compressor</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/briston-new-clubmaster-legend-compressor-collection-in-steel-and-acetate-accessible-automatic-dive-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Briston Presents the New Clubmaster Legend Compressor Collection in Steel and Signature Acetate</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Praesidus — Montar Ranger Ana-Digi and GMT</div>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/introducing-the-praesidus-montar-ranger-ana-digi-and-gmt/" target="_blank" rel="noopener">Worn &amp; Wound: Introducing the Praesidus Montar Ranger Ana-Digi and GMT</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Serica — 8315 Travel Chronometer Golden Green</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/the-new-serica-travel-chronometer-golden-green-ref-8315-3/" target="_blank" rel="noopener">Monochrome: First Look – The New Serica Travel Chronometer Golden Green Ref. 8315-3</a><a href="https://timeandtidewatches.com/serica-ref8315-03-golden-green-introducing/" target="_blank" rel="noopener">Time+Tide: Serica preps its Travel Chronometer for the golden hour with the new Golden Green Ref. 8315-03</a><a href="https://wornandwound.com/serica-introduces-the-8315-3-golden-green-travel-chronometer/" target="_blank" rel="noopener">Worn &amp; Wound: Serica Introduces the 8315-3 Golden Green Travel Chronometer</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Trafford Watch Co. — Violet Crown</div>
+        <p class="note">Limited to 200 numbered pieces</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/trafford-violet-crown-introducing/" target="_blank" rel="noopener">Time+Tide: The Trafford Violet Crown captures the spectacular sunsets of Austin, Texas</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Andersen Genève — Communication 45 Supersonic London</div>
+        <p class="note">Platinum worldtimer with cloisonné enamel dial commemorating Concorde</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/introducing-andesen-geneve-communication-45-supersonic-london-edition-concorde-a-schild-worldtimer-specs-price/" target="_blank" rel="noopener">Monochrome: Introducing – The Andersen Geneve Communication 45 Supersonic London Takes Flight</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">JM Fleury — Chronograph Openwork</div>
+        <p class="note">Titanium case with sapphire dial, hand-wound FM04 calibre based on Lemania 2310, CHF 59,000</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/jm-fleury-chronograph-openwork.html" target="_blank" rel="noopener">SJX: Hands On: JM Fleury Chronograph Openwork</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Breguet</div>
+        <p class="models">Classique Souscription Platinum, Marine Collection 5517/5527</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/video-hands-on-with-the-new-breguet-marine-collection/" target="_blank" rel="noopener">Fratello: [Video] Hands-On With The New Breguet Marine Collection</a><a href="https://www.fratellowatches.com/introducing-the-breguet-classique-souscription-in-platinum/" target="_blank" rel="noopener">Fratello: Introducing: The Breguet Classique Souscription In Platinum</a><a href="https://monochrome-watches.com/breguet-classique-souscription-platinum-2026pt-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Breguet Classique Souscription, now in Platinum</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Bulova</div>
+        <p class="models">A-11 &#34;Jimmy&#34;</p>
+        <div class="links">
+          <a href="https://wornandwound.com/review/review-the-bulova-a-11-jimmy/" target="_blank" rel="noopener">Worn &amp; Wound: Review: the Bulova A-11 “Jimmy”</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Casio</div>
+        <p class="models">G-Shock 2500 Series</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/casios-power-move/" target="_blank" rel="noopener">Revolution: Casio’s Power Move</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Fossil</div>
+        <p class="models">Everett 42mm Automatic, Everett 44mm Chronograph, Harlow 33mm, Machine Chronograph, Signature CS-1</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/fossil-launches-premium-signature-cs-1-swiss-made-watch-collection-with-royal-descendants-in-historic-jaipur-india/" target="_blank" rel="noopener">aBlogtoWatch: Fossil Launches Premium ‘Signature’ CS-1 Swiss-Made Watch Collection With Royal Descendants In Historic Jaipur, India</a><a href="https://www.ablogtowatch.com/celebrate-the-holiday-season-with-a-curated-selection-of-watches-from-fossil/" target="_blank" rel="noopener">aBlogtoWatch: Celebrate The Holiday Season With A Curated Selection Of Watches From FOSSIL</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Louis Vuitton</div>
+        <p class="models">Tambour Convergence Mirror Steel</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/louis-vuitton-tambour-convergence-mirror-steel" target="_blank" rel="noopener">Hodinkee: Introducing: Louis Vuitton Tambour Convergence Mirror Steel</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Nomos Glashütte</div>
+        <p class="models">Club Sport Neomatik 34 All Silver, Tangente Neomatik Platinum Gray</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/nomos-club-sport-neomatik-34-all-silver-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The New, Monochromatic Nomos Club Sport Neomatik 34 All Silver</a><a href="https://www.fratellowatches.com/why-i-bought-a-nomos-tangente-neomatik-platinum-gray/" target="_blank" rel="noopener">Fratello: Why I Finally Bought A Nomos: The Tangente Neomatik Platinum Gray</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Omega</div>
+        <p class="models">Seamaster Diver 300M Blue Ceramic, Seamaster Diver 300M Brown Ceramic</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/omega-silently-introduces-two-new-seamaster-diver-300m-models-in-blue-and-brown-ceramic/" target="_blank" rel="noopener">Fratello: Omega Silently Introduces Two New Seamaster Diver 300M Models In Blue And Brown Ceramic</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Piaget</div>
+        <p class="models">Andy Warhol &#34;Camouflage&#34; Limited Edition</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/piaget-andy-warhol-camouflage-limited-edition-watch/" target="_blank" rel="noopener">Fratello: Introducing: The Piaget Andy Warhol “Camouflage” Limited Edition</a><a href="https://monochrome-watches.com/piaget-andy-warhol-camouflage-limited-edition-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The New Piaget Andy Warhol Camouflage, A Dial Made of Art</a><a href="https://watchesbysjx.com/2026/11/piaget-andy-warhol-camouflage.html" target="_blank" rel="noopener">SJX: Magnificent Marquetry: Piaget’s Andy Warhol ‘Camouflage’</a><a href="https://timeandtidewatches.com/piaget-andy-warhol-watch-camouflage-limited-edition-video/" target="_blank" rel="noopener">Time+Tide: Piaget introduces its second Andy Warhol Watch Limited Edition</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Rolex</div>
+        <p class="models">Day-Date</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/rolex-day-date-explained-a-beginners-guide-diving-deep/" target="_blank" rel="noopener">Revolution: Rolex Day-Date Explained: A Beginner’s Guide | Diving Deep</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Sinn</div>
+        <p class="models">140 A S Anniversary</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-top-5-watches-released-in-october-2026/" target="_blank" rel="noopener">Fratello: The Top 5 Watches Released In October 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tutima</div>
+        <p class="models">Patria 6612</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/sporty-classicism-from-glashutte-review-of-the-titanium-tutima-patria-6612-watch-with-in-house-movement/" target="_blank" rel="noopener">aBlogtoWatch: Sporty Classicism From Glashütte: Review Of The Titanium Tutima Patria 6612 Watch With In-House Movement</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Yema</div>
+        <p class="models">Senans Grand Lune CMM.22</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/yema-senans-grand-lune-cmm-22-micro-rotor-new-dress-watch-collection-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Yema Unveils a New Dress Watch Collection with the Senans Grand Lune CMM.22</a><a href="https://timeandtidewatches.com/yema-senans-grande-lune-cmm-22-hands-on/" target="_blank" rel="noopener">Time+Tide: Yema reaches for the Moon with the new Senans Grande Lune CMM.22</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
