@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-10</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-10 17:02 CET · 25 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 25 new articles — 5 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 5 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 4 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 3 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 3 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>, 3 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, 1 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, and 1 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          MB&amp;F’s Gabriel Colliard LM101 cloisonné trilogy dominates coverage across Hodinkee, Monochrome, Time+Tide, and SJX.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/mbandf-lm101-gabriel-colliard" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://monochrome-watches.com/mbf-trilogy-lm101-by-gabriel-colliard-cloisonne-enamel-dials-introducing-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://timeandtidewatches.com/mbf-lm101-gabriel-colliard-introducing/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Vacheron Constantin’s new grey-dial Fiftysix Self-Winding and Complete Calendar draw attention from three outlets.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/intro-vacheron-fiftysix" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://www.fratellowatches.com/introducing-two-new-vacheron-constantin-fiftysix-watches-with-tuxedo-dials/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://monochrome-watches.com/vacheron-constantin-fiftysix-self-winding-and-fiftysix-complete-calendar-2026-updated-steel-case-two-tone-dials-introducing-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Casio reimagines the square G-Shock as the fully analog 2500 series with shock-absorbing hands.
+          
+            <span class="bullet-links"><a href="https://revolutionwatch.com/the-g-shock-2500-gives-a-familiar-favorite-a-new-set-of-hands/" target="_blank" rel="noopener">Revolution</a></span>
+          
+        </li>
+      
+        <li>
+          Laurent Ferrier conceals the tourbillon on its new Grand Sport Tourbillon Iceberg for quiet-luxury appeal.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/laurent-ferrier-grand-sport-tourbillon-iceberg-cool-and-concealed/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          Debut and indie highlights include Albishorn’s Voisin Aérosport, Auret’s Mederi, and Ming’s 37mm 51.01 Halo.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/albishorn-voisin-aerosport-retro-futuristic-chronometer-dress-watch-sector-dial-review-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://monochrome-watches.com/auret-mederi-independent-automatic-watch-concentric-dial-from-colombia-first-look-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://wornandwound.com/mings-newest-model-blends-classic-dress-watch-principles-with-the-brands-instantly-recognizable-design-language/" target="_blank" rel="noopener">Worn &amp; Wound</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    <p class="empty">No business news today.</p>
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Albishorn — Voisin Aerosport</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: Hand-wound AMT-based chronometer caliber</li>
+            
+            
+            <li>Layered sector dial</li><li>Asymmetric seconds hand</li><li>Art Deco/retro-futuristic design inspired by Gabriel Voisin</li>
+            <li>Price: Under CHF 4,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/albishorn-voisin-aerosport-retro-futuristic-chronometer-dress-watch-sector-dial-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Voisin Aerosport, Albishorn’s Retro-Futuristic Take on the Dress Watch</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Awake — Sơn Mài Silver Leaf Vignette</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            
+            <li>Water resistance: 100m</li>
+            <li>Case material: Stainless steel</li>
+            <li>Gradient vignette dials with Vietnamese lacquer and silver leaf</li><li>Limited-edition Purple Viola (200 pieces)</li><li>Permanent Indian Red variant</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-awake-son-mai-collection-adds-bold-silver-leaf-vignette-dials/" target="_blank" rel="noopener">Fratello: The Awake Sơn Mài Collection Adds Bold Silver Leaf Vignette Dials</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Casio — G-Shock 2500</div>
+        
+          <ul class="specs">
+            
+            
+            
+            <li>Case material: Resin (GAC-2500) and stainless steel (GMC-2500)</li>
+            <li>Fully analog square case based on DW-5000C</li><li>Multi-Mission Date window</li><li>Magnetic Shock Release Hand</li><li>Nine versions across resin and steel lines</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/the-g-shock-2500-gives-a-familiar-favorite-a-new-set-of-hands/" target="_blank" rel="noopener">Revolution: The G-Shock 2500 Gives a Familiar Favorite a New Set of Hands</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Laurent Ferrier — Grand Sport Tourbillon Iceberg</div>
+        
+          <ul class="specs">
+            <li>Size: 44mm</li>
+            <li>Movement: LF619.01</li>
+            <li>Water resistance: 100m</li>
+            <li>Case material: Grade 5 titanium</li>
+            <li>Concealed tourbillon visible only through caseback</li><li>Opaline white dial with ice-blue gradients</li><li>Integrated bracelet</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/laurent-ferrier-grand-sport-tourbillon-iceberg-cool-and-concealed/" target="_blank" rel="noopener">Fratello: Laurent Ferrier Grand Sport Tourbillon Iceberg: Cool And Concealed</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">MB&amp;F — LM101 Gabriel Colliard</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            
+            
+            <li>Case material: Platinum</li>
+            <li>Cloisonné enamel jungle scenes by Gabriel Colliard</li><li>Limited to 24 pieces total (8 per design)</li><li>Artwork integrated into dial and ratchet wheel</li><li>Modified architecture with thinned dial plate and extended hands</li>
+            <li>Price: $131,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/mbandf-lm101-gabriel-colliard" target="_blank" rel="noopener">Hodinkee: Introducing: The MB&amp;F LM101 Gets A Cloisonné Twist With Enamel Artist Gabriel Colliard</a><a href="https://monochrome-watches.com/mbf-trilogy-lm101-by-gabriel-colliard-cloisonne-enamel-dials-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – MB&amp;F Releases a Trilogy of LM101s Transformed by Gabriel Colliard into Enamel Jungles</a><a href="https://timeandtidewatches.com/mbf-lm101-gabriel-colliard-introducing/" target="_blank" rel="noopener">Time+Tide: MB&amp;F makes room for Gabriel Colliard’s miniature enamel jungles in the LM101</a><a href="https://watchesbysjx.com/2026/11/mbf-lm101-gabriel-colliard-cloisonne-enamel.html" target="_blank" rel="noopener">SJX: MB&amp;F Taps Cloisonné Artist Gabriel Colliard for LM101</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Ming — 51.01 Halo</div>
+        
+          <ul class="specs">
+            <li>Size: 37mm</li>
+            <li>Movement: Manual-winding La Joux-Perret caliber</li>
+            
+            <li>Case material: Crystallized grade-5 titanium</li>
+            <li>90-hour power reserve</li><li>Contemporary dress watch design</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/mings-newest-model-blends-classic-dress-watch-principles-with-the-brands-instantly-recognizable-design-language/" target="_blank" rel="noopener">Worn &amp; Wound: Ming’s Newest Model Blends Classic Dress Watch Principles with the Brand’s Instantly Recognizable Design Language</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Vacheron Constantin — Fiftysix Complete Calendar</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            
+            
+            <li>Case material: Stainless steel</li>
+            <li>Two-tone grey dégradé dial</li><li>Geneva Seal-certified</li><li>Complete Calendar complication</li><li>Anthracite nubuck leather strap</li>
+            <li>Price: $33,900</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/intro-vacheron-fiftysix" target="_blank" rel="noopener">Hodinkee: Introducing: Vacheron Constantin Fiftysix Self-Winding And FiftySix Complete Calendar</a><a href="https://www.fratellowatches.com/introducing-two-new-vacheron-constantin-fiftysix-watches-with-tuxedo-dials/" target="_blank" rel="noopener">Fratello: Introducing: Two New Vacheron Constantin Fiftysix Watches With Tuxedo Dials</a><a href="https://monochrome-watches.com/vacheron-constantin-fiftysix-self-winding-and-fiftysix-complete-calendar-2026-updated-steel-case-two-tone-dials-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Vacheron Constantin Upgrades its Fiftysix with New Two-Tone Dials and Steel Cases</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Vacheron Constantin — Fiftysix Self-Winding</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            
+            
+            <li>Case material: Stainless steel</li>
+            <li>Two-tone grey dégradé dial</li><li>Anthracite nubuck leather strap</li>
+            <li>Price: $14,300</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/intro-vacheron-fiftysix" target="_blank" rel="noopener">Hodinkee: Introducing: Vacheron Constantin Fiftysix Self-Winding And FiftySix Complete Calendar</a><a href="https://www.fratellowatches.com/introducing-two-new-vacheron-constantin-fiftysix-watches-with-tuxedo-dials/" target="_blank" rel="noopener">Fratello: Introducing: Two New Vacheron Constantin Fiftysix Watches With Tuxedo Dials</a><a href="https://monochrome-watches.com/vacheron-constantin-fiftysix-self-winding-and-fiftysix-complete-calendar-2026-updated-steel-case-two-tone-dials-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Vacheron Constantin Upgrades its Fiftysix with New Two-Tone Dials and Steel Cases</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Yema — Senans Grande Lune CMM.22</div>
+        
+          <ul class="specs">
+            <li>Size: 38.5mm</li>
+            <li>Movement: In-house micro-rotor caliber</li>
+            
+            
+            <li>First moonphase model</li><li>Grade X Super-LumiNova moon disc</li><li>New collection debut</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-yema-senans-grande-lune-cmm-22-limited-edition/" target="_blank" rel="noopener">Fratello: Shooting For The Moon With The Yema Senans Grande Lune CMM.22 Limited Edition</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Albishorn — Voisin Aerosport</div>
+        <p class="note">First time-only model, retro-futuristic/Art Deco dress chronometer inspired by Gabriel Voisin. 38mm hand-wound AMT-based chronometer with layered sector dial and asymmetric seconds hand. Priced under CHF 4,000.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/albishorn-voisin-aerosport-retro-futuristic-chronometer-dress-watch-sector-dial-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Voisin Aerosport, Albishorn’s Retro-Futuristic Take on the Dress Watch</a><a href="https://wornandwound.com/review/review-the-albishorn-voisin-aerosport-imagines-an-art-deco-watch-that-never-was/" target="_blank" rel="noopener">Worn &amp; Wound: Review: The Albishorn Voisin Aérosport Imagines an Art Deco Watch That Never Was</a><a href="https://watchesbysjx.com/2026/11/albishorn-voisin-aerosport.html" target="_blank" rel="noopener">SJX: Albishorn’s Voisin Aérosport is a Time-Only Time Machine</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Auret — Mederi</div>
+        <p class="note">Debut watch from a Colombian independent brand. 40mm steel case with a dodecagonal bezel and concentric ripple-textured dial. Decorated Sellita SW260 automatic; priced at EUR 1,750.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/auret-mederi-independent-automatic-watch-concentric-dial-from-colombia-first-look-price/" target="_blank" rel="noopener">Monochrome: First Look – Auret Mederi, A Distinctive Debut Watch from a Colombian Independent Brand</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Awake — Sơn Mài Silver Leaf Vignette</div>
+        <p class="note">Expanded collection with four gradient vignette dials using Vietnamese lacquer and silver leaf; Purple Viola limited to 200 pieces and a permanent Indian Red variant. Redesigned 38mm steel case with 100m WR and Maison Jean Rousseau straps.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-awake-son-mai-collection-adds-bold-silver-leaf-vignette-dials/" target="_blank" rel="noopener">Fratello: The Awake Sơn Mài Collection Adds Bold Silver Leaf Vignette Dials</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Venezianico — Nereide Opale Blu</div>
+        <p class="note">Limited-edition diver with a lab-grown blue opal dial, new Sansovino bracelet, exhibition caseback, and mirrored tungsten bezel. 42mm case.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/venezianico-nereide-opale-blu-decorative-diver-watch-review/" target="_blank" rel="noopener">aBlogtoWatch: Venezianico Nereide Opale Blu Decorative Diver Watch Review</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Laurent Ferrier — Grand Sport Tourbillon Iceberg</div>
+        <p class="note">Grade 5 titanium 44mm case with opaline white dial and ice-blue gradients. The LF619.01 tourbillon is concealed from the dial side and visible only through the sapphire caseback. 100m water resistance with integrated bracelet.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/laurent-ferrier-grand-sport-tourbillon-iceberg-cool-and-concealed/" target="_blank" rel="noopener">Fratello: Laurent Ferrier Grand Sport Tourbillon Iceberg: Cool And Concealed</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">MB&amp;F — LM101 Gabriel Colliard</div>
+        <p class="note">Trilogy of limited editions (24 pieces total; eight each of red macaw, blue monkey, and green crocodile) in 40mm platinum with cloisonné enamel jungle scenes integrated into the dial and ratchet wheel. Dial plate thinned and hands extended to accommodate the enamel work. Priced at $131,000.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/mbandf-lm101-gabriel-colliard" target="_blank" rel="noopener">Hodinkee: Introducing: The MB&amp;F LM101 Gets A Cloisonné Twist With Enamel Artist Gabriel Colliard</a><a href="https://monochrome-watches.com/mbf-trilogy-lm101-by-gabriel-colliard-cloisonne-enamel-dials-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – MB&amp;F Releases a Trilogy of LM101s Transformed by Gabriel Colliard into Enamel Jungles</a><a href="https://timeandtidewatches.com/mbf-lm101-gabriel-colliard-introducing/" target="_blank" rel="noopener">Time+Tide: MB&amp;F makes room for Gabriel Colliard’s miniature enamel jungles in the LM101</a><a href="https://watchesbysjx.com/2026/11/mbf-lm101-gabriel-colliard-cloisonne-enamel.html" target="_blank" rel="noopener">SJX: MB&amp;F Taps Cloisonné Artist Gabriel Colliard for LM101</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ming — 51.01 Halo</div>
+        <p class="note">37mm dress watch in crystallized grade-5 titanium. Time-only display with a manually wound La Joux-Perret caliber and a 90-hour power reserve. Blends traditional proportions with Ming’s signature avant-garde material use.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/mings-newest-model-blends-classic-dress-watch-principles-with-the-brands-instantly-recognizable-design-language/" target="_blank" rel="noopener">Worn &amp; Wound: Ming’s Newest Model Blends Classic Dress Watch Principles with the Brand’s Instantly Recognizable Design Language</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Casio</div>
+        <p class="models">G-Shock 2500, GAC-2500, GMC-2500</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/the-g-shock-2500-gives-a-familiar-favorite-a-new-set-of-hands/" target="_blank" rel="noopener">Revolution: The G-Shock 2500 Gives a Familiar Favorite a New Set of Hands</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Jaeger-LeCoultre</div>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/jaeger-lecoultres-the-collectibles-capsule-news/" target="_blank" rel="noopener">Time+Tide: Jaeger-LeCoultre’s 8th “The Collectibles” capsule collection highlights the brand’s relationship with America</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Junghans</div>
+        <p class="models">Max Bill, Meister Chronoscope</p>
+        <div class="links">
+          <a href="https://wornandwound.com/junghans-takes-over-the-windup-watch-shop-showroom-for-a-saturday-open-house/" target="_blank" rel="noopener">Worn &amp; Wound: Junghans Takes Over the Windup Watch Shop Showroom for a Saturday Open House</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Omega</div>
+        <p class="models">18K gold golf-inspired Speedmaster, Speedmaster 38, Speedmaster Professional &#34;Reverse Panda&#34;</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-best-omega-speedmaster-of-2026/" target="_blank" rel="noopener">Fratello: The Best Omega Speedmaster Of 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Orient Star</div>
+        <p class="models">Skeleton 75th Anniversary</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/orient-star-skeleton-75th-anniversary-re-br0001n.html" target="_blank" rel="noopener">SJX: Hands On: Orient Star Skeleton 75th Anniversary</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Seiko</div>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/seiko-145th-anniversary-in-sydney-events/" target="_blank" rel="noopener">Time+Tide: 145 years of Seiko: A celebration of Japanese watchmaking on Sydney Harbour</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">TAG Heuer</div>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/tag-heuer-x-timetide-sign-up-now/" target="_blank" rel="noopener">Time+Tide: TAG Heuer x Time+Tide – SIGN UP NOW</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vacheron Constantin</div>
+        <p class="models">Fiftysix Complete Calendar, Fiftysix Self-Winding</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/intro-vacheron-fiftysix" target="_blank" rel="noopener">Hodinkee: Introducing: Vacheron Constantin Fiftysix Self-Winding And FiftySix Complete Calendar</a><a href="https://www.fratellowatches.com/introducing-two-new-vacheron-constantin-fiftysix-watches-with-tuxedo-dials/" target="_blank" rel="noopener">Fratello: Introducing: Two New Vacheron Constantin Fiftysix Watches With Tuxedo Dials</a><a href="https://monochrome-watches.com/vacheron-constantin-fiftysix-self-winding-and-fiftysix-complete-calendar-2026-updated-steel-case-two-tone-dials-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Vacheron Constantin Upgrades its Fiftysix with New Two-Tone Dials and Steel Cases</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Yema</div>
+        <p class="models">Senans Grande Lune CMM.22</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-yema-senans-grande-lune-cmm-22-limited-edition/" target="_blank" rel="noopener">Fratello: Shooting For The Moon With The Yema Senans Grande Lune CMM.22 Limited Edition</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
