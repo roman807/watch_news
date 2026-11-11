@@ -1,0 +1,714 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-11</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-11 17:08 CET · 26 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 26 new articles — 6 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 5 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 4 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 4 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, 3 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>, 2 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, and 2 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>.
+       No new articles from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>.
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Krayon&#39;s CHF 178k Anywhere Magnolia with hand-painted onyx dial earns coverage from Hodinkee and Monochrome.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/krayon-magnolia" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://monochrome-watches.com/krayon-anywhere-magnolia-artistic-dial-indie-watchmaking-sunrise-and-sunset-review/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Phillips exceeds $100 million at Geneva&#39;s fall auctions, while an F.P. Journe provenance controversy highlights shifting market geography.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/three-takeaways-from-the-geneva-fall-auction-season" target="_blank" rel="noopener">Hodinkee</a></span>
+          
+        </li>
+      
+        <li>
+          Panerai&#39;s new left-handed Destro and GMT Marina Militare models are spotlighted by Fratello and Monochrome.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/new-panerai-submersible-marina-militare-pam01757-destro-and-pam01758-gmt/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://monochrome-watches.com/panerai-submersible-marina-militare-gmt-pam01758-and-submersible-marina-militare-destro-pam01757-military-dive-watche-video-review-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Accessible jump hours launch from Maen (EUR 899, permanent collection) and Christopher Ward (sold-out 15th-anniversary edition).
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/maen-grand-tonneau-jump-hour-permanent-collection-accessible-automatic-jumping-hour-watch-review-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://www.ablogtowatch.com/christopher-ward-c1-jump-hour-xv-watch-review-15-years-of-the-jj01/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+        <li>
+          Revolution profiles a new wave of independents including Berneron and Takahiko Aigaki&#39;s debut tourbillon.
+          
+            <span class="bullet-links"><a href="https://revolutionwatch.com/the-future-of-independent-watchmaking/" target="_blank" rel="noopener">Revolution</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">Hodinkee Business of Watches Podcast: GPHG 2026 jury and winners</div>
+        <p class="note">Podcast explores the GPHG jury process, 2026 award winners, and the strategic impact of winning a prize.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-gpgh-jury-and-award-winners-with-senior-editor-mark-kauzlarich" target="_blank" rel="noopener">Hodinkee: The Business of Watches Podcast: The GPGH Jury And Award Winners With Senior Editor Mark Kauzlarich</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Geneva fall auction season takeaways</div>
+        <p class="note">Phillips exceeds $100 million with a 100% sell-through rate; controversy surrounds an F.P. Journe Pre-Production Résonance&#39;s provenance; market eyes a pivot toward New York.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/three-takeaways-from-the-geneva-fall-auction-season" target="_blank" rel="noopener">Hodinkee: Auctions: Three Big Takeaways From The Geneva Fall Auction Season</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Albishorn — Voisin Aérosport</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: Manual-wind, ALB04 M (COSC-certified)</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>COSC-certified</li><li>Multi-layered dial</li><li>Specialized two-sided seconds hand</li><li>Art Deco-inspired design</li><li>Classic silver and Ice Blue variants</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/introducing-albishorn-voisin-aerosport" target="_blank" rel="noopener">Hodinkee: Introducing: Albishorn&#39;s Second Model — The Voisin Aérosport (Live Pics)</a><a href="https://www.fratellowatches.com/introducing-the-albishorn-voisin-aerosport/" target="_blank" rel="noopener">Fratello: Introducing: The Albishorn Voisin Aérosport</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Angelier — Calatrava-Styled Dress Watch</div>
+        
+          <ul class="specs">
+            <li>Size: 37.2mm</li>
+            <li>Movement: Automatic, Miyota 9039</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Calatrava 96-inspired styling</li><li>Custom Breguet-style numerals</li><li>Four dial options</li><li>Kickstarter launch</li>
+            <li>Price: EUR 479</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/angelier-on-kickstarter-accessible-37mm-vintage-calatrava-automatic-dress-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Angelier Launches on Kickstarter with an Accessible Calatrava-Styled Dress Watch</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Breguet — Classique Souscription 2026</div>
+        
+          <ul class="specs">
+            
+            
+            
+            <li>Case material: Platinum</li>
+            <li>Navy blue petite feu enamel dial</li><li>Single-handed display</li><li>George Daniels-engraved signature</li>
+            <li>Price: US$76,600</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/breguet-classique-souscription-2026.html" target="_blank" rel="noopener">SJX: Breguet’s Classique Souscription Returns in Platinum</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Garrick — S8</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Manual-wind (60-hour power reserve)</li>
+            <li>Water resistance: 100m</li>
+            
+            <li>Skeletonized</li><li>Extreme hand-finishing of every visible component</li><li>Slim 8mm profile</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-garrick-s8/" target="_blank" rel="noopener">Fratello: Why The New Garrick S8 Might Be The Brand’s Best Watch Yet</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">H by Bohen — Plongeur 530</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Tribute to saturation diver Patrick Raude</li><li>1988 world record depth of 530m</li><li>Professional dive watch specifications</li>
+            <li>Price: Under €1,500</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/the-h-by-bohen-plongeur-530-pays-tribute-to-a-saturation-diving-legend/" target="_blank" rel="noopener">aBlogtoWatch: The H By Bohen Plongeur 530 Pays Tribute To A Saturation Diving Legend</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Horologically Unique — HU-02</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: Automatic, ETA 2824-2 with custom module</li>
+            
+            <li>Case material: Stainless steel or Naval brass</li>
+            <li>Rotating arrowhead and wandering hour aperture</li><li>Tribute to Robert Cart&#39;s Art Deco Chronoscope</li><li>Limited by production</li>
+            <li>Price: $3,850</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/horologically-unique-reintroduces-a-cult-classic-with-the-new-hu-02/" target="_blank" rel="noopener">Worn &amp; Wound: Horologically Unique Reintroduces a Cult Classic with the New HU-02</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Konstantin Chaykin — SC02C</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Chronograph (12-hour)</li>
+            
+            
+            <li>12-hour chronograph</li><li>High-legibility black dial</li><li>Two straps included (daily wear and space suit cuff)</li><li>Limited to 28 pieces</li><li>Developed for spacewalks</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/how-spacewalks-shaped-konstantin-chaykins-sc02c/" target="_blank" rel="noopener">Revolution: How Spacewalks Shaped Konstantin Chaykin’s SC02C</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Krayon — Anywhere Magnolia</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Manual-wind, Caliber C030</li>
+            
+            <li>Case material: Platinum</li>
+            <li>Hand-painted floral motif on black onyx dial</li><li>Adjustable sunrise and sunset display</li><li>Limited to 15 pieces</li>
+            <li>Price: CHF 178,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/krayon-magnolia" target="_blank" rel="noopener">Hodinkee: Introducing: The Krayon Anywhere Magnolia (Live Pics)</a><a href="https://monochrome-watches.com/krayon-anywhere-magnolia-artistic-dial-indie-watchmaking-sunrise-and-sunset-review/" target="_blank" rel="noopener">Monochrome: First Look – The Krayon Anywhere Magnolia, a new Artistic Take by The Indie Watchmaker</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Maen — Grand Tonneau Jump Hour</div>
+        
+          <ul class="specs">
+            <li>Size: 34mm</li>
+            <li>Movement: Automatic, modified Seagull ST1721</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Jumping-hour complication</li><li>Sapphire display caseback</li><li>Four vertically brushed dial colors</li><li>Permanent collection addition</li><li>Launches December 10, 2026</li>
+            <li>Price: EUR 899</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/maen-grand-tonneau-jump-hour-permanent-collection-accessible-automatic-jumping-hour-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Maen Grand Tonneau Jump Hour, now Part of the Permanent Collection</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Nomos Glashütte — Club Sport neomatik 34</div>
+        
+          <ul class="specs">
+            <li>Size: 34mm</li>
+            <li>Movement: Automatic, DUW 3001</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Monochromatic all-silver design</li><li>Silver-plated sunburst dial</li><li>Matching stainless steel bracelet</li>
+            <li>Price: $3,490</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/nomos-introduces-a-new-all-silver-version-of-the-club-sport-neomatik-34/" target="_blank" rel="noopener">Worn &amp; Wound: Nomos Introduces a New All Silver Version of the Club Sport Neomatik 34</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Panerai — Submersible Marina Militare PAM01757 Destro</div>
+        
+          <ul class="specs">
+            <li>Size: 44mm</li>
+            <li>Movement: Automatic P.980 (three-day power reserve)</li>
+            <li>Water resistance: 500m</li>
+            <li>Case material: Brushed steel</li>
+            <li>Left-sided crown (Destro configuration)</li><li>Matte black ceramic bezel insert</li><li>Matte black dial with beige Super-LumiNova</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-panerai-submersible-marina-militare-pam01757-destro-and-pam01758-gmt/" target="_blank" rel="noopener">Fratello: Discovering The New Panerai Submersible Marina Militare PAM01757 Destro And PAM01758 GMT</a><a href="https://monochrome-watches.com/panerai-submersible-marina-militare-gmt-pam01758-and-submersible-marina-militare-destro-pam01757-military-dive-watche-video-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Military-Inspired Panerai Marina Militare Submersible PAM01757 &amp; PAM01758 (Incl. Video)</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Panerai — Submersible Marina Militare PAM01758 GMT</div>
+        
+          <ul class="specs">
+            <li>Size: 44mm</li>
+            
+            <li>Water resistance: 500m</li>
+            <li>Case material: Brushed steel</li>
+            <li>GMT function</li><li>Matte black ceramic bezel insert</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-panerai-submersible-marina-militare-pam01757-destro-and-pam01758-gmt/" target="_blank" rel="noopener">Fratello: Discovering The New Panerai Submersible Marina Militare PAM01757 Destro And PAM01758 GMT</a><a href="https://monochrome-watches.com/panerai-submersible-marina-militare-gmt-pam01758-and-submersible-marina-militare-destro-pam01757-military-dive-watche-video-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Military-Inspired Panerai Marina Militare Submersible PAM01757 &amp; PAM01758 (Incl. Video)</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Renaud Tixier — Monday (Skeletonised)</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Automatic micro-rotor with platinum inertia flywheel and propulsion spring</li>
+            
+            
+            <li>Skeletonised dial</li><li>Micro-rotor winding with platinum inertia flywheel</li><li>Propulsion spring designed for subtle wrist movements</li><li>In-house finishing and architectural bridge work</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/renaud-tixier-skeletonises-the-monday/" target="_blank" rel="noopener">Revolution: Renaud Tixier Skeletonises the Monday</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Tangens — Komposition Automatic &#34;Storm&#34;</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: Automatic, Miyota 9039</li>
+            
+            <li>Case material: Steel</li>
+            <li>Matte velvet-like dials in dusty blue and dusty purple</li><li>1970s-inspired design</li>
+            <li>Price: EUR 469</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/the-accessible-tangens-komposition-automatic-storm-collection-in-dusty-blue-dusty-purple-first-look-price/" target="_blank" rel="noopener">Monochrome: First Look – The Accessible Tangens Komposition Automatic “Storm” Collection, in Dusty Blue &amp; Dusty Purple</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Urwerk — UR-101 Green Mamba</div>
+        
+          <ul class="specs">
+            <li>Size: 41mm</li>
+            <li>Movement: Automatic, UR-1.01V calibre</li>
+            
+            <li>Case material: Black PVD-coated steel</li>
+            <li>Wandering-hours complication</li><li>Emerald green minute scale</li><li>Limited to 50 pieces</li>
+            <li>Price: CHF 33,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/urwerk-ur-101-green-mamba-black-pvd-wandering-hour-watch-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The New Urwerk UR-101 Green Mamba</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Albishorn — Voisin Aérosport</div>
+        <p class="note">COSC-certified proprietary ALB04 M movement; Art Deco-inspired multi-layered dial with two-sided seconds hand.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/introducing-albishorn-voisin-aerosport" target="_blank" rel="noopener">Hodinkee: Introducing: Albishorn&#39;s Second Model — The Voisin Aérosport (Live Pics)</a><a href="https://www.fratellowatches.com/introducing-the-albishorn-voisin-aerosport/" target="_blank" rel="noopener">Fratello: Introducing: The Albishorn Voisin Aérosport</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Angelier — Calatrava-Styled Dress Watch</div>
+        <p class="note">37.2mm Miyota 9039 vintage-inspired dress watch on Kickstarter at EUR 479 with four dial options.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/angelier-on-kickstarter-accessible-37mm-vintage-calatrava-automatic-dress-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Angelier Launches on Kickstarter with an Accessible Calatrava-Styled Dress Watch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Garrick — S8</div>
+        <p class="note">39mm skeletonized manual-wind with 60h power reserve, 100m WR, and slim 8mm profile.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-garrick-s8/" target="_blank" rel="noopener">Fratello: Why The New Garrick S8 Might Be The Brand’s Best Watch Yet</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">H by Bohen — Plongeur 530</div>
+        <p class="note">Accessible saturation-dive tribute to Patrick Raude&#39;s 530m record; priced under €1,500.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/the-h-by-bohen-plongeur-530-pays-tribute-to-a-saturation-diving-legend/" target="_blank" rel="noopener">aBlogtoWatch: The H By Bohen Plongeur 530 Pays Tribute To A Saturation Diving Legend</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Horologically Unique — HU-02</div>
+        <p class="note">38mm ETA 2824-2 with custom wandering-hour module in steel or naval brass; $3,850, limited by production.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/horologically-unique-reintroduces-a-cult-classic-with-the-new-hu-02/" target="_blank" rel="noopener">Worn &amp; Wound: Horologically Unique Reintroduces a Cult Classic with the New HU-02</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Maen — Grand Tonneau Jump Hour</div>
+        <p class="note">34mm jumping-hour automatic at EUR 899; added to the permanent collection with four dial colors.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/maen-grand-tonneau-jump-hour-permanent-collection-accessible-automatic-jumping-hour-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Maen Grand Tonneau Jump Hour, now Part of the Permanent Collection</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tangens — Komposition Automatic &#34;Storm&#34;</div>
+        <p class="note">38mm Miyota 9039 with matte dusty blue and dusty purple dials; priced at EUR 469.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/the-accessible-tangens-komposition-automatic-storm-collection-in-dusty-blue-dusty-purple-first-look-price/" target="_blank" rel="noopener">Monochrome: First Look – The Accessible Tangens Komposition Automatic “Storm” Collection, in Dusty Blue &amp; Dusty Purple</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Artisans de Genève — Feather</div>
+        <p class="note">Bespoke 57g chronograph for Eliud Kipchoge featuring a Titalum case and Kenyan-flag colors.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/artisans-geneve-feather-eliud-kipchoge/" target="_blank" rel="noopener">Revolution: Beyond Limits with A Custom Creation for Eliud Kipchoge</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Berneron — Mirage</div>
+        <p class="note">Geometrically derived design highlighted in Revolution&#39;s survey of the new wave of independents.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/the-future-of-independent-watchmaking/" target="_blank" rel="noopener">Revolution: The Future of Independent Watchmaking</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Berneron — Quantième Annuel</div>
+        <p class="note">Intuitive annual calendar featured alongside the Mirage in Revolution&#39;s independents survey.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/the-future-of-independent-watchmaking/" target="_blank" rel="noopener">Revolution: The Future of Independent Watchmaking</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Konstantin Chaykin — SC02C</div>
+        <p class="note">Limited 28 chronograph developed for spacewalks with a daily strap and a space-suit cuff strap.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/how-spacewalks-shaped-konstantin-chaykins-sc02c/" target="_blank" rel="noopener">Revolution: How Spacewalks Shaped Konstantin Chaykin’s SC02C</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Krayon — Anywhere Magnolia</div>
+        <p class="note">CHF 178,000 platinum piece with hand-painted onyx dial and adjustable sunrise/sunset display; limited to 15.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/krayon-magnolia" target="_blank" rel="noopener">Hodinkee: Introducing: The Krayon Anywhere Magnolia (Live Pics)</a><a href="https://monochrome-watches.com/krayon-anywhere-magnolia-artistic-dial-indie-watchmaking-sunrise-and-sunset-review/" target="_blank" rel="noopener">Monochrome: First Look – The Krayon Anywhere Magnolia, a new Artistic Take by The Indie Watchmaker</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Renaud Tixier — Monday (Skeletonised)</div>
+        <p class="note">Skeletonised micro-rotor with platinum inertia flywheel and propulsion spring capturing subtle wrist motion.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/renaud-tixier-skeletonises-the-monday/" target="_blank" rel="noopener">Revolution: Renaud Tixier Skeletonises the Monday</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Takahiko Aigaki — Direct Impulse Tourbillon</div>
+        <p class="note">Debut watch combining a tourbillon with a natural escapement.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/the-future-of-independent-watchmaking/" target="_blank" rel="noopener">Revolution: The Future of Independent Watchmaking</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Urwerk — UR-101 Green Mamba</div>
+        <p class="note">CHF 33,000 black PVD steel wandering-hours watch with emerald green minute scale; limited to 50.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/urwerk-ur-101-green-mamba-black-pvd-wandering-hour-watch-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The New Urwerk UR-101 Green Mamba</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">A. Lange &amp; Söhne</div>
+        <p class="models">Datograph Perpetual ref. 410.136E</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/lange-datograph-perpetual-bracelet-diamonds-review.html" target="_blank" rel="noopener">SJX: Hands On: A. Lange &amp; Söhne Datograph Perpetual Bracelet and Diamonds</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Breguet</div>
+        <p class="models">Classique Souscription 2026</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/breguet-classique-souscription-2026.html" target="_blank" rel="noopener">SJX: Breguet’s Classique Souscription Returns in Platinum</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Christopher Ward</div>
+        <p class="models">C1 Jump Hour XV</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/christopher-ward-c1-jump-hour-xv-watch-review-15-years-of-the-jj01/" target="_blank" rel="noopener">aBlogtoWatch: Christopher Ward C1 Jump Hour XV Watch Review: 15 Years Of The JJ01</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Nomos Glashütte</div>
+        <p class="models">Club Sport neomatik 34</p>
+        <div class="links">
+          <a href="https://wornandwound.com/nomos-introduces-a-new-all-silver-version-of-the-club-sport-neomatik-34/" target="_blank" rel="noopener">Worn &amp; Wound: Nomos Introduces a New All Silver Version of the Club Sport Neomatik 34</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Panerai</div>
+        <p class="models">Submersible Marina Militare PAM01757 Destro, Submersible Marina Militare PAM01758 GMT</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-panerai-submersible-marina-militare-pam01757-destro-and-pam01758-gmt/" target="_blank" rel="noopener">Fratello: Discovering The New Panerai Submersible Marina Militare PAM01757 Destro And PAM01758 GMT</a><a href="https://monochrome-watches.com/panerai-submersible-marina-militare-gmt-pam01758-and-submersible-marina-militare-destro-pam01757-military-dive-watche-video-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Military-Inspired Panerai Marina Militare Submersible PAM01757 &amp; PAM01758 (Incl. Video)</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Seiko</div>
+        <p class="models">Astron GPS Solar SAST001</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/seiko-astron-gps-solar-sast001/" target="_blank" rel="noopener">Fratello: Seiko Astron GPS Solar SAST001: My Least Worn Watch And Why I Still Own It</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vacheron Constantin</div>
+        <p class="models">Fiftysix Complete Calendar, Fiftysix Self-Winding</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/vacheron-constantin-fiftysix.html" target="_blank" rel="noopener">SJX: Vacheron Constantin’s Fiftysix in Shades of Grey</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
