@@ -1,0 +1,834 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-13</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-13 17:03 CET · 55 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 55 new articles — 10 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 10 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 8 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 7 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 6 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, 6 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, 4 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, and 4 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          British microbrand Studio Underd0g launches its first automatic calendar, the 04Series, with retrograde date, moonphase, and weekend indicator for $1,100.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/studio-underd0g-04series-calendar" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://monochrome-watches.com/studio-underd0g-04series-calendar-collection-retrograde-date-weekend-indicator-new-seagull-movement-value-proposition-introducing-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://timeandtidewatches.com/studio-underd0g-04series-hands-on/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Zenith partners with American independent J.N. Shapiro on a 25-piece rose gold G.F.J. Calibre 135 featuring hand-cut guilloché.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/zenith-shapiro-collab" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://monochrome-watches.com/zenith-gfj-calibre-135-double-signed-with-jn-shapiro-guilloche-dial-by-american-independent-watchmaker-review-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://wornandwound.com/zenith-introduces-their-latest-in-the-double-signed-series-a-g-f-j-with-j-n-shapiro/" target="_blank" rel="noopener">Worn &amp; Wound</a></span>
+          
+        </li>
+      
+        <li>
+          TAG Heuer and Time+Tide reunite for a mechanical titanium Aquaracer Professional 300 Sundowner II limited to 500 pieces.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/time-tide-sundowner-ii" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://wornandwound.com/tag-heuer-and-timetide-reunite-for-the-aquaracer-sundowner-ii/" target="_blank" rel="noopener">Worn &amp; Wound</a></span>
+          
+        </li>
+      
+        <li>
+          Petermann Bédat introduces the 36.5mm platinum Reference 2914 monopusher with in-house Caliber 234 and jumping minutes.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/introducing-petermann-bedat-2914-chronograph" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://revolutionwatch.com/petermann-bedat-2914-chronograph-monopusher/" target="_blank" rel="noopener">Revolution</a></span>
+          
+        </li>
+      
+        <li>
+          Richemont posts strong H1 2026 results, with specialist watchmakers sales up 10% led by Vacheron Constantin, Jaeger-LeCoultre, and A. Lange &amp; Söhne.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/richemont-reports-strong-first-semester-2026-sales-up-by-17-industry-news/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">Richemont H1 2026 results</div>
+        <p class="note">Richemont reported a strong first semester for fiscal year 2026, with specialist watchmakers seeing a 10% sales increase at constant rates, led by Vacheron Constantin, Jaeger-LeCoultre, and A. Lange &amp; Söhne.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/richemont-reports-strong-first-semester-2026-sales-up-by-17-industry-news/" target="_blank" rel="noopener">Monochrome: Industry News – Richemont Reports Strong First Semester 2026, Sales up by 17%</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Patek Philippe Museum 25th Anniversary</div>
+        <p class="note">The Patek Philippe Museum celebrates its 25th anniversary with a special exhibition featuring a Nautilus retrospective and rare historical acquisitions.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/the-patek-philippe-museum-celebrates-its-25th-anniversary/" target="_blank" rel="noopener">Monochrome: Industry News – The Patek Philippe Museum Celebrates its 25th Anniversary</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ateliers Associés watchmaker incubator launch</div>
+        <p class="note">Industry veterans William Massena and Louis Westphalen-Lemaitre launched Ateliers Associés, an incubator providing funding and commercial infrastructure to independent watchmakers, debuting with Mickaël Gaspar.</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/ateliers-associes-mickael-gaspar-souscription.html" target="_blank" rel="noopener">SJX: Ateliers Associés Backs Mickaël Gaspar’s Souscription</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Anders &amp; Co — AC3 Lago</div>
+        
+          <ul class="specs">
+            
+            
+            
+            <li>Case material: 316L stainless steel</li>
+            <li>Rectangular dress watch</li><li>6.3mm thick</li><li>Five dial options</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/anders-co-ac3-lago-hands-on/" target="_blank" rel="noopener">Time+Tide: Anders &amp; Co goes rectangular with the ultra-slim AC3 Lago</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">ArtyA — Purity Curvy HMS Sapphire Sport Edition</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: &#34;Stairway to Heaven&#34; openworked</li>
+            
+            <li>Case material: Saphir Absolu</li>
+            <li>Tonneau-shaped sapphire case</li><li>Mid-air suspended balance wheel</li><li>Limited to 99 pieces</li>
+            <li>Price: $61,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/artya-purity-curvy-hms-sapphire-sport-edition-first-look-hands-on-price/" target="_blank" rel="noopener">Monochrome: First Look – ArtyA Presents the Purity Curvy HMS Sapphire Sport Edition</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Blancpain — Ladybird Colors Zodiaque</div>
+        
+          <ul class="specs">
+            <li>Size: 34.9mm</li>
+            <li>Movement: Ultra-thin automatic calibre 2653QZ</li>
+            
+            <li>Case material: White or red gold</li>
+            <li>Western zodiac display</li><li>Retrograde month</li><li>Off-center time</li><li>10.8mm thick</li>
+            <li>Price: Starting at $57,200</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/scorpio-rising-the-blancpain-ladybird-colors-zodiaque/" target="_blank" rel="noopener">Revolution: Scorpio Rising: The Blancpain Ladybird Colors Zodiaque</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Brellum — Duobox 39 TC Moonphase Chronometer</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Automatic BR-751 (Valjoux 7751-based), COSC-certified</li>
+            <li>Water resistance: 100m</li>
+            <li>Case material: Stainless steel</li>
+            <li>Blue sunray dial</li><li>Triple calendar with moonphase, pointer date, day/month windows</li><li>Limited to 46 pieces</li>
+            <li>Price: CHF 3,600</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-brellum-duobox-39-triple-calendar-moonphase-chronometer-returns-in-blue/" target="_blank" rel="noopener">Fratello: The Brellum Duobox 39 Triple Calendar Moonphase Chronometer Debuts In Blue</a><a href="https://monochrome-watches.com/brellum-duobox-39-tc-moonphase-chronometer-full-calendar-chronograph-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Brellum Duobox 39 TC Moonphase Chronometer</a><a href="https://www.ablogtowatch.com/new-release-limited-edition-brellum-duobox-39-tc-moonphase-chronometer-watch/" target="_blank" rel="noopener">aBlogtoWatch: New Release: Limited-Edition Brellum Duobox 39 TC Moonphase Chronometer Watch</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Christopher Ward — C1 Bel Canto Lucia</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Bel Canto chiming mechanism</li>
+            
+            
+            <li>Garden scene inspired by Lucia di Lammermoor</li><li>Bird beak chime indicator and tail striking hammer</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/christopher-ward-and-mr-jones-launch-the-new-c1-bel-canto-lucia/" target="_blank" rel="noopener">Worn &amp; Wound: Christopher Ward and Mr. Jones Launch the New C1 Bel Canto Lucia</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Czapek — Faubourg de Cracovie Crossroads Lightning</div>
+        
+          <ul class="specs">
+            <li>Size: 41.5mm</li>
+            <li>Movement: Automatic SXH3 high-frequency, COSC-certified</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Black Alloy 401 dial with tire-tread guilloché</li><li>Red gradient tachymeter scale</li><li>Limited to 18 pieces</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/czapek-faubourg-de-cracovie-crossroads-lightning-racing-inspired-high-frequency-review-price/" target="_blank" rel="noopener">Monochrome: First Look – New Racing Livery for the Czapek Faubourg de Cracovie Crossroads Lightning</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Fortis — Novonaut N-42 TR Series</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: Fortis Werk 17 automatic</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Fully luminous LumiCast X1 base dials</li><li>Panda-style chronographs in black, blue, and green</li><li>Matching luminous bezel inserts</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/fortis-novonaut-n-42-tr-series/" target="_blank" rel="noopener">Fratello: Lighting Up The Room With The Fortis Novonaut N-42 TR Series</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Glashütte Original — Senator Aventurine</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: In-house Caliber 36-16 automatic, 100-hour power reserve</li>
+            
+            <li>Case material: Red gold or platinum</li>
+            <li>Aventurine glass dials</li><li>Art Nouveau Green and Art Deco Blue variants</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/glashutte-original-releases-senator-aventurine-watches-inspired-by-art-deco-and-art-nouveau/" target="_blank" rel="noopener">aBlogtoWatch: Glashütte Original Dazzles With Its New Senator Aventurine Watches Inspired By Early Twentieth-Century Design</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Mickaël Gaspar — Souscription</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Dial-side movement with retrograde date</li>
+            
+            
+            <li>Dial-side balance</li><li>Retrograde date</li><li>Limited to 20 pieces</li>
+            <li>Price: CHF 69,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/indie-watchmaker-mickael-gaspar-launches-the-souscription-his-first-wristwatch/" target="_blank" rel="noopener">Monochrome: Introducing – Indie Watchmaker Mickaël Gaspar Launches the Souscription, His First Wristwatch</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Petermann Bédat — Reference 2914 Monopusher Chronograph</div>
+        
+          <ul class="specs">
+            <li>Size: 36.5mm</li>
+            <li>Movement: In-house Caliber 234, 18,000 bph</li>
+            
+            <li>Case material: Platinum</li>
+            <li>Semi-open sector dial</li><li>Jumping minute counter</li><li>Limited to 20 pieces</li>
+            <li>Price: CHF 180,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/introducing-petermann-bedat-2914-chronograph" target="_blank" rel="noopener">Hodinkee: Introducing: The Petermann Bédat Reference 2914 Monopusher Chronograph</a><a href="https://revolutionwatch.com/petermann-bedat-2914-chronograph-monopusher/" target="_blank" rel="noopener">Revolution: Petermann Bédat Introduces the 2914 Chronograph Monopusher</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Studio Underd0g — 04Series Calendar</div>
+        
+          <ul class="specs">
+            <li>Size: 37mm and 38.5mm</li>
+            <li>Movement: Automatic, custom Seagull ST-2115B</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Retrograde pointer date</li><li>Moonphase</li><li>Weekend indicator</li><li>Four dial colors</li>
+            <li>Price: $1,100</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/studio-underd0g-04series-calendar" target="_blank" rel="noopener">Hodinkee: Introducing: The Studio Underd0g 04Series Calendar</a><a href="https://www.fratellowatches.com/studio-underd0g-04series-calendar/" target="_blank" rel="noopener">Fratello: Who Saw This Coming? The Studio Underd0g 04Series Calendar</a><a href="https://monochrome-watches.com/studio-underd0g-04series-calendar-collection-retrograde-date-weekend-indicator-new-seagull-movement-value-proposition-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Studio Underd0g Launches the 04SERIES Calendar with a Clever Weekend Indicator</a><a href="https://timeandtidewatches.com/studio-underd0g-04series-hands-on/" target="_blank" rel="noopener">Time+Tide: Studio Underd0g stays up to date with its new 04SERIES</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">TAG Heuer — Aquaracer Professional 300 Sundowner II</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: Automatic TH31-01, COSC-certified, 80-hour power reserve</li>
+            <li>Water resistance: 300m</li>
+            <li>Case material: Sandblasted grade-2 titanium</li>
+            <li>Date-free wave-textured dial</li><li>Grey ceramic bezel with rose gold accents</li><li>Limited to 450 pieces on rubber strap and 50 on bracelet</li>
+            <li>Price: $5,100 (rubber strap) / $5,750 (titanium bracelet)</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/time-tide-sundowner-ii" target="_blank" rel="noopener">Hodinkee: Introducing: The TAG Heuer Aquaracer Professional 300 x Time+Tide &#39;Sundowner II&#39;</a><a href="https://www.fratellowatches.com/tag-heuer-aquaracer-professional-300-x-timetide-sundowner-ii/" target="_blank" rel="noopener">Fratello: Introducing: The TAG Heuer Aquaracer Professional 300 × Time+Tide Sundowner II</a><a href="https://timeandtidewatches.com/sundowner-ii-launch-gphg-reaction-friday-wind-down/" target="_blank" rel="noopener">Time+Tide: We launched our second Sundowner around the world, and our thoughts on the GPHG results</a><a href="https://timeandtidewatches.com/tag-heuer-x-timetide-aquaracer-professional-300-sundowner-ii-full-overview-video/" target="_blank" rel="noopener">Time+Tide: Global orders open now! Zach breaks down what makes our Sundowner II so distinct and special</a><a href="https://timeandtidewatches.com/tag-heuer-aquaracer-time-tide-sundowner-ii-hands-on/" target="_blank" rel="noopener">Time+Tide: From the outback to the ocean: The TAG Heuer Aquaracer x Time+Tide ‘Sundowner II’</a><a href="https://wornandwound.com/tag-heuer-and-timetide-reunite-for-the-aquaracer-sundowner-ii/" target="_blank" rel="noopener">Worn &amp; Wound: TAG Heuer and Time+Tide Reunite for the Aquaracer Sundowner II</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Time Objects — Skull Flowers</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Jumping hours and flying tourbillons</li>
+            
+            
+            <li>Skull-shaped cases</li><li>Rotating flower eyes</li><li>Five versions</li>
+            <li>Price: CHF 85,000 to CHF 148,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/takashi-murakami-time-objects-skull-flowers.html" target="_blank" rel="noopener">SJX: Japanese Artist Takashi Murakami Launches Time Objects</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Trilobe — Une Folle Journée</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: In-house X-Nihilo manufacture movement</li>
+            
+            <li>Case material: Titanium or rose gold</li>
+            <li>Counterclockwise ring display</li><li>Barrel-shaped case</li><li>3D floating disc architecture</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-2nd-gen-trilobe-une-folle-journee-new-case-and-manufacture-x-nihilo-movement-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The 2nd-Gen Trilobe Une Folle Journée, with New Case and Manufacture Movement</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Ulysse Nardin — Freak S Purple Enamel</div>
+        
+          <ul class="specs">
+            <li>Size: 45mm</li>
+            <li>Movement: Calibre UN-251 automatic with double inclined silicon oscillators and vertical differential</li>
+            
+            <li>Case material: Titanium</li>
+            <li>Semi-transparent purple enamel dial over guilloché-flinqué</li><li>Limited to 50 pieces</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/ulysse-nardin-freak-s-purple-enamel-titanium-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Ulysse Nardin Freak S Purple Enamel</a><a href="https://wornandwound.com/ulysse-nardin-introduces-the-freak-s-purple-enamel/" target="_blank" rel="noopener">Worn &amp; Wound: Ulysse Nardin Introduces the Freak S Purple Enamel</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Vacheron Constantin — Fiftysix Self-Winding / Complete Calendar</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: Caliber 1326 (Valfleurier-based) for Self-Winding</li>
+            
+            <li>Case material: Steel</li>
+            <li>Gray gradient dial</li><li>Complete Calendar and Self-Winding variants</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/vacheron-constantin-adds-two-new-references-to-the-fiftysix-collection/" target="_blank" rel="noopener">Worn &amp; Wound: Vacheron Constantin Adds Two New References to the Fiftysix Collection</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Vander Avort — Lovon</div>
+        
+          <ul class="specs">
+            <li>Size: 40.9mm</li>
+            <li>Movement: Automatic</li>
+            
+            <li>Case material: 18K rose gold or palladium-alloyed white gold</li>
+            <li>35 pieces total across seven dial variations</li><li>Hand-engraved lugs</li><li>Radiating guilloché dials</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-vander-avort-lovon-belgian-quiet-confidence-on-the-wrist/" target="_blank" rel="noopener">Fratello: The Vander Avort Lovon: Belgian Quiet Confidence On The Wrist</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Vario — Futurist Tantalum Edition</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            
+            
+            <li>Case material: Tantalum</li>
+            <li>30-piece limited run</li><li>Dense bluish-grey tantalum case</li><li>Faceted sapphire crystal</li><li>Hidden 12 o&#39;clock crown</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/vario-futurist-tantalum-introducing/" target="_blank" rel="noopener">Time+Tide: Vario drops some heavy metal with the Futurist Tantalum Edition</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Zenith — G.F.J. Calibre 135 Double Signed J.N. Shapiro</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Calibre 135</li>
+            
+            <li>Case material: 18K rose gold</li>
+            <li>Three distinct hand-turned guilloché dial patterns</li><li>American-style damaskeening on movement bridges</li><li>Limited to 25 pieces</li>
+            <li>Price: CHF 68,900</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/zenith-shapiro-collab" target="_blank" rel="noopener">Hodinkee: Introducing: The Zenith G.F.J. Calibre 135 Double Signed With J.N. Shapiro (Live Pics)</a><a href="https://www.fratellowatches.com/introducing-the-zenith-g-f-j-calibre-135-double-signed-with-j-n-shapiro/" target="_blank" rel="noopener">Fratello: Introducing: The Zenith G.F.J. Calibre 135 Double Signed With J.N. Shapiro</a><a href="https://monochrome-watches.com/zenith-gfj-calibre-135-double-signed-with-jn-shapiro-guilloche-dial-by-american-independent-watchmaker-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Zenith G.F.J. Calibre 135 Double Signed J.N. Shapiro, American Artistry Meets Swiss Chronometry</a><a href="https://timeandtidewatches.com/zenith-g-f-j-calibre-135-double-signed-with-j-n-shapiro-introducing/" target="_blank" rel="noopener">Time+Tide: Zenith’s legendary Calibre 135 gets an American makeover courtesy of J.N. Shapiro</a><a href="https://wornandwound.com/zenith-introduces-their-latest-in-the-double-signed-series-a-g-f-j-with-j-n-shapiro/" target="_blank" rel="noopener">Worn &amp; Wound: Zenith Introduces their Latest in the Double Signed Series, a G.F.J. with J.N. Shapiro</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Anders &amp; Co — AC3 Lago</div>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/anders-co-ac3-lago-hands-on/" target="_blank" rel="noopener">Time+Tide: Anders &amp; Co goes rectangular with the ultra-slim AC3 Lago</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Brellum — Duobox 39 TC Moonphase Chronometer</div>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-brellum-duobox-39-triple-calendar-moonphase-chronometer-returns-in-blue/" target="_blank" rel="noopener">Fratello: The Brellum Duobox 39 Triple Calendar Moonphase Chronometer Debuts In Blue</a><a href="https://monochrome-watches.com/brellum-duobox-39-tc-moonphase-chronometer-full-calendar-chronograph-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Brellum Duobox 39 TC Moonphase Chronometer</a><a href="https://www.ablogtowatch.com/new-release-limited-edition-brellum-duobox-39-tc-moonphase-chronometer-watch/" target="_blank" rel="noopener">aBlogtoWatch: New Release: Limited-Edition Brellum Duobox 39 TC Moonphase Chronometer Watch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">March LA.B — Mansart Small Second / Milady Mansart Chevrons</div>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/march-lab-mansart-small-second" target="_blank" rel="noopener">Hodinkee: Hands-On: March LA.B Mansart Small Second</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">RZE — Seeker</div>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-new-rze-seeker/" target="_blank" rel="noopener">Fratello: Hands-On: The New RZE Seeker — A Solar-Powered Titanium Watch Built To Keep Moving</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Studio Underd0g — 04Series Calendar</div>
+        <p class="note">The brand&#39;s first automatic and first calendar complication, assembled in England.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/studio-underd0g-04series-calendar" target="_blank" rel="noopener">Hodinkee: Introducing: The Studio Underd0g 04Series Calendar</a><a href="https://www.fratellowatches.com/studio-underd0g-04series-calendar/" target="_blank" rel="noopener">Fratello: Who Saw This Coming? The Studio Underd0g 04Series Calendar</a><a href="https://monochrome-watches.com/studio-underd0g-04series-calendar-collection-retrograde-date-weekend-indicator-new-seagull-movement-value-proposition-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Studio Underd0g Launches the 04SERIES Calendar with a Clever Weekend Indicator</a><a href="https://timeandtidewatches.com/studio-underd0g-04series-hands-on/" target="_blank" rel="noopener">Time+Tide: Studio Underd0g stays up to date with its new 04SERIES</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Trilobe — Une Folle Journée</div>
+        <p class="note">Second generation with new barrel-shaped case and in-house X-Nihilo movement.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/2026-2nd-gen-trilobe-une-folle-journee-new-case-and-manufacture-x-nihilo-movement-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The 2nd-Gen Trilobe Une Folle Journée, with New Case and Manufacture Movement</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vario — Futurist Tantalum Edition</div>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/vario-futurist-tantalum-introducing/" target="_blank" rel="noopener">Time+Tide: Vario drops some heavy metal with the Futurist Tantalum Edition</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">ArtyA — Purity Curvy HMS Sapphire Sport Edition</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/artya-purity-curvy-hms-sapphire-sport-edition-first-look-hands-on-price/" target="_blank" rel="noopener">Monochrome: First Look – ArtyA Presents the Purity Curvy HMS Sapphire Sport Edition</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Czapek — Faubourg de Cracovie Crossroads Lightning</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/czapek-faubourg-de-cracovie-crossroads-lightning-racing-inspired-high-frequency-review-price/" target="_blank" rel="noopener">Monochrome: First Look – New Racing Livery for the Czapek Faubourg de Cracovie Crossroads Lightning</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Mickaël Gaspar — Souscription</div>
+        <p class="note">Debut wristwatch with dial-side balance and retrograde date, limited to 20 pieces.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/indie-watchmaker-mickael-gaspar-launches-the-souscription-his-first-wristwatch/" target="_blank" rel="noopener">Monochrome: Introducing – Indie Watchmaker Mickaël Gaspar Launches the Souscription, His First Wristwatch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Petermann Bédat — Reference 2914 Monopusher Chronograph</div>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/introducing-petermann-bedat-2914-chronograph" target="_blank" rel="noopener">Hodinkee: Introducing: The Petermann Bédat Reference 2914 Monopusher Chronograph</a><a href="https://revolutionwatch.com/petermann-bedat-2914-chronograph-monopusher/" target="_blank" rel="noopener">Revolution: Petermann Bédat Introduces the 2914 Chronograph Monopusher</a><a href="https://watchesbysjx.com/2026/11/petermann-bedat-reference-2914-monopusher-chronograph.html" target="_blank" rel="noopener">SJX: Hands On: Petermann Bédat Reference 2914 Monopusher Chronograph</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Rexhep Rexhepi — Chronomètre Contemporain II</div>
+        <p class="note">Personal pièce unique in platinum with a sage green translucent Japanese enamel dial.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/what-watch-does-rexhep-rexhepi-make-for-himself-this" target="_blank" rel="noopener">Hodinkee: Just Because: What Watch Does Rexhep Rexhepi Make For Himself? This Unique One.</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Time Objects — Skull Flowers</div>
+        <p class="note">Takashi Murakami&#39;s own brand debut; five skull-shaped watches with rotating flower eyes.</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/takashi-murakami-time-objects-skull-flowers.html" target="_blank" rel="noopener">SJX: Japanese Artist Takashi Murakami Launches Time Objects</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Ulysse Nardin — Freak S Purple Enamel</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/ulysse-nardin-freak-s-purple-enamel-titanium-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Ulysse Nardin Freak S Purple Enamel</a><a href="https://wornandwound.com/ulysse-nardin-introduces-the-freak-s-purple-enamel/" target="_blank" rel="noopener">Worn &amp; Wound: Ulysse Nardin Introduces the Freak S Purple Enamel</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vander Avort — Lovon</div>
+        <p class="note">First timepiece from Belgian jewelry house; 35 pieces total across seven dial variations.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-vander-avort-lovon-belgian-quiet-confidence-on-the-wrist/" target="_blank" rel="noopener">Fratello: The Vander Avort Lovon: Belgian Quiet Confidence On The Wrist</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">A. Lange &amp; Söhne</div>
+        <p class="models">Saxonia Annual Calendar</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/video-hands-on-a-lange-sohne-saxonia-annual-calendar-in-white-gold/" target="_blank" rel="noopener">Fratello: Video: Hands-On With The A. Lange &amp; Söhne Saxonia Annual Calendar In White Gold</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Blancpain</div>
+        <p class="models">Ladybird Colors Zodiaque</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/scorpio-rising-the-blancpain-ladybird-colors-zodiaque/" target="_blank" rel="noopener">Revolution: Scorpio Rising: The Blancpain Ladybird Colors Zodiaque</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Christopher Ward</div>
+        <p class="models">C1 Bel Canto Lucia</p>
+        <div class="links">
+          <a href="https://wornandwound.com/christopher-ward-and-mr-jones-launch-the-new-c1-bel-canto-lucia/" target="_blank" rel="noopener">Worn &amp; Wound: Christopher Ward and Mr. Jones Launch the New C1 Bel Canto Lucia</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Fortis</div>
+        <p class="models">Novonaut N-42 TR Series</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/fortis-novonaut-n-42-tr-series/" target="_blank" rel="noopener">Fratello: Lighting Up The Room With The Fortis Novonaut N-42 TR Series</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Glashütte Original</div>
+        <p class="models">Senator Aventurine</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/glashutte-original-releases-senator-aventurine-watches-inspired-by-art-deco-and-art-nouveau/" target="_blank" rel="noopener">aBlogtoWatch: Glashütte Original Dazzles With Its New Senator Aventurine Watches Inspired By Early Twentieth-Century Design</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Jaeger-LeCoultre</div>
+        <p class="models">Master Control Chronometre collection</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-top-5-surprising-releases-of-2026/" target="_blank" rel="noopener">Fratello: The Top 5 Surprising Releases Of 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Rado</div>
+        <p class="models">Plasma high-tech ceramic collection</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/the-magic-is-in-the-material/" target="_blank" rel="noopener">Revolution: The Magic Is in the Material</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Seiko</div>
+        <p class="models">H601-5480 Upside-Down Arnie</p>
+        <div class="links">
+          <a href="https://wornandwound.com/the-seiko-h601-5480-upside-down-arnie-a-twist-on-the-legendary-silver-screen-seiko/" target="_blank" rel="noopener">Worn &amp; Wound: The Seiko H601-5480 “Upside-Down Arnie:” A Twist on the Legendary Silver Screen Seiko</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Shinola</div>
+        <p class="models">Duck Automatic</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/hands-on-shinola-duck-automatic-watch-brings-value-with-a-japanese-movement/" target="_blank" rel="noopener">aBlogtoWatch: Hands-On: Shinola Duck Automatic Watch Brings Value With A Japanese Movement</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">TAG Heuer</div>
+        <p class="models">Aquaracer Professional 300 Sundowner II</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/time-tide-sundowner-ii" target="_blank" rel="noopener">Hodinkee: Introducing: The TAG Heuer Aquaracer Professional 300 x Time+Tide &#39;Sundowner II&#39;</a><a href="https://www.fratellowatches.com/tag-heuer-aquaracer-professional-300-x-timetide-sundowner-ii/" target="_blank" rel="noopener">Fratello: Introducing: The TAG Heuer Aquaracer Professional 300 × Time+Tide Sundowner II</a><a href="https://timeandtidewatches.com/sundowner-ii-launch-gphg-reaction-friday-wind-down/" target="_blank" rel="noopener">Time+Tide: We launched our second Sundowner around the world, and our thoughts on the GPHG results</a><a href="https://timeandtidewatches.com/tag-heuer-x-timetide-aquaracer-professional-300-sundowner-ii-full-overview-video/" target="_blank" rel="noopener">Time+Tide: Global orders open now! Zach breaks down what makes our Sundowner II so distinct and special</a><a href="https://timeandtidewatches.com/tag-heuer-aquaracer-time-tide-sundowner-ii-hands-on/" target="_blank" rel="noopener">Time+Tide: From the outback to the ocean: The TAG Heuer Aquaracer x Time+Tide ‘Sundowner II’</a><a href="https://wornandwound.com/tag-heuer-and-timetide-reunite-for-the-aquaracer-sundowner-ii/" target="_blank" rel="noopener">Worn &amp; Wound: TAG Heuer and Time+Tide Reunite for the Aquaracer Sundowner II</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vacheron Constantin</div>
+        <p class="models">Fiftysix Complete Calendar, Fiftysix Self-Winding</p>
+        <div class="links">
+          <a href="https://wornandwound.com/vacheron-constantin-adds-two-new-references-to-the-fiftysix-collection/" target="_blank" rel="noopener">Worn &amp; Wound: Vacheron Constantin Adds Two New References to the Fiftysix Collection</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Zenith</div>
+        <p class="models">G.F.J. Calibre 135 Double Signed J.N. Shapiro</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/zenith-shapiro-collab" target="_blank" rel="noopener">Hodinkee: Introducing: The Zenith G.F.J. Calibre 135 Double Signed With J.N. Shapiro (Live Pics)</a><a href="https://www.fratellowatches.com/introducing-the-zenith-g-f-j-calibre-135-double-signed-with-j-n-shapiro/" target="_blank" rel="noopener">Fratello: Introducing: The Zenith G.F.J. Calibre 135 Double Signed With J.N. Shapiro</a><a href="https://monochrome-watches.com/zenith-gfj-calibre-135-double-signed-with-jn-shapiro-guilloche-dial-by-american-independent-watchmaker-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Zenith G.F.J. Calibre 135 Double Signed J.N. Shapiro, American Artistry Meets Swiss Chronometry</a><a href="https://timeandtidewatches.com/zenith-g-f-j-calibre-135-double-signed-with-j-n-shapiro-introducing/" target="_blank" rel="noopener">Time+Tide: Zenith’s legendary Calibre 135 gets an American makeover courtesy of J.N. Shapiro</a><a href="https://wornandwound.com/zenith-introduces-their-latest-in-the-double-signed-series-a-g-f-j-with-j-n-shapiro/" target="_blank" rel="noopener">Worn &amp; Wound: Zenith Introduces their Latest in the Double Signed Series, a G.F.J. with J.N. Shapiro</a><a href="https://www.ablogtowatch.com/zenith-g-f-j-calibre-135-j-n-shapiro-double-signed-watch-hands-on-le-locle-to-los-angeles/" target="_blank" rel="noopener">aBlogtoWatch: Zenith G.F.J. Calibre 135 J.N. Shapiro ‘Double-Signed’ Watch Hands-On: Le Locle To Los Angeles</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
