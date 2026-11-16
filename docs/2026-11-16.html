@@ -1,0 +1,501 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-16</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-16 17:03 CET · 15 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 15 new articles — 4 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 3 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 3 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 2 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>, 1 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, 1 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, and 1 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>.
+       No new articles from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>.
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Robert Pattinson is the new James Bond but appears watchless, sparking Omega vs. Jaeger-LeCoultre speculation.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/robert-pattinson-confirmed-as-the-next-james-bond-no-watch-in-sight-for-now/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          Frodsham miniaturized George Daniels’ double independent wheel escapement for the first time in a wristwatch.
+          
+            <span class="bullet-links"><a href="https://watchesbysjx.com/2026/11/insight-modern-escapement-developments-part-ii.html" target="_blank" rel="noopener">SJX</a></span>
+          
+        </li>
+      
+        <li>
+          Peacock’s 70th-anniversary Black Hole III tourbillon features a “Gravitational Weave” dial requiring 1,440 manual cuts.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/peacock-celebrates-70-years-with-the-black-hole-iii-curved-guilloche-central-tourbillon/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          New releases from independents and small brands include Garrick’s skeletonized S8, Kurono Tokyo’s Structure Chronograph S1, and Laurent Ferrier’s Grand Sport Tourbillon Iceberg.
+          
+            <span class="bullet-links"><a href="https://wornandwound.com/introducing-the-garrick-s8-the-brands-most-ambitious-watch-yet/" target="_blank" rel="noopener">Worn &amp; Wound</a><span class="sep">·</span><a href="https://monochrome-watches.com/kurono-tokyo-structure-chronograph-s1-sports-chronograph-introducing-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://www.ablogtowatch.com/new-release-laurent-ferrier-grand-sport-tourbillon-iceberg-watch/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">GPHG controversies and CEO creative freedom</div>
+        <p class="note">aBlogtoWatch Weekly examines GPHG 2026 controversies, including Patek Philippe receiving a special jury prize despite not entering, and discusses the decline of creative freedom for luxury watch CEOs.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/ablogtowatch-weekly-247-luxury-watch-ceos-losing-power-gphg-awards-controversy-and-5000-tourbillons/" target="_blank" rel="noopener">aBlogtoWatch: aBlogtoWatch Weekly #247: Luxury Watch CEOs Losing Power, GPHG Awards Controversy, And $5,000 Tourbillons</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Garrick — S8</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm diameter, 8mm thickness</li>
+            <li>Movement: New highly complex caliber</li>
+            
+            
+            <li>Skeletonized time-only display</li><li>Frosted, brushed, and black-polished finishing</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/introducing-the-garrick-s8-the-brands-most-ambitious-watch-yet/" target="_blank" rel="noopener">Worn &amp; Wound: Introducing the Garrick S8, the Brand’s Most Ambitious Watch Yet</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Hamilton — Khaki Pilot GMT Air Zermatt</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: H-14 automatic</li>
+            
+            <li>Case material: Forged carbon</li>
+            <li>True traveler-style GMT</li><li>80-hour power reserve</li><li>City ring honoring Air Zermatt partnership</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/hamilton-khaki-pilot-gmt-air-zermatt-accessible-true-gmt-watch-in-forged-carbon-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Hamilton Khaki Pilot GMT Air Zermatt, An Accessible True GMT Watch in Forged Carbon</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Kurono Tokyo — Structure Chronograph S1</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: Japanese automatic</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Four-layered dial eliminates parallax error</li><li>High-contrast orange accents</li><li>Available in white, teal, and salmon</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/kurono-tokyo-structure-chronograph-s1-sports-chronograph-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Kurono Tokyo Unveils the New and Sportier Structure Chronograph S1</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Laurent Ferrier — Grand Sport Tourbillon Iceberg</div>
+        
+          <ul class="specs">
+            <li>Size: 44mm</li>
+            
+            
+            <li>Case material: Grade 5 titanium</li>
+            <li>Hidden tourbillon visible through exhibition caseback</li><li>Pale blue matte opaline dial</li><li>Integrated titanium bracelet</li>
+            <li>Price: 175,000 CHF</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/new-release-laurent-ferrier-grand-sport-tourbillon-iceberg-watch/" target="_blank" rel="noopener">aBlogtoWatch: New Release: Laurent Ferrier Grand Sport Tourbillon Iceberg Watch</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">MAEN — Grand Tonneau Jump Hour</div>
+        
+          <ul class="specs">
+            <li>Size: 34 x 45mm</li>
+            
+            
+            <li>Case material: Stainless steel</li>
+            <li>Jump hour complication</li><li>Arc-shaped minute window</li><li>New vertically brushed dial colors</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-maen-event-the-grand-tonneau-jump-hour-collection/" target="_blank" rel="noopener">Fratello: The Maen Event: The Grand Tonneau Jump Hour Collection</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">MB&amp;F — LM101</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Three new editions</li><li>Cloisonné enamel art by Gabriel Colliard</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-zenith-teams-up-with-j-n-shapiro-murakami-makes-his-move/" target="_blank" rel="noopener">Revolution: Last Week in Watches: Zenith Teams Up with J.N. Shapiro, Murakami Makes His Move</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Peacock — Black Hole III Curved Guilloché Central Tourbillon</div>
+        
+          <ul class="specs">
+            <li>Size: 43.5mm</li>
+            
+            
+            <li>Case material: Grade 5 titanium</li>
+            <li>Central tourbillon</li><li>Gravitational Weave dial with 1,440 manual cuts</li><li>Concentric hour and minute discs</li><li>Available in Cloud Azure and Night Purple</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/peacock-celebrates-70-years-with-the-black-hole-iii-curved-guilloche-central-tourbillon/" target="_blank" rel="noopener">Fratello: Peacock Celebrates 70 Years With The Black Hole III Curved Guilloché Central Tourbillon</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Zenith — G.F.J. Calibre 135</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Calibre 135</li>
+            
+            
+            <li>Limited to 25 pieces</li><li>Guilloché and American-style damaskeening by J.N. Shapiro</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-zenith-teams-up-with-j-n-shapiro-murakami-makes-his-move/" target="_blank" rel="noopener">Revolution: Last Week in Watches: Zenith Teams Up with J.N. Shapiro, Murakami Makes His Move</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Kurono Tokyo — Structure Chronograph S1</div>
+        <p class="note">40mm steel chronograph with a four-layered anti-parallax dial, Japanese auto movement, and orange accents.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/kurono-tokyo-structure-chronograph-s1-sports-chronograph-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Kurono Tokyo Unveils the New and Sportier Structure Chronograph S1</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">MAEN — Grand Tonneau Jump Hour</div>
+        <p class="note">Four new dial variants; 34 x 45mm stainless steel case with jump hour and arc-shaped minute window.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-maen-event-the-grand-tonneau-jump-hour-collection/" target="_blank" rel="noopener">Fratello: The Maen Event: The Grand Tonneau Jump Hour Collection</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Nordic Marine Instruments — Havørn</div>
+        <p class="note">Rectangular dress watch inspired by the Cartier Tank, with faceted lugs, crown guards, and luminous accents.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/actually-affordable-nordic-marine-instruments-havorn-dress-watch/" target="_blank" rel="noopener">aBlogtoWatch: Actually Affordable: Nordic Marine Instruments Havørn Dress Watch</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Charles Frodsham — Double independent wheel escapement wristwatch</div>
+        <p class="note">First miniaturization of George Daniels’ double independent wheel escapement for the wrist.</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/insight-modern-escapement-developments-part-ii.html" target="_blank" rel="noopener">SJX: Insight: Modern Escapement Developments Part II</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Garrick — S8</div>
+        <p class="note">Skeletonized time-only watch with a new complex caliber, 39mm x 8mm case, and extensive hand-finishing.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/introducing-the-garrick-s8-the-brands-most-ambitious-watch-yet/" target="_blank" rel="noopener">Worn &amp; Wound: Introducing the Garrick S8, the Brand’s Most Ambitious Watch Yet</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Laurent Ferrier — Grand Sport Tourbillon Iceberg</div>
+        <p class="note">44mm Grade 5 titanium integrated sports watch with hidden tourbillon and pale blue matte opaline dial; priced at 175,000 CHF.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/new-release-laurent-ferrier-grand-sport-tourbillon-iceberg-watch/" target="_blank" rel="noopener">aBlogtoWatch: New Release: Laurent Ferrier Grand Sport Tourbillon Iceberg Watch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">MB&amp;F — LM101</div>
+        <p class="note">Three new editions featuring cloisonné enamel art by Gabriel Colliard.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-zenith-teams-up-with-j-n-shapiro-murakami-makes-his-move/" target="_blank" rel="noopener">Revolution: Last Week in Watches: Zenith Teams Up with J.N. Shapiro, Murakami Makes His Move</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Simon Brette — Chronomètre Artisans Confluence Ruby</div>
+        <p class="note">One-off platinum commission with 270 rubies, custom-cut dovetail motif, and red sapphire seconds ring.</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/simon-brette-chronometre-artisans-confluence-ruby.html" target="_blank" rel="noopener">SJX: Simon Brette’s Confluence of Artisans and Rubies</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Hamilton</div>
+        <p class="models">Khaki Pilot GMT Air Zermatt</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/hamilton-khaki-pilot-gmt-air-zermatt-accessible-true-gmt-watch-in-forged-carbon-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Hamilton Khaki Pilot GMT Air Zermatt, An Accessible True GMT Watch in Forged Carbon</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hublot</div>
+        <p class="models">Big Bang Meca-10</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/why-the-hublot-big-bang-meca-10-deserves-more-credit-than-it-gets/" target="_blank" rel="noopener">Fratello: Why The Hublot Big Bang Meca-10 Deserves More Credit Than It Gets</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">IWC</div>
+        <p class="models">Ingenieur</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/christian-knoop-and-alexia-genta-on-gerald-gentas-legacy-and-the-rebirth-of-the-iwc-ingenieur/" target="_blank" rel="noopener">Monochrome: Interview – Christian Knoop and Alexia Genta on Gérald Genta’s Legacy and the Rebirth of the IWC Ingenieur</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Peacock</div>
+        <p class="models">Black Hole III Curved Guilloché Central Tourbillon</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/peacock-celebrates-70-years-with-the-black-hole-iii-curved-guilloche-central-tourbillon/" target="_blank" rel="noopener">Fratello: Peacock Celebrates 70 Years With The Black Hole III Curved Guilloché Central Tourbillon</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Zenith</div>
+        <p class="models">G.F.J. Calibre 135</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-zenith-teams-up-with-j-n-shapiro-murakami-makes-his-move/" target="_blank" rel="noopener">Revolution: Last Week in Watches: Zenith Teams Up with J.N. Shapiro, Murakami Makes His Move</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
