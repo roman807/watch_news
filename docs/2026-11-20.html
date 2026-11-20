@@ -1,0 +1,527 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-20</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-20 17:09 CET · 23 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 23 new articles — 4 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 4 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 3 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, 3 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 3 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, 2 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 2 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, and 2 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          IAMWATCH 2026 debuted independents including Rémy Cools’ €70k manual-wind, Raúl Pagès’ RP2 Hour Glass Edition, and Takashi Murakami’s skull jumping-hours tourbillon.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/all-the-new-releases-from-iamwatch-2026" target="_blank" rel="noopener">Hodinkee</a></span>
+          
+        </li>
+      
+        <li>
+          Hublot’s Big Bang Denim collection pairs hand-textured cases with genuine denim dials and straps.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/hublot-big-bang-denim-collection-with-hand-textured-cases-and-textile-dials-introducing-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Seiko added a green Prospex Marinemaster Save the Ocean HBF003 powered by the 8L35.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/the-new-green-dial-seiko-prospex-marinemaster-save-the-ocean-hbf003/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Brass F.P. Journe Octa Calendrier lots are outperforming rose gold at Antiquorum.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/antiquorum-f-p-journe-bass-vs-gold/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Microbrand releases include Brellum’s 39mm Pilot DLC, the Worn &amp; Wound × Dennison collab, and Vaer’s USPS C5 Postmaster.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/hands-on-introduction-of-the-brellum-pilot-39-power-reserve-black-dlc-chronometer/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://wornandwound.com/celebrate-with-worn-wound-and-dennison-the-launch-of-their-limited-edition-collab/" target="_blank" rel="noopener">Worn &amp; Wound</a><span class="sep">·</span><a href="https://www.ablogtowatch.com/vaer-c5-postmaster-watch-review-a-first-of-its-kind-collaboration-with-usps/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+        <li>
+          Public watchmaking schools in America are shrinking as brand-run programs expand.
+          
+            <span class="bullet-links"><a href="https://watchesbysjx.com/2026/11/paris-junior-college-american-watch-school.html" target="_blank" rel="noopener">SJX</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">American watchmaking education shortage</div>
+        <p class="note">The revival of American watchmaking faces a critical shortage of trained professionals as brand-operated schools increasingly supplant public education.</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/paris-junior-college-american-watch-school.html" target="_blank" rel="noopener">SJX: Inside One of America’s Last Public Watchmaking Schools</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">ArtyA — Purity Curvy HMS Sapphire Sport Edition</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Manual-wind Purity Curvy HMS with &#39;Stairway To Heaven&#39; escapement</li>
+            
+            <li>Case material: Sapphire</li>
+            <li>Fully transparent sapphire case</li><li>Nine colorways via tinted caseback gaskets</li><li>Limited to 99 pieces</li>
+            <li>Price: $61,000 USD</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/new-release-artya-purity-curvy-hms-sapphire-sport-edition-watches/" target="_blank" rel="noopener">aBlogtoWatch: New Release: ArtyA Purity Curvy HMS Sapphire Sport Edition Watches</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Hublot — Big Bang Denim Collection</div>
+        
+          <ul class="specs">
+            <li>Size: 43mm / 33mm / tonneau</li>
+            
+            
+            <li>Case material: Hand-textured titanium and steel</li>
+            <li>Genuine denim dials and matching straps</li><li>Includes 43mm Unico chronograph, 33mm diamond-set steel, and tonneau-shaped Spirit of Big Bang</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/hublot-big-bang-denim-collection-with-hand-textured-cases-and-textile-dials-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The New Hublot Big Bang Denim Collection with Hand-Textured Cases</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Raúl Pagès — RP2 &#34;Hour Glass Edition&#34;</div>
+        
+          <ul class="specs">
+            
+            
+            
+            
+            <li>Mother-of-pearl dial</li><li>Hour Glass limited edition</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/all-the-new-releases-from-iamwatch-2026" target="_blank" rel="noopener">Hodinkee: Introducing: The New Releases From IAMWATCH 2026</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Rémy Cools — Minimalist Three-Hand Manual Wind</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Manual wind</li>
+            
+            
+            
+            <li>Price: €70,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/all-the-new-releases-from-iamwatch-2026" target="_blank" rel="noopener">Hodinkee: Introducing: The New Releases From IAMWATCH 2026</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Seiko — Prospex Marinemaster 1968 Heritage Save the Ocean HBF003</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Automatic, Cal. 8L35</li>
+            
+            <li>Case material: Super-Hard coated steel</li>
+            <li>Green sunray-brushed dial inspired by Okinawa’s mangroves</li><li>Rose gold-toned seconds hand</li><li>Ceramic bezel</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/the-new-green-dial-seiko-prospex-marinemaster-save-the-ocean-hbf003/" target="_blank" rel="noopener">Monochrome: First Look – The new, Green Dial Seiko Prospex Marinemaster Save the Ocean HBF003</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Takashi Murakami — Skull-Shaped Jumping Hours Tourbillon</div>
+        
+          <ul class="specs">
+            <li>Size: 44mm</li>
+            
+            
+            
+            <li>Skull-shaped case</li><li>Jumping hours tourbillon complication</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/all-the-new-releases-from-iamwatch-2026" target="_blank" rel="noopener">Hodinkee: Introducing: The New Releases From IAMWATCH 2026</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Brellum — Pilot 39 Power Reserve Black DLC Chronometer</div>
+        <p class="note">46-piece LE; 39mm Duobox; COSC BR-750 RM (Valjoux 7750-based); full black DLC; CHF 3,390.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-introduction-of-the-brellum-pilot-39-power-reserve-black-dlc-chronometer/" target="_blank" rel="noopener">Fratello: Hands-On: The New Brellum Pilot 39 Power Reserve Black DLC Chronometer</a><a href="https://monochrome-watches.com/brellums-pilot-39-power-reserve-black-dlc-chronograph-more-compact-aviation-chronograph-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Brellum’s new Pilot 39 Power Reserve Black DLC, a More Compact Take on the Aviation Chronograph</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Cimier — 47° North Purple Dusk</div>
+        <p class="note">38mm steel case; grained gradient purple dial; ETA 2824-2; old radium Super-LumiNova; 100m WR; CHF 850–990.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/cimier-47-degree-north-purple-dusk-accessible-automatic-field-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Cimier 47° North Purple Dusk, Adding Fun to the Accessible Field Watch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Dennison — Worn &amp; Wound Limited Edition Collaboration</div>
+        <p class="note">Three dial designs by Zach Starr Weiss; 150 total pieces (50 per colorway); Brooklyn launch event Dec 10.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/celebrate-with-worn-wound-and-dennison-the-launch-of-their-limited-edition-collab/" target="_blank" rel="noopener">Worn &amp; Wound: Celebrate with Worn &amp; Wound and Dennison the Launch of Their Limited Edition Collab</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Lebois &amp; Co — Heritage Atelier Small Seconds &#34;Stroopwafel&#34;</div>
+        <p class="note">Laser-engraved 24K gold galvanic dial inspired by the Dutch treat; COSC-certified LC-350; 37.8mm case.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/fratellos-top-5-small-brand-watches-of-2026/" target="_blank" rel="noopener">Fratello: Fratello’s Top 5 Small-Brand Watches Of 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Marathon — Titanium GSAR</div>
+        <p class="note">41mm diver; 30% lighter than steel; 30 ATM WR; introduced at Windup Watch Fair NYC.</p>
+        <div class="links">
+          <a href="https://wornandwound.com/titanium-and-sapphire-our-marathon-and-g-shock-panels-at-windup-watch-fair-nyc/" target="_blank" rel="noopener">Worn &amp; Wound: Titanium and Sapphire: Our Marathon and G-SHOCK Panels at Windup Watch Fair NYC</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vaer — C5 Postmaster</div>
+        <p class="note">USPS collaboration; 40mm brushed steel; Swiss quartz; vintage dial with 1970–1993 Raymond Loewy Eagle logo; day-date; under $400.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/vaer-c5-postmaster-watch-review-a-first-of-its-kind-collaboration-with-usps/" target="_blank" rel="noopener">aBlogtoWatch: Vaer C5 Postmaster Watch Review: A First-Of-Its-Kind Collaboration With USPS</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Anton Suhanov — Flamingo Singapore Edition</div>
+        <p class="note">Third wristwatch; first custom-developed movement; oversized luminous balance wheel at 12 o&#39;clock.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/a-closer-look-anton-suhanov-flamingo-singapore-edition/" target="_blank" rel="noopener">Revolution: A Closer Look: Anton Suhanov Flamingo Singapore Edition</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">ArtyA — Purity Curvy HMS Sapphire Sport Edition</div>
+        <p class="note">Fully transparent sapphire case; 99 pieces; $61,000.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/new-release-artya-purity-curvy-hms-sapphire-sport-edition-watches/" target="_blank" rel="noopener">aBlogtoWatch: New Release: ArtyA Purity Curvy HMS Sapphire Sport Edition Watches</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">F.P. Journe — Octa Calendrier</div>
+        <p class="note">Brass-movement version commands a higher Antiquorum estimate than rose gold, underscoring early-brass rarity.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/antiquorum-f-p-journe-bass-vs-gold/" target="_blank" rel="noopener">Time+Tide: Antiquorum proves brass can be worth more than gold with this F.P. Journe</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Raúl Pagès — RP2 &#34;Hour Glass Edition&#34;</div>
+        <p class="note">Limited edition with mother-of-pearl dial for The Hour Glass.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/all-the-new-releases-from-iamwatch-2026" target="_blank" rel="noopener">Hodinkee: Introducing: The New Releases From IAMWATCH 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Rémy Cools — Minimalist Three-Hand Manual Wind</div>
+        <p class="note">IAMWATCH debut priced around €70,000.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/all-the-new-releases-from-iamwatch-2026" target="_blank" rel="noopener">Hodinkee: Introducing: The New Releases From IAMWATCH 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Takashi Murakami — Skull-Shaped Jumping Hours Tourbillon</div>
+        <p class="note">44mm skull case; jumping hours tourbillon; the artist’s entry into watchmaking.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/all-the-new-releases-from-iamwatch-2026" target="_blank" rel="noopener">Hodinkee: Introducing: The New Releases From IAMWATCH 2026</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">A. Lange &amp; Söhne</div>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/how-a-lange-sohne-became-a-chronograph-powerhouse-anthony-de-haas-wei-koh/" target="_blank" rel="noopener">Revolution: How A. Lange &amp; Söhne Became a Chronograph Powerhouse | Anthony de Haas &amp; Wei Koh</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Casio</div>
+        <p class="models">MRG-D5000 Blue Sapphire</p>
+        <div class="links">
+          <a href="https://wornandwound.com/titanium-and-sapphire-our-marathon-and-g-shock-panels-at-windup-watch-fair-nyc/" target="_blank" rel="noopener">Worn &amp; Wound: Titanium and Sapphire: Our Marathon and G-SHOCK Panels at Windup Watch Fair NYC</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hublot</div>
+        <p class="models">Big Bang Denim Collection</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/hublot-big-bang-denim-collection-with-hand-textured-cases-and-textile-dials-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The New Hublot Big Bang Denim Collection with Hand-Textured Cases</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Louis Vuitton</div>
+        <p class="models">Tambour Convergence Mirror Steel</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/louis-vuitton-tambour-convergence-mirror-steel.html" target="_blank" rel="noopener">SJX: Hands On: Louis Vuitton Tambour Convergence Mirror Steel</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Patek Philippe</div>
+        <p class="models">Calibre 89, Ref. 1527</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-patek-philippe-museum-celebrates-25-years" target="_blank" rel="noopener">Hodinkee: Dispatch: The Patek Philippe Museum Celebrates 25 Years</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Seiko</div>
+        <p class="models">Prospex Marinemaster 1968 Heritage Save the Ocean HBF003</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/the-new-green-dial-seiko-prospex-marinemaster-save-the-ocean-hbf003/" target="_blank" rel="noopener">Monochrome: First Look – The new, Green Dial Seiko Prospex Marinemaster Save the Ocean HBF003</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vacheron Constantin</div>
+        <p class="models">Overseas Perpetual Calendar Ultra-Thin &#34;30th Anniversary&#34;</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/a-closer-look-vacheron-constantin-overseas-perpetual-calendar-ultra-thin/" target="_blank" rel="noopener">Revolution: A Closer Look: Vacheron Constantin Overseas Perpetual Calendar Ultra-Thin “30th Anniversary”</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
