@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-22</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-22 17:00 CET · 8 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 8 new articles — 3 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 2 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 2 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, and 1 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>.
+       No new articles from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a> and <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>.
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          ATOWAK debuts its first fully in-house movement with the composite-cased, 39mm Cosmofleet Ascent wandering-hour watch.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/atowak-releases-its-most-ambitious-wandering-hour-watch-yet-the-cosmofleet-ascent/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Fratello argues that brands like Blancpain too often reserve their best designs for limited editions instead of core collections.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/when-a-brands-best-watches-are-limited-editions/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          The neo-vintage market has officially entered the mainstream, buoyed by strong auction results and independent watchmaking.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/neo-vintage-auction-opinion/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          aBlogtoWatch Weekly spotlights major collaborations and novelties, including a Zenith x J.N. Shapiro piece and Laurent Ferrier’s Grand Sport Tourbillon Iceberg.
+          
+            <span class="bullet-links"><a href="https://www.ablogtowatch.com/ablogtowatch-weekly-248-zenith-and-j-n-shapiro-join-forces-the-evolution-of-solar-watches-and-studio-underd0gs-bold-new-direction/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+        <li>
+          Monochrome rounds up six 500m+ dive watches, from the accessible Titan Zero Hour to the 2,000m Certina DS PH2000M.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/buying-guide-titan-certina-doxa-zrc-omega-panerai-dive-watches-500m-review-specs-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">Neo-vintage market enters mainstream</div>
+        <p class="note">Driven by independent watchmaking and strong auction results, the neo-vintage transitional watch market has officially entered the mainstream, exemplified by recent Sotheby’s Geneva sales.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/neo-vintage-auction-opinion/" target="_blank" rel="noopener">Time+Tide: This year, neo-vintage broke into the main stream</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">ATOWAK — Cosmofleet Ascent</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: In-house</li>
+            
+            <li>Case material: Composite fiber</li>
+            <li>Wandering hour display</li><li>First in-house movement</li><li>Limited to 150 pieces per colorway</li>
+            <li>Price: $3,799</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/atowak-releases-its-most-ambitious-wandering-hour-watch-yet-the-cosmofleet-ascent/" target="_blank" rel="noopener">Time+Tide: ATOWAK releases its most ambitious wandering hour watch yet, the Cosmofleet Ascent</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">ATOWAK — Cosmofleet Ascent</div>
+        <p class="note">First fully in-house movement; 39mm matte white composite fiber case; limited to 150 pieces per colorway (green and purple).</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/atowak-releases-its-most-ambitious-wandering-hour-watch-yet-the-cosmofleet-ascent/" target="_blank" rel="noopener">Time+Tide: ATOWAK releases its most ambitious wandering hour watch yet, the Cosmofleet Ascent</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Heinrich — Helicoprion Football Edition</div>
+        <p class="note">Dial and strap crafted from authentic Horween leather used in NFL game balls; 40.5mm case with 12 exposed screws.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/watch-review-the-heinrich-helicoprion-football-edition-watch-targets-gridiron-diehards/" target="_blank" rel="noopener">aBlogtoWatch: Watch Review: The Heinrich Helicoprion Football Edition Watch Targets Gridiron Diehards</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Studio Underd0g — Series 04</div>
+        <p class="note">Features a unique moonphase and weekend indicator.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/ablogtowatch-weekly-248-zenith-and-j-n-shapiro-join-forces-the-evolution-of-solar-watches-and-studio-underd0gs-bold-new-direction/" target="_blank" rel="noopener">aBlogtoWatch: aBlogtoWatch Weekly #248: Zenith And J.N. Shapiro Join Forces, The Evolution Of Solar Watches, And Studio Underd0g’s Bold New Direction</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Chopard — Mille Miglia Classic Chronograph</div>
+        <p class="note">Highlighted in aBlogtoWatch Weekly.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/ablogtowatch-weekly-248-zenith-and-j-n-shapiro-join-forces-the-evolution-of-solar-watches-and-studio-underd0gs-bold-new-direction/" target="_blank" rel="noopener">aBlogtoWatch: aBlogtoWatch Weekly #248: Zenith And J.N. Shapiro Join Forces, The Evolution Of Solar Watches, And Studio Underd0g’s Bold New Direction</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">J.N. Shapiro</div>
+        <p class="note">Collaboration with Zenith on a high-end timepiece featuring Caliber 135, priced at $143,500.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/ablogtowatch-weekly-248-zenith-and-j-n-shapiro-join-forces-the-evolution-of-solar-watches-and-studio-underd0gs-bold-new-direction/" target="_blank" rel="noopener">aBlogtoWatch: aBlogtoWatch Weekly #248: Zenith And J.N. Shapiro Join Forces, The Evolution Of Solar Watches, And Studio Underd0g’s Bold New Direction</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Laurent Ferrier — Grand Sport Tourbillon Iceberg</div>
+        <p class="note">Highlighted in aBlogtoWatch Weekly.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/ablogtowatch-weekly-248-zenith-and-j-n-shapiro-join-forces-the-evolution-of-solar-watches-and-studio-underd0gs-bold-new-direction/" target="_blank" rel="noopener">aBlogtoWatch: aBlogtoWatch Weekly #248: Zenith And J.N. Shapiro Join Forces, The Evolution Of Solar Watches, And Studio Underd0g’s Bold New Direction</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Patek Philippe — ref. 3790</div>
+        <p class="note">Rare perpetual calendar chronograph exemplifying the neo-vintage era&#39;s design evolution.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/neo-vintage-auction-opinion/" target="_blank" rel="noopener">Time+Tide: This year, neo-vintage broke into the main stream</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Blancpain</div>
+        <p class="models">Fifty Fathoms Bathyscaphe 70th Anniversary</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/when-a-brands-best-watches-are-limited-editions/" target="_blank" rel="noopener">Fratello: Is It An Issue When A Brand’s “Best” Watches Are Limited Editions?</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Breitling</div>
+        <p class="models">Navitimer B09 Chronograph 41</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/sunday-morning-showdown-breitling-navitimer-b09-chronograph-41-vs-omega-speedmaster-moonwatch/" target="_blank" rel="noopener">Fratello: Sunday Morning Showdown: Breitling Navitimer B09 Chronograph 41 Vs. Omega Speedmaster Moonwatch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Certina</div>
+        <p class="models">DS PH2000M</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-titan-certina-doxa-zrc-omega-panerai-dive-watches-500m-review-specs-price/" target="_blank" rel="noopener">Monochrome: Buying Guide – Six Deep Dive Watches, From Accessible To Luxury</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Citizen</div>
+        <p class="models">Promaster Air Automatic</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/hands-on-the-citizen-promaster-air-automatic-watch-is-a-capable-titanium-all-rounder/" target="_blank" rel="noopener">aBlogtoWatch: Hands-On: The Citizen Promaster Air Automatic Watch Is A Capable Titanium All-Rounder</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Doxa</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-titan-certina-doxa-zrc-omega-panerai-dive-watches-500m-review-specs-price/" target="_blank" rel="noopener">Monochrome: Buying Guide – Six Deep Dive Watches, From Accessible To Luxury</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Omega</div>
+        <p class="models">Speedmaster Moonwatch</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/sunday-morning-showdown-breitling-navitimer-b09-chronograph-41-vs-omega-speedmaster-moonwatch/" target="_blank" rel="noopener">Fratello: Sunday Morning Showdown: Breitling Navitimer B09 Chronograph 41 Vs. Omega Speedmaster Moonwatch</a><a href="https://monochrome-watches.com/buying-guide-titan-certina-doxa-zrc-omega-panerai-dive-watches-500m-review-specs-price/" target="_blank" rel="noopener">Monochrome: Buying Guide – Six Deep Dive Watches, From Accessible To Luxury</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Panerai</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-titan-certina-doxa-zrc-omega-panerai-dive-watches-500m-review-specs-price/" target="_blank" rel="noopener">Monochrome: Buying Guide – Six Deep Dive Watches, From Accessible To Luxury</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Titan</div>
+        <p class="models">Zero Hour Professional 500M</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-titan-certina-doxa-zrc-omega-panerai-dive-watches-500m-review-specs-price/" target="_blank" rel="noopener">Monochrome: Buying Guide – Six Deep Dive Watches, From Accessible To Luxury</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Zenith</div>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/ablogtowatch-weekly-248-zenith-and-j-n-shapiro-join-forces-the-evolution-of-solar-watches-and-studio-underd0gs-bold-new-direction/" target="_blank" rel="noopener">aBlogtoWatch: aBlogtoWatch Weekly #248: Zenith And J.N. Shapiro Join Forces, The Evolution Of Solar Watches, And Studio Underd0g’s Bold New Direction</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">ZRC</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/buying-guide-titan-certina-doxa-zrc-omega-panerai-dive-watches-500m-review-specs-price/" target="_blank" rel="noopener">Monochrome: Buying Guide – Six Deep Dive Watches, From Accessible To Luxury</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
