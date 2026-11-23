@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-23</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-23 17:02 CET · 15 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 15 new articles — 4 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 3 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 2 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>, 2 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 1 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 1 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 1 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, and 1 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Roger W. Smith celebrates 25 years with the Series Seven, featuring a one-minute tourbillon, co-axial escapement, and the brand&#39;s first center seconds.
+          
+            <span class="bullet-links"><a href="https://revolutionwatch.com/last-week-in-watches-roger-w-smith-unveils-the-series-seven-hublot-dresses-in-denim/" target="_blank" rel="noopener">Revolution</a></span>
+          
+        </li>
+      
+        <li>
+          Zenith plans to relaunch by 2029 as an ultra-high-end brand with far lower volumes, per CEO Benoit de Clerck.
+          
+            <span class="bullet-links"><a href="https://www.ablogtowatch.com/grinding-gears-its-not-only-zenith-that-needs-to-change-so-do-many-watch-buyers/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+        <li>
+          Chinese indie maker Qian GuoBiao releases the full-titanium Facing The Sky 2.0 with his first in-house integrated bracelet and flying balance wheel.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/chinese-indie-watchmaker-qian-guobiao-releases-the-full-titanium-facing-the-sky-2-0-bracelet-blue-lagoon-british-racing-green-introducing-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          ATOWAK debuts the Cosmofleet Ascent, its most ambitious watch yet, with a wandering-hour display and first fully in-house movement.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/atowak-cosmofleet-ascent-micro-mondays/" target="_blank" rel="noopener">Time+Tide</a></span>
+          
+        </li>
+      
+        <li>
+          Citizen expands Campanola with two limited-edition mechanical models in urushi lacquer, powered by its first new mechanical caliber…
+          
+            <span class="bullet-links"><a href="https://watchesbysjx.com/2026/11/campanola-small-seconds-mechanical-nz4000-56e-amamitsuhoshi-nz4000-56n-kojo.html" target="_blank" rel="noopener">SJX</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">Zenith plans ultra-high-end pivot by 2029</div>
+        <p class="note">Zenith CEO Benoit de Clerck has signaled a fundamental shift in the brand&#39;s business model to combat structural difficulties and market declines, aiming to relaunch by 2029 as an exclusively ultra-high-end haute horlogerie brand with significantly reduced production volumes.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/grinding-gears-its-not-only-zenith-that-needs-to-change-so-do-many-watch-buyers/" target="_blank" rel="noopener">aBlogtoWatch: Grinding Gears: It’s Not (Only) Zenith That Needs To Change — So Do Many Watch Buyers</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">ATOWAK — Cosmofleet Ascent</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            
+            
+            <li>Case material: Matte white composite fibre</li>
+            <li>Wandering hour complication</li><li>First fully in-house movement</li><li>Limited to 150 pieces per colour</li>
+            <li>Price: $3,799</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/atowak-cosmofleet-ascent-micro-mondays/" target="_blank" rel="noopener">Time+Tide: ATOWAK releases its most ambitious wandering hour watch yet, the Cosmofleet Ascent</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Chronoswiss — ReSec Final Edition Manufacture</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            
+            
+            <li>Case material: Grade 5 titanium</li>
+            <li>Hand-guilloché turbine dial finished in rose gold CVD</li><li>Retrograde seconds</li><li>Regulator-style display</li><li>Limited to 100 pieces</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-chronoswiss-resec-final-edition-manufacture/" target="_blank" rel="noopener">Fratello: The Chronoswiss ReSec Final Edition Manufacture: It’s Time To Say Goodbye</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Citizen — Campanola Small Seconds Mechanical Amamitsuhoshi / Kōjō</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: Cal. Y520 (La Joux-Perret)</li>
+            
+            <li>Case material: Steel</li>
+            <li>Urushi lacquer and engraved mother-of-pearl dial</li><li>Updated five-link bracelet</li><li>First new mechanical movement in 12 years</li>
+            <li>Price: approximately US$4,730</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/campanola-small-seconds-mechanical-nz4000-56e-amamitsuhoshi-nz4000-56n-kojo.html" target="_blank" rel="noopener">SJX: Campanola Shines in Urushi Lacquer and Mother-of-Pearl</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Micromilspec — Pilot Worldtimer Single Date Edition</div>
+        
+          <ul class="specs">
+            <li>Size: 42mm</li>
+            <li>Movement: La Joux-Perret L122 column-wheel</li>
+            <li>Water resistance: 200m</li>
+            <li>Case material: Grade 5 titanium</li>
+            <li>Worldtimer bezel</li><li>Single-date window replacing triple-date</li><li>Black or white grained dial</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/micromilspec-pilot-worldtimer-single-date-edition-aviation-traveller-chronograph-gmt-titanium-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Micromilspec Pilot Worldtimer Single Date Edition, a Simpler Take on the Original Pilot’s Chronograph</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Qian GuoBiao — Facing The Sky 2.0</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Manual, Calibre AB-02-2.0</li>
+            
+            <li>Case material: Grade 5 titanium</li>
+            <li>First in-house developed integrated bracelet</li><li>Flying balance wheel on dial</li><li>Blue Lagoon or British Racing Green finishes</li><li>40-hour power reserve</li><li>Extensive hand-finishing</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/chinese-indie-watchmaker-qian-guobiao-releases-the-full-titanium-facing-the-sky-2-0-bracelet-blue-lagoon-british-racing-green-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Chinese Indie Watchmaker Qian GuoBiao Releases the Full Titanium Facing The Sky 2.0</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Roger W. Smith — Series Seven</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: New caliber with one-minute tourbillon and co-axial escapement</li>
+            
+            
+            <li>One-minute tourbillon</li><li>Co-axial escapement</li><li>Brand&#39;s first center seconds</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-roger-w-smith-unveils-the-series-seven-hublot-dresses-in-denim/" target="_blank" rel="noopener">Revolution: Last Week in Watches: Roger W. Smith Unveils the Series Seven, Hublot Dresses in Denim</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">ATOWAK — Cosmofleet Ascent</div>
+        <p class="note">First fully in-house movement; limited to 150 pieces per colourway.</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/atowak-cosmofleet-ascent-micro-mondays/" target="_blank" rel="noopener">Time+Tide: ATOWAK releases its most ambitious wandering hour watch yet, the Cosmofleet Ascent</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Micromilspec — Pilot Worldtimer Single Date Edition</div>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/micromilspec-pilot-worldtimer-single-date-edition-aviation-traveller-chronograph-gmt-titanium-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Micromilspec Pilot Worldtimer Single Date Edition, a Simpler Take on the Original Pilot’s Chronograph</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Praesidus — Montar Ana-Digi</div>
+        <p class="note">Vintage-inspired multifunctional tool watch priced at €280.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/nachos-best-watches-of-2026/" target="_blank" rel="noopener">Fratello: Nacho’s Best Watches Of 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">RZE — UTD-8080</div>
+        <p class="note">Upgraded digital watch with improved LCD and additional functions.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/nachos-best-watches-of-2026/" target="_blank" rel="noopener">Fratello: Nacho’s Best Watches Of 2026</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Synchron — Ti300M Poseidon Deep Black</div>
+        <p class="note">10th-anniversary partnership with Poseidon; 41mm Grade 5 titanium case, 11.9mm profile, 300m water resistance.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-with-the-synchron-ti300m-poseidon-deep-black/" target="_blank" rel="noopener">Fratello: Hands-On With The Synchron Ti300M Poseidon Deep Black</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Chronoswiss — ReSec Final Edition Manufacture</div>
+        <p class="note">Limited to 100 pieces; hand-guilloché turbine dial in rose gold CVD with retrograde seconds and regulator-style display.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/new-chronoswiss-resec-final-edition-manufacture/" target="_blank" rel="noopener">Fratello: The Chronoswiss ReSec Final Edition Manufacture: It’s Time To Say Goodbye</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Kneijnsberg — Hugenius</div>
+        <p class="note">Titanium tribute to Christiaan Huygens with a complex multilayered dial, planetary-themed day pointer, luminous wind rose, and celestial symbols.</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/hands-on-kneijnsberg-hugenius/" target="_blank" rel="noopener">Fratello: Hands-On With The Kneijnsberg Hugenius — A Tribute To Christiaan Huygens</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">MB&amp;F</div>
+        <p class="note">Updated catalogue raisonné &#34;The First Twenty Years&#34; documenting 2005–2025 and all 230 product variations.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/mbandf-catalogue-raisonne-update-first-twenty-years-news/" target="_blank" rel="noopener">Monochrome: News – MB&amp;F Releases its Updated Catalogue Raisonné “The First Twenty Years”</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Qian GuoBiao — Facing The Sky 2.0</div>
+        <p class="note">Full-titanium 39mm case with first in-house integrated bracelet, flying balance wheel, and manually wound Calibre AB-02-2.0.</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/chinese-indie-watchmaker-qian-guobiao-releases-the-full-titanium-facing-the-sky-2-0-bracelet-blue-lagoon-british-racing-green-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Chinese Indie Watchmaker Qian GuoBiao Releases the Full Titanium Facing The Sky 2.0</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Roger W. Smith — Series Seven</div>
+        <p class="note">25th-anniversary limited-production piece with a new caliber, one-minute tourbillon, co-axial escapement, and the brand’s first center seconds.</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-roger-w-smith-unveils-the-series-seven-hublot-dresses-in-denim/" target="_blank" rel="noopener">Revolution: Last Week in Watches: Roger W. Smith Unveils the Series Seven, Hublot Dresses in Denim</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Citizen</div>
+        <p class="models">Campanola Small Seconds Mechanical Amamitsuhoshi, Campanola Small Seconds Mechanical Kōjō</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/campanola-small-seconds-mechanical-nz4000-56e-amamitsuhoshi-nz4000-56n-kojo.html" target="_blank" rel="noopener">SJX: Campanola Shines in Urushi Lacquer and Mother-of-Pearl</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hublot</div>
+        <p class="models">Denim collection</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/last-week-in-watches-roger-w-smith-unveils-the-series-seven-hublot-dresses-in-denim/" target="_blank" rel="noopener">Revolution: Last Week in Watches: Roger W. Smith Unveils the Series Seven, Hublot Dresses in Denim</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Longines</div>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-longines-heritage-workshop" target="_blank" rel="noopener">Hodinkee: Inside The Manufacture: A Deep Dive Into The Longines Heritage Workshop</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Patek Philippe</div>
+        
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/patek-philippe-museum-25-years-philippe-stern.html" target="_blank" rel="noopener">SJX: Patek Philippe Museum Marks 25 Years with Philippe Stern Tribute</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
