@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-24</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-24 17:15 CET · 24 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 24 new articles — 5 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 4 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 4 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 3 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 3 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>, 2 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>, 2 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, and 1 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Blancpain’s Carrousel Incliné is the world’s first 30-degree inclined flying carrousel, cased in sapphire and priced at CHF 380,000.
+          
+            <span class="bullet-links"><a href="https://revolutionwatch.com/blancpain-introduces-the-worlds-first-carrousel-incline/" target="_blank" rel="noopener">Revolution</a><span class="sep">·</span><a href="https://watchesbysjx.com/2026/11/blancpain-carrousel-incline.html" target="_blank" rel="noopener">SJX</a></span>
+          
+        </li>
+      
+        <li>
+          Holthinrichs marks its tenth anniversary with the Signature Ornament Heritage Hand Engraved, featuring dials hand-engraved by Camille Jean-Mairet in four 25-piece editions.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/holthinrichs-signature-ornament-heritage-hand-engraved/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://monochrome-watches.com/holthinrichs-signature-ornament-heritage-hand-engraved-collection-new-hand-applied-dial-textures-review-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Hanhart launches the limited-edition 417 C Panna Flyback, a cream-dial chronograph in a steel-and-bronze case starting at €2,740.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/hanhart-417-c-panna-flyback" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://monochrome-watches.com/two-tone-hanhart-417-c-panna-flyback-chronograph-the-real-time-show-introducing-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Nomos turns formal with the Noir Series, dressing the Tangente 33, Ludwig 33, and Tetra 27 in matte black galvanization.
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/nomos-noir-series/" target="_blank" rel="noopener">Fratello</a></span>
+          
+        </li>
+      
+        <li>
+          Nodus, Tusenö, and Atelier Loreti broaden the accessible field with a titanium Sector II, a slimmer Shellback GMT, and a sub-$1,200…
+          
+            <span class="bullet-links"><a href="https://www.fratellowatches.com/the-new-nodus-sector-ii-field-ti-fde-setting-the-standard-for-modern-field-watches/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://wornandwound.com/tuseno-introduces-the-shellback-gmt/" target="_blank" rel="noopener">Worn &amp; Wound</a><span class="sep">·</span><a href="https://www.ablogtowatch.com/new-release-atelier-loreti-celestial-tourbillon-charoite-snowflake-obsidian-make-high-horology-accessible/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    <p class="empty">No business news today.</p>
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Atelier Loreti — Celestial Tourbillon</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Automatic, customized 4Hz Miyota 8215</li>
+            
+            
+            <li>Natural charoite and snowflake obsidian dials</li><li>Tourbillon</li><li>Limited to 50 pieces per variant</li>
+            <li>Price: $980 – $1,180 USD</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/new-release-atelier-loreti-celestial-tourbillon-charoite-snowflake-obsidian-make-high-horology-accessible/" target="_blank" rel="noopener">aBlogtoWatch: New Release: Atelier Loreti Celestial Tourbillon Charoite &amp; Snowflake Obsidian Make High Horology Accessible</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Blancpain — Carrousel Incliné</div>
+        
+          <ul class="specs">
+            <li>Size: 40.3mm</li>
+            <li>Movement: Manually wound, Cal. 222ISQ</li>
+            
+            <li>Case material: Sapphire crystal</li>
+            <li>World&#39;s first inclined one-minute flying carrousel at 30 degrees</li><li>Chronometry certificate guaranteeing 0/+2 seconds per day</li><li>100-hour power reserve</li><li>Skeletonized 18k gold movement</li>
+            <li>Price: CHF 380,000</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://revolutionwatch.com/blancpain-introduces-the-worlds-first-carrousel-incline/" target="_blank" rel="noopener">Revolution: Blancpain Introduces the World’s First Carrousel Incliné</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Bremont — Supernova Perpetual Calendar GMT Monopusher</div>
+        
+          <ul class="specs">
+            <li>Size: 41mm</li>
+            <li>Movement: Manually wound, Cal. BHC9192MH (developed with Agenhor)</li>
+            
+            <li>Case material: DLC-coated steel</li>
+            <li>Perpetual calendar</li><li>Globe-based GMT display adjusted via crown monopusher</li><li>3D grid-pattern dial</li><li>Limited to 20 pieces</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/bremont-adds-its-perpetual-calendar-gmt-monopusher-introducing/" target="_blank" rel="noopener">Time+Tide: Bremont adds its Perpetual Calendar GMT Monopusher to its Supernova collection</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Casio — CMK-100 Series</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            <li>Movement: Automatic</li>
+            <li>Water resistance: 100m</li>
+            <li>Case material: Titanium</li>
+            <li>Raised luminous numerals</li><li>Five references including full titanium bracelet</li><li>Sapphire crystal</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/casios-second-automatic-takes-shape-in-titanium-with-the-cmk-100-series/" target="_blank" rel="noopener">aBlogtoWatch: Casio’s Second Automatic Takes Shape In Titanium With The CMK-100 Series</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Hanhart — 417 C Panna Flyback</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Hand-wound, Sellita AMT5100 M</li>
+            
+            <li>Case material: Stainless steel with aluminium bronze</li>
+            <li>Cream dial with cream lume</li><li>Column-wheel flyback chronograph</li><li>Limited to 100 pieces</li>
+            <li>Price: €2,740 – €2,940</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/hanhart-417-c-panna-flyback" target="_blank" rel="noopener">Hodinkee: Introducing: Hanhart 417 C Panna Flyback</a><a href="https://monochrome-watches.com/two-tone-hanhart-417-c-panna-flyback-chronograph-the-real-time-show-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The Two-Toned Hanhart 417 C Panna Flyback</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Holthinrichs — Signature Ornament Heritage Hand Engraved</div>
+        
+          <ul class="specs">
+            <li>Size: 38.5mm</li>
+            <li>Movement: Automatic, modified Sellita SW-300</li>
+            
+            <li>Case material: Grade 5 titanium</li>
+            <li>Hand-engraved German silver dial by Camille Jean-Mairet</li><li>Custom 18k yellow gold-plated rotor</li><li>Four limited editions of 25 pieces each in yellow gold, rose gold, white rhodium, and black rhodium finishes</li>
+            <li>Price: €6,900</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/holthinrichs-signature-ornament-heritage-hand-engraved/" target="_blank" rel="noopener">Fratello: Celebrating 10 Years Of Holthinrichs: The Signature Ornament Heritage Hand Engraved</a><a href="https://monochrome-watches.com/holthinrichs-signature-ornament-heritage-hand-engraved-collection-new-hand-applied-dial-textures-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Holthinrichs Signature Ornament Heritage Hand Engraved Collection</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Nodus — Sector II Field Ti FDE</div>
+        
+          <ul class="specs">
+            <li>Size: 38mm</li>
+            
+            <li>Water resistance: 100m</li>
+            <li>Case material: Titanium with Cerakote finish</li>
+            <li>Modular sector-style dial</li><li>Cerakote finishes: Canopy, Dusk, FDE</li><li>Box-shaped sapphire crystal</li><li>Old Radium Grade X1 Super-LumiNova</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-new-nodus-sector-ii-field-ti-fde-setting-the-standard-for-modern-field-watches/" target="_blank" rel="noopener">Fratello: The New Nodus Sector II Field Ti FDE: Setting The Standard For Modern Field Watches</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Nomos — Noir Series</div>
+        
+          <ul class="specs">
+            <li>Size: 33mm / 27mm</li>
+            <li>Movement: Hand-wound</li>
+            
+            <li>Case material: Stainless steel or 18K yellow gold</li>
+            <li>Matte black galvanization dials</li><li>Gold-colored hands</li><li>Tuxedo-inspired Tangente 33, Ludwig 33, and Tetra 27</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/nomos-noir-series/" target="_blank" rel="noopener">Fratello: After Hours In Glashütte: Nomos Dims The Lights With The Six-Piece Noir Series</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Raymond Weil — Millesime Small Seconds Japan-exclusive</div>
+        
+          <ul class="specs">
+            <li>Size: 35mm</li>
+            
+            
+            <li>Case material: Steel</li>
+            <li>Cream sector dial inspired by Echizen Torinoko washi paper</li><li>Drilled lugs</li><li>Domed sapphire crystal</li><li>Japan-exclusive limited to 30 pieces</li>
+            <li>Price: ~US$2,350</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/raymond-weil-millesime-small-seconds-japan-limited-edition.html" target="_blank" rel="noopener">SJX: Raymond Weil Debuts Japan-Exclusive Millesime</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">SHER — Obtuse</div>
+        
+          <ul class="specs">
+            <li>Size: 34mm x 27mm</li>
+            
+            
+            
+            <li>Angular rectangular case</li><li>Multi-layered architectural dial</li><li>Integrated tapered bracelet</li><li>Blue fumé Numeric dial with cut-out numerals</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/sher-obtuse-numeric-pure-introducing/" target="_blank" rel="noopener">Time+Tide: SHER takes a decidedly angular direction with the Obtuse</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Timex — x Worn &amp; Wound Field Watch w/a Twist</div>
+        
+          <ul class="specs">
+            <li>Size: 37mm</li>
+            <li>Movement: Hand-wound</li>
+            
+            
+            <li>Sector-style dial with italicized numerals</li><li>Three-ring layout for hours, minutes, and 24-hour track</li><li>New Sunburst and Mist colorways</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://windupwatchshop.com/pages/the-timex-x-worn-wound-field-watch-w-a-twist-now-in-sunburst-and-mist" target="_blank" rel="noopener">Worn &amp; Wound: The Timex x Worn &amp; Wound Field Watch w/a Twist, Now in Sunburst and Mist</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Tusenö — Shellback GMT</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Automatic, Sellita SW330-2</li>
+            
+            
+            <li>Case thickness 10.85mm</li><li>20-to-16mm tapered Oyster bracelet</li><li>Green Linen and Blue Linen textured dials with Pepsi bezels</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/tuseno-introduces-the-shellback-gmt/" target="_blank" rel="noopener">Worn &amp; Wound: Tuseno Introduces the Shellback GMT</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Atelier Loreti — Celestial Tourbillon</div>
+        
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/new-release-atelier-loreti-celestial-tourbillon-charoite-snowflake-obsidian-make-high-horology-accessible/" target="_blank" rel="noopener">aBlogtoWatch: New Release: Atelier Loreti Celestial Tourbillon Charoite &amp; Snowflake Obsidian Make High Horology Accessible</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Nodus — Sector II Field Ti FDE</div>
+        
+        <div class="links">
+          <a href="https://www.fratellowatches.com/the-new-nodus-sector-ii-field-ti-fde-setting-the-standard-for-modern-field-watches/" target="_blank" rel="noopener">Fratello: The New Nodus Sector II Field Ti FDE: Setting The Standard For Modern Field Watches</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">OraOrea — Coriolis Pointer Date</div>
+        <p class="note">Debut brand from Zach Weiss of Worn &amp; Wound.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/oraorea-coriolis-pointer-date-what-happens-when-a-watch-journalist-makes-a-watch/" target="_blank" rel="noopener">aBlogtoWatch: OraOrea Coriolis Pointer Date Review: What Happens When A Watch Journalist Makes A Watch?</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">SHER — Obtuse</div>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/sher-obtuse-numeric-pure-introducing/" target="_blank" rel="noopener">Time+Tide: SHER takes a decidedly angular direction with the Obtuse</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tusenö — Shellback GMT</div>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/tuseno-introduces-the-shellback-gmt/" target="_blank" rel="noopener">Worn &amp; Wound: Tuseno Introduces the Shellback GMT</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Holthinrichs — Signature Ornament Heritage Hand Engraved</div>
+        <p class="note">10th anniversary limited editions with dials hand-engraved by Camille Jean-Mairet; four variants of 25 pieces each.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/holthinrichs-signature-ornament-hand-engraved" target="_blank" rel="noopener">Hodinkee: Hands-On: The Holthinrichs Signature Ornament Heritage Hand Engraved</a><a href="https://www.fratellowatches.com/holthinrichs-signature-ornament-heritage-hand-engraved/" target="_blank" rel="noopener">Fratello: Celebrating 10 Years Of Holthinrichs: The Signature Ornament Heritage Hand Engraved</a><a href="https://monochrome-watches.com/holthinrichs-signature-ornament-heritage-hand-engraved-collection-new-hand-applied-dial-textures-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Holthinrichs Signature Ornament Heritage Hand Engraved Collection</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Blancpain</div>
+        <p class="models">Carrousel Incliné</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/the-blancpain-carrousel-returnson-tilt-immaculately-finished-and-increasingly-accurate" target="_blank" rel="noopener">Hodinkee: Hands-On: The Blancpain Carrousel Incliné — On Tilt, Immaculately Finished, And Incredibly Accurate</a><a href="https://www.fratellowatches.com/hands-on-with-the-all-new-blancpain-carrousel-incline-a-new-angle-on-precision/" target="_blank" rel="noopener">Fratello: Hands-On With The All-New Blancpain Carrousel Incliné: A New Angle On Precision</a><a href="https://revolutionwatch.com/blancpain-introduces-the-worlds-first-carrousel-incline/" target="_blank" rel="noopener">Revolution: Blancpain Introduces the World’s First Carrousel Incliné</a><a href="https://monochrome-watches.com/blancpain-carrousel-incline-inclined-carrousel-regulating-organ-sapphire-case-video-review-price/" target="_blank" rel="noopener">Monochrome: In-Depth – The Blancpain Carrousel Incliné, a New Angle on Chronometric Precision (Incl. Video)</a><a href="https://watchesbysjx.com/2026/11/blancpain-carrousel-incline.html" target="_blank" rel="noopener">SJX: Blancpain’s Carrousel Incliné is Inclined to Perform</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Bremont</div>
+        <p class="models">Supernova Perpetual Calendar GMT Monopusher</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/bremont-adds-its-perpetual-calendar-gmt-monopusher-introducing/" target="_blank" rel="noopener">Time+Tide: Bremont adds its Perpetual Calendar GMT Monopusher to its Supernova collection</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Casio</div>
+        <p class="models">CMK-100 Series</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/casios-second-automatic-takes-shape-in-titanium-with-the-cmk-100-series/" target="_blank" rel="noopener">aBlogtoWatch: Casio’s Second Automatic Takes Shape In Titanium With The CMK-100 Series</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hamilton</div>
+        <p class="models">Khaki Field Mechanical</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/fratello-on-air-our-favorite-watches-of-2026-at-different-price-points/" target="_blank" rel="noopener">Fratello: Fratello On Air: Our Favorite Watches Of 2026 At Different Price Points</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hanhart</div>
+        <p class="models">417 C Panna Flyback</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/hanhart-417-c-panna-flyback" target="_blank" rel="noopener">Hodinkee: Introducing: Hanhart 417 C Panna Flyback</a><a href="https://monochrome-watches.com/two-tone-hanhart-417-c-panna-flyback-chronograph-the-real-time-show-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – The Two-Toned Hanhart 417 C Panna Flyback</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Lebois &amp; Co</div>
+        <p class="models">Heritage Atelier Chronograph Bleu-sur-Blanc</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/hands-on-lebois-co-heritage-atelier-chronograph-bleu-sur-blanc-with-two-tone-enamel-dial/" target="_blank" rel="noopener">Monochrome: Hands-on – The Lebois &amp; Co Heritage Atelier Chronograph Bleu-sur-Blanc, with Two-Tone Enamel Dial</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Nomos</div>
+        <p class="models">Noir Series (Tangente 33, Ludwig 33, Tetra 27)</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/nomos-noir-series/" target="_blank" rel="noopener">Fratello: After Hours In Glashütte: Nomos Dims The Lights With The Six-Piece Noir Series</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Raymond Weil</div>
+        <p class="models">Millesime Small Seconds Japan-exclusive</p>
+        <div class="links">
+          <a href="https://watchesbysjx.com/2026/11/raymond-weil-millesime-small-seconds-japan-limited-edition.html" target="_blank" rel="noopener">SJX: Raymond Weil Debuts Japan-Exclusive Millesime</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Timex</div>
+        <p class="models">x Worn &amp; Wound Field Watch w/a Twist</p>
+        <div class="links">
+          <a href="https://windupwatchshop.com/pages/the-timex-x-worn-wound-field-watch-w-a-twist-now-in-sunburst-and-mist" target="_blank" rel="noopener">Worn &amp; Wound: The Timex x Worn &amp; Wound Field Watch w/a Twist, Now in Sunburst and Mist</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Tudor</div>
+        <p class="models">Black Bay Chronograph 39 &#34;Bumblebee&#34;</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/fratello-on-air-our-favorite-watches-of-2026-at-different-price-points/" target="_blank" rel="noopener">Fratello: Fratello On Air: Our Favorite Watches Of 2026 At Different Price Points</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
