@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Watch News — 2026-11-26</title>
+<style>
+  :root {
+    --bg: #fafaf9;
+    --card: #ffffff;
+    --text: #1c1917;
+    --muted: #78716c;
+    --border: #e7e5e4;
+    --accent: #4702ad;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #1c1917;
+      --card: #292524;
+      --text: #f5f5f4;
+      --muted: #a8a29e;
+      --border: #44403c;
+      --accent: #a78bfa;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    padding: 2.5rem 1.25rem;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.5;
+  }
+  .container { max-width: 960px; margin: 0 auto; }
+  header { margin-bottom: 2rem; }
+  h1 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .meta { color: var(--muted); font-size: 0.9rem; }
+  .description { margin: 0.6rem 0 0; color: var(--muted); font-size: 0.9rem; line-height: 1.5; }
+  .description a { color: var(--accent); text-decoration: none; }
+  .description a:hover { text-decoration: underline; }
+  .back-link {
+    display: inline-block;
+    margin-bottom: 0.75rem;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+  }
+  .back-link:hover { color: var(--accent); }
+  .layout { display: flex; align-items: flex-start; gap: 2.5rem; }
+  .sidebar {
+    flex: 0 0 160px;
+    position: sticky;
+    top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .sidebar a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.88rem;
+    padding: 0.3rem 0 0.3rem 0.65rem;
+    border-left: 2px solid var(--border);
+  }
+  .sidebar a:hover { color: var(--accent); border-left-color: var(--accent); }
+  .sidebar a.sub { padding-left: 1.3rem; font-size: 0.8rem; }
+  .wrap { flex: 1 1 auto; min-width: 0; max-width: 720px; }
+  @media (max-width: 780px) {
+    body { padding: 1.5rem 1rem; }
+    .layout { flex-direction: column; gap: 1rem; }
+    .sidebar {
+      position: static;
+      flex-direction: row;
+      flex-wrap: wrap;
+      gap: 0.5rem 0.75rem;
+      padding-bottom: 0.75rem;
+      margin-bottom: 0.5rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar a {
+      border-left: none;
+      padding: 0.35rem 0.55rem;
+      font-size: 0.85rem;
+    }
+    .sidebar a.sub { padding-left: 0.55rem; font-size: 0.8rem; }
+  }
+  h2.section {
+    font-size: 1.2rem;
+    margin: 2.5rem 0 1rem;
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  h3.subsection {
+    font-size: 1rem;
+    margin: 1.75rem 0 0.75rem;
+    color: var(--accent);
+    scroll-margin-top: 1rem;
+  }
+  .discovery-line { margin: 0 0 1rem; }
+  .discovery-line a { color: var(--accent); text-decoration: none; }
+  .discovery-line a:hover { text-decoration: underline; }
+  .highlights-label { margin: 0 0 0.5rem; font-weight: 600; }
+  ul.summary-bullets {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    margin: 0;
+    padding: 0.9rem 1.1rem 0.9rem 2rem;
+  }
+  ul.summary-bullets li { margin-bottom: 0.55rem; }
+  ul.summary-bullets li:last-child { margin-bottom: 0; }
+  .bullet-links { margin-left: 0.4rem; font-size: 0.85rem; }
+  .bullet-links a { color: var(--accent); text-decoration: none; }
+  .bullet-links a:hover { text-decoration: underline; }
+  .bullet-links .sep { color: var(--muted); margin: 0 0.3rem; }
+  .empty { color: var(--muted); font-style: italic; }
+  .group {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.85rem 1.1rem;
+    margin-bottom: 0.6rem;
+  }
+  .group .heading { font-weight: 600; }
+  .group .note { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .models { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.9rem; }
+  .group .links { margin-top: 0.4rem; font-size: 0.9rem; }
+  .group .links a { display: block; color: var(--accent); text-decoration: none; margin-bottom: 0.3rem; }
+  .group .links a:last-child { margin-bottom: 0; }
+  .group .links a:hover { text-decoration: underline; }
+  .group ul.specs { margin: 0.5rem 0 0; padding-left: 1.15rem; font-size: 0.88rem; }
+  .group ul.specs li { margin-bottom: 0.15rem; }
+  ul.archive-list { list-style: none; margin: 0; padding: 0; }
+  ul.archive-list li { margin-bottom: 0.5rem; }
+  ul.archive-list a {
+    display: block;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  ul.archive-list a:hover { border-color: var(--accent); color: var(--accent); }
+</style>
+</head>
+<body>
+<div class="container">
+  
+  <div class="layout">
+    <nav class="sidebar">
+      <a href="#summary">Summary</a>
+      <a href="#business-news">Business News</a>
+      <a href="#new-releases">New Releases</a>
+      <a href="#brands-covered">Brands Covered</a>
+      <a href="#microbrands" class="sub">Microbrands</a>
+      <a href="#independents" class="sub">Independents</a>
+      <a href="#mainstream-brands" class="sub">Mainstream Brands</a>
+    </nav>
+    <div class="wrap">
+      <header>
+        <a class="back-link" href="index.html">← Back to archive</a>
+        <h1>Daily Watch News Digest</h1>
+        <div class="meta">2026-11-26 17:09 CET · 19 new articles</div>
+      </header>
+
+  <h2 class="section" id="summary">Summary</h2>
+  
+    <p class="discovery-line">
+      We discovered 19 new articles — 5 from <a href="https://monochrome-watches.com/" target="_blank" rel="noopener">Monochrome</a>, 3 from <a href="https://www.ablogtowatch.com/" target="_blank" rel="noopener">aBlogtoWatch</a>, 3 from <a href="https://www.fratellowatches.com/" target="_blank" rel="noopener">Fratello</a>, 3 from <a href="https://wornandwound.com/" target="_blank" rel="noopener">Worn &amp; Wound</a>, 2 from <a href="https://www.hodinkee.com/" target="_blank" rel="noopener">Hodinkee</a>, 1 from <a href="https://revolutionwatch.com/" target="_blank" rel="noopener">Revolution</a>, 1 from <a href="https://watchesbysjx.com/" target="_blank" rel="noopener">SJX</a>, and 1 from <a href="https://timeandtidewatches.com/" target="_blank" rel="noopener">Time+Tide</a>.
+      
+    </p>
+  
+  
+    <p class="highlights-label">Some highlights:</p>
+    <ul class="summary-bullets">
+      
+        <li>
+          Anoma’s sculptural, Möbius-inspired A2 captures headlines across Hodinkee, Fratello, Worn &amp; Wound, and SJX.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/introducing-anoma-a2" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://www.fratellowatches.com/hands-on-anoma-a2/" target="_blank" rel="noopener">Fratello</a><span class="sep">·</span><a href="https://wornandwound.com/review/review-the-anoma-a2/" target="_blank" rel="noopener">Worn &amp; Wound</a></span>
+          
+        </li>
+      
+        <li>
+          Breitling revives 1960s heritage with hand-wound Twin Jet Navitimers, while Hanhart debuts a limited 417 C Panna Flyback.
+          
+            <span class="bullet-links"><a href="https://timeandtidewatches.com/breitling-navitimer-cosmonaute-video/" target="_blank" rel="noopener">Time+Tide</a><span class="sep">·</span><a href="https://wornandwound.com/introducing-the-hanhart-417-c-panna-flyback/" target="_blank" rel="noopener">Worn &amp; Wound</a></span>
+          
+        </li>
+      
+        <li>
+          Monochrome spotlights accessible newcomers with Hamilton’s Jazzmaster, Monceau’s Model 01 GTS, and two new Lebois &amp; Co Heritage Chronographs.
+          
+            <span class="bullet-links"><a href="https://monochrome-watches.com/hamilton-jazzmaster-automatic-40mm-accessible-everyday-watch-review-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://monochrome-watches.com/monceau-model-01-gts-seventies-inspired-accessible-integrated-sports-watch-review-price/" target="_blank" rel="noopener">Monochrome</a><span class="sep">·</span><a href="https://monochrome-watches.com/lebois-heritage-baton-chronograph-and-heritage-sector-frosted-forest-chronograph-introducing-price/" target="_blank" rel="noopener">Monochrome</a></span>
+          
+        </li>
+      
+        <li>
+          Industry education and events step forward via an FHH-GIA collaboration and the announcement of The Escapement collector show in Las Vegas.
+          
+            <span class="bullet-links"><a href="https://www.hodinkee.com/articles/fondation-haute-horlogerie-vice-president-pascal-ravessoud" target="_blank" rel="noopener">Hodinkee</a><span class="sep">·</span><a href="https://www.ablogtowatch.com/the-superlative-podcast-the-escapement-a-new-era-of-watch-events-with-faheem-khan-and-neeshu-hajra/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+        <li>
+          Speake Marin raises the bar for the independent scene with the slim, high-frequency Ripples Kármán Line.
+          
+            <span class="bullet-links"><a href="https://www.ablogtowatch.com/hands-on-speake-marin-ripples-karman-line-watch-quietly-sets-new-bar-for-the-brand/" target="_blank" rel="noopener">aBlogtoWatch</a></span>
+          
+        </li>
+      
+    </ul>
+  
+
+  <h2 class="section" id="business-news">Business News</h2>
+  
+    
+      <div class="group">
+        <div class="heading">FHH partners with GIA on gemology education</div>
+        <p class="note">Fondation Haute Horlogerie Vice-President Pascal Ravessoud discusses a new collaboration with the Gemological Institute of America to expand gemology and jewelry-arts training.</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/fondation-haute-horlogerie-vice-president-pascal-ravessoud" target="_blank" rel="noopener">Hodinkee: The Business of Watches Podcast: Fondation Haute Horlogerie Vice-President Pascal Ravessoud</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">The Escapement collector event announced for Las Vegas 2027</div>
+        <p class="note">A new immersive, Comic-Con-inspired watch event called The Escapement is slated to debut in Las Vegas in February 2027 with live programming, workshops, and exclusive auctions.</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/the-superlative-podcast-the-escapement-a-new-era-of-watch-events-with-faheem-khan-and-neeshu-hajra/" target="_blank" rel="noopener">aBlogtoWatch: The SUPERLATIVE Podcast: The Escapement: A New Era Of Watch Events With Faheem Khan And Neeshu Hajra</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="new-releases">New Releases</h2>
+  
+    
+      
+      <div class="group">
+        <div class="heading">Anoma — A2</div>
+        
+          <ul class="specs">
+            
+            <li>Movement: Manual-wind La Joux-Perret D100</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Möbius strip-inspired twisted oval case</li><li>Faceted sapphire crystal twisting opposite to case</li><li>Hidden crown</li><li>Lugless aesthetic</li>
+            <li>Price: Approximately $3,150</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/introducing-anoma-a2" target="_blank" rel="noopener">Hodinkee: Introducing: Anoma A2, Twisting Cases To Turn Heads</a><a href="https://watchesbysjx.com/2026/11/anoma-a2.html" target="_blank" rel="noopener">SJX: Anoma Returns with Shape-Shifting A2</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Breitling — Navitimer B02 Chronograph 41 Cosmonaute</div>
+        
+          <ul class="specs">
+            <li>Size: 41mm</li>
+            <li>Movement: Hand-wound B02</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Vintage gold Twin Jet logo</li><li>Full circular slide rule</li><li>Wider bezel inspired by astronaut Scott Carpenter’s original</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/breitling-navitimer-cosmonaute-video/" target="_blank" rel="noopener">Time+Tide: Breitling turns back the clock to the 1960s with two new Twin Jet Navitimers</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Breitling — Navitimer B09 Chronograph 41</div>
+        
+          <ul class="specs">
+            <li>Size: 41mm</li>
+            <li>Movement: Hand-wound B09</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Vintage gold Twin Jet logo</li><li>1960s heritage revival</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://timeandtidewatches.com/breitling-navitimer-cosmonaute-video/" target="_blank" rel="noopener">Time+Tide: Breitling turns back the clock to the 1960s with two new Twin Jet Navitimers</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Hamilton — Jazzmaster Automatic 40mm</div>
+        
+          <ul class="specs">
+            <li>Size: 40mm</li>
+            <li>Movement: Automatic, H-10</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>80-hour power reserve</li><li>10mm thickness</li><li>Two-zone dial finishing</li>
+            <li>Price: From CHF 550 (leather) / CHF 620 (bracelet)</li>
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/hamilton-jazzmaster-automatic-40mm-accessible-everyday-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Hamilton’s New Jazzmaster Automatic 40mm, an Accessible Everyday Watch</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Hanhart — 417 C Panna Flyback</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Sellita-based manual-wind flyback</li>
+            
+            <li>Case material: Two-tone stainless steel and aluminum bronze</li>
+            <li>Cream-colored dial</li><li>Limited edition of 100 pieces</li><li>Collaboration with The Real Time Show</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://wornandwound.com/introducing-the-hanhart-417-c-panna-flyback/" target="_blank" rel="noopener">Worn &amp; Wound: Introducing the Hanhart 417 C Panna Flyback</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Lebois &amp; Co — Heritage Baton</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Manually wound La Joux-Perret LC-450 column-wheel</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Column-wheel chronograph</li><li>60-hour power reserve</li><li>Vintage-inspired design</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/lebois-heritage-baton-chronograph-and-heritage-sector-frosted-forest-chronograph-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Lebois &amp; Co Expands its Heritage Chronograph Collection with Two New Editions</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Lebois &amp; Co — Heritage Sector Frosted Forest</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Manually wound La Joux-Perret LC-450 column-wheel</li>
+            
+            <li>Case material: Stainless steel</li>
+            <li>Column-wheel chronograph</li><li>60-hour power reserve</li><li>Green dial</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/lebois-heritage-baton-chronograph-and-heritage-sector-frosted-forest-chronograph-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Lebois &amp; Co Expands its Heritage Chronograph Collection with Two New Editions</a>
+        </div>
+      </div>
+    
+      
+      <div class="group">
+        <div class="heading">Monceau — Model 01 GTS</div>
+        
+          <ul class="specs">
+            <li>Size: 39mm</li>
+            <li>Movement: Hand-wound Sellita SW210-1</li>
+            <li>Water resistance: 100m</li>
+            <li>Case material: Sandblasted stainless steel</li>
+            <li>Slim 10.2mm profile</li><li>Fumé dial inspired by 1960s/70s performance cars</li><li>Push-pull crown</li>
+            
+          </ul>
+        
+        <div class="links">
+          <a href="https://monochrome-watches.com/monceau-model-01-gts-seventies-inspired-accessible-integrated-sports-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Monceau Model 01 GTS, a Revving Seventies-Inspired Accessible Sports Watch</a>
+        </div>
+      </div>
+    
+  
+
+  <h2 class="section" id="brands-covered">Brands Covered</h2>
+
+  <h3 class="subsection" id="microbrands">Microbrands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Anoma — A2</div>
+        <p class="note">Möbius-inspired twisted oval case; covered by four outlets today</p>
+        <div class="links">
+          <a href="https://www.hodinkee.com/articles/introducing-anoma-a2" target="_blank" rel="noopener">Hodinkee: Introducing: Anoma A2, Twisting Cases To Turn Heads</a><a href="https://www.fratellowatches.com/hands-on-anoma-a2/" target="_blank" rel="noopener">Fratello: A Hands-On Introduction To The Twisted And Infinite Anoma A2</a><a href="https://wornandwound.com/review/review-the-anoma-a2/" target="_blank" rel="noopener">Worn &amp; Wound: Review: the Anoma A2</a><a href="https://watchesbysjx.com/2026/11/anoma-a2.html" target="_blank" rel="noopener">SJX: Anoma Returns with Shape-Shifting A2</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Beda&#39;a — Angles Aventurine</div>
+        <p class="note">Qatari microbrand; Art Deco 34mm octagonal dress watch</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/hands-on-the-bedaa-angles-aventurine-watch-is-a-quietly-excellent-art-deco-dress-piece/" target="_blank" rel="noopener">aBlogtoWatch: Hands-On: The Beda’a Angles Aventurine Watch Is A Quietly Excellent Art Deco Dress Piece</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">House of Wunder — Amplifier Midi / Mini</div>
+        <p class="note">New lifestyle brand by former Corum president Michael Wunderman blending watches and jewelry</p>
+        <div class="links">
+          <a href="https://revolutionwatch.com/house-of-wunder-michael-wunderman/" target="_blank" rel="noopener">Revolution: Inside the House of Wunder</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Lebois &amp; Co — Heritage Baton &amp; Heritage Sector Frosted Forest</div>
+        <p class="note">Community-influenced chronographs powered by LJP column-wheel calibre</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/lebois-heritage-baton-chronograph-and-heritage-sector-frosted-forest-chronograph-introducing-price/" target="_blank" rel="noopener">Monochrome: Introducing – Lebois &amp; Co Expands its Heritage Chronograph Collection with Two New Editions</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Monceau — Model 01 GTS</div>
+        <p class="note">1970s performance car dial inspiration</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/monceau-model-01-gts-seventies-inspired-accessible-integrated-sports-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – The Monceau Model 01 GTS, a Revving Seventies-Inspired Accessible Sports Watch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Vaer — C5 Postmaster</div>
+        <p class="note">USPS 250th anniversary collaboration</p>
+        <div class="links">
+          <a href="https://www.fratellowatches.com/vaer-c5-postmaster-usps-collab/" target="_blank" rel="noopener">Fratello: Hands-On With The Vaer C5 Postmaster USPS Collab: The Postman Always Rings Twice</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="independents">Independents</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Alain Silberstein — 2027 relaunch models</div>
+        <p class="note">Obituary of the avant-garde independent designer; eponymous brand was planning a relaunch</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/in-memory-of-alain-silberstein-1950-2026-the-singular-watch-designer/" target="_blank" rel="noopener">Monochrome: News – In Memory of Alain Silberstein (1950-2026), The Singular Watch Designer</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Speake Marin — Ripples Kármán Line</div>
+        <p class="note">6.3mm-thick 904L steel case with 5Hz micro-rotor and blue sapphire crystal dial</p>
+        <div class="links">
+          <a href="https://www.ablogtowatch.com/hands-on-speake-marin-ripples-karman-line-watch-quietly-sets-new-bar-for-the-brand/" target="_blank" rel="noopener">aBlogtoWatch: Hands-On: Speake Marin Ripples Kármán Line Watch Quietly Sets New Bar For The Brand</a>
+        </div>
+      </div>
+    
+  
+
+  <h3 class="subsection" id="mainstream-brands">Mainstream Brands</h3>
+  
+    
+      <div class="group">
+        <div class="heading">Breitling</div>
+        <p class="models">Navitimer B02 Chronograph 41 Cosmonaute, Navitimer B09 Chronograph 41</p>
+        <div class="links">
+          <a href="https://timeandtidewatches.com/breitling-navitimer-cosmonaute-video/" target="_blank" rel="noopener">Time+Tide: Breitling turns back the clock to the 1960s with two new Twin Jet Navitimers</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hamilton</div>
+        <p class="models">Jazzmaster Automatic 40mm</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/hamilton-jazzmaster-automatic-40mm-accessible-everyday-watch-review-price/" target="_blank" rel="noopener">Monochrome: First Look – Hamilton’s New Jazzmaster Automatic 40mm, an Accessible Everyday Watch</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Hanhart</div>
+        <p class="models">417 C Panna Flyback</p>
+        <div class="links">
+          <a href="https://wornandwound.com/introducing-the-hanhart-417-c-panna-flyback/" target="_blank" rel="noopener">Worn &amp; Wound: Introducing the Hanhart 417 C Panna Flyback</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Jaeger-LeCoultre</div>
+        <p class="models">Master Control Chronomètre Date</p>
+        <div class="links">
+          <a href="https://monochrome-watches.com/jaeger-lecoultre-master-control-chronometre-date-luxury-sports-watch-integrated-bracelet-review-price/" target="_blank" rel="noopener">Monochrome: Review – Second Thoughts about the Master Control Chronomètre Date, Jaeger-LeCoultre’s Take on the Integrated Bracelet</a>
+        </div>
+      </div>
+    
+      <div class="group">
+        <div class="heading">Longines</div>
+        <p class="models">Ultra-Chron Classic</p>
+        <div class="links">
+          <a href="https://wornandwound.com/review/review-the-longines-ultra-chron-classic-beats-fast-and-plays-it-safe/" target="_blank" rel="noopener">Worn &amp; Wound: Review: The Longines Ultra-Chron Classic Beats Fast and Plays It Safe</a>
+        </div>
+      </div>
+    
+  
+
+    </div>
+  </div>
+  
+</div>
+</body>
+</html>
